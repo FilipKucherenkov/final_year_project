@@ -1,8 +1,10 @@
 import pyomo.environ as pyo
 from pyomo.opt import SolverFactory
 
+from structures.problem_instance import ProblemInstance
 
-def solve_active_time_ip():
+
+def solve_active_time_ip(instance: ProblemInstance):
     """
     Pyomo model for Integer Programming definition given in Chang et al 2017.
     :return:
@@ -11,21 +13,21 @@ def solve_active_time_ip():
     model = pyo.ConcreteModel()
 
     # Parameter: Number of jobs to be done in parallel TODO: Add those from method for generating data
-    model.G = pyo.Param(initialize=100)
+    model.G = pyo.Param(initialize=instance.number_of_parallel_jobs)
 
     # Parameter: Number of timeslots TODO: Add those from method for generating data
-    model.timeslots = pyo.RangeSet(0, 12)
+    model.timeslots = instance.get_timeslots_lst()
     # Parameter: Jobs to be scheduled TODO: Add those from method for generating data
-    model.jobs = pyo.RangeSet(1, 6)
+    model.jobs = instance.get_jobs_lst()
 
     # Parameter: Release times for jobs TODO: Add those from method for generating data
-    model.release_times = pyo.Param(model.jobs, initialize={1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0})
+    model.release_times = pyo.Param(model.jobs, initialize=instance.get_job_release_times_map())
     release_times = model.release_times
     # Parameter: Deadlines for jobs TODO: Add those from method for generating data
-    model.deadlines = pyo.Param(model.jobs, initialize={1: 2, 2: 2, 3: 4, 4: 6, 5: 6, 6: 12})
+    model.deadlines = pyo.Param(model.jobs, initialize=instance.get_job_deadlines_map())
     deadlines = model.deadlines
     # Parameter: Processing times for jobs TODO: Add those from method for generating data
-    model.processing_times = pyo.Param(model.jobs, initialize={1: 2, 2: 2, 3: 2, 4: 4, 5: 4, 6: 2})
+    model.processing_times = pyo.Param(model.jobs, initialize=instance.get_processing_times_map())
     processing_times = model.processing_times
 
     # Decision variable: Whether slot t is open
@@ -77,6 +79,3 @@ def solve_active_time_ip():
             for j in model.jobs:
                 if(x[t,j]() != 0):
                     print("Job ", j, " scheduled in timeslot ", t, ": ", x[t, j]())
-
-
-solve_active_time_ip()
