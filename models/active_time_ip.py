@@ -11,7 +11,7 @@ def solve_active_time_ip():
     model = pyo.ConcreteModel()
 
     # Parameter: Number of jobs to be done in parallel TODO: Add those from method for generating data
-    model.G = pyo.Param(initialize=3)
+    model.G = pyo.Param(initialize=100)
 
     # Parameter: Number of timeslots TODO: Add those from method for generating data
     model.timeslots = pyo.RangeSet(0, 12)
@@ -68,13 +68,15 @@ def solve_active_time_ip():
     Solver = SolverFactory('glpk')
     results = Solver.solve(model)
 
-    print(results)
-    # print(model.Objf())
+    if results.solver.termination_condition == 'infeasible':
+        print("No feasible solution found")
+    else:
+        print(f"Number of active time slots: {model.objective()}")
+        print(f"Execution time: {results.solver.time}")
+        for t in model.timeslots:
+            for j in model.jobs:
+                if(x[t,j]() != 0):
+                    print("Job ", j, " scheduled in timeslot ", t, ": ", x[t, j]())
 
-    # for t in model.t:
-    #     for j in model.j:
-    #         if(x[t,j]() != 0):
-    #             print("Job ", j , " scheduled in timeslot ", t, ": ", x[t, j]())
 
-    # print(results.__dict__)
 solve_active_time_ip()
