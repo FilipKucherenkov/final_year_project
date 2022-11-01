@@ -59,7 +59,7 @@ def solve_active_time_ip(instance: ProblemInstance):
         return sum(x[t, j] for t in model.timeslots) >= processing_times[j]
 
     # Constraint: Ensure a job is not assigned to a timeslot if that timeslot is not within the job's window
-    # (e.g. release_times[j],...,deadlines[j + 1] )
+    # (e.g. release_times[j],...,deadlines[j] )
     @model.Constraint(model.timeslots, model.jobs)
     def job_window_assignment_rule(model, t, j):
         if release_times[j] > t or deadlines[j] <= t:
@@ -67,8 +67,8 @@ def solve_active_time_ip(instance: ProblemInstance):
         else:
             return pyo.Constraint.Skip
 
-    Solver = SolverFactory('glpk')
-    results = Solver.solve(model)
+    solver = SolverFactory('gurobi')
+    results = solver.solve(model)
 
     if results.solver.termination_condition == 'infeasible':
         print("No feasible solution found")
