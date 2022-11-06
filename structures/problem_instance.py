@@ -4,6 +4,15 @@ from structures.time_horizon import TimeHorizon
 
 
 class ProblemInstance:
+    """
+    Simple class to represent a problem instance of the Active time scheduling problem. This class uses the static
+    methods from the SyntheticDataGenerator class to randomly generate jobs with their release times, deadlines and
+    processing times. It also holds information about the length of the time horizon and the number of
+    jobs G that can be scheduled at each timeslot.
+
+    Note: Getter methods are used to assist with feeding input to optimization models.
+    """
+
     time_horizon: TimeHorizon
     jobs: list[Job]
     number_of_timeslots: int

@@ -12,21 +12,21 @@ def solve_active_time_ip(instance: ProblemInstance):
     # Create pyomo model
     model = pyo.ConcreteModel()
 
-    # Parameter: Number of jobs to be done in parallel TODO: Add those from method for generating data
+    # Parameter: Number of jobs to be done in parallel.
     model.G = pyo.Param(initialize=instance.number_of_parallel_jobs)
 
-    # Parameter: Number of timeslots TODO: Add those from method for generating data
+    # Parameter: Number of timeslots.
     model.timeslots = instance.get_timeslots_lst()
-    # Parameter: Jobs to be scheduled TODO: Add those from method for generating data
+    # Parameter: Jobs to be scheduled.
     model.jobs = instance.get_jobs_lst()
 
-    # Parameter: Release times for jobs TODO: Add those from method for generating data
+    # Parameter: Release times for jobs.
     model.release_times = pyo.Param(model.jobs, initialize=instance.get_job_release_times_map())
     release_times = model.release_times
-    # Parameter: Deadlines for jobs TODO: Add those from method for generating data
+    # Parameter: Deadlines for jobs.
     model.deadlines = pyo.Param(model.jobs, initialize=instance.get_job_deadlines_map())
     deadlines = model.deadlines
-    # Parameter: Processing times for jobs TODO: Add those from method for generating data
+    # Parameter: Processing times for jobs.
     model.processing_times = pyo.Param(model.jobs, initialize=instance.get_processing_times_map())
     processing_times = model.processing_times
 
@@ -38,10 +38,10 @@ def solve_active_time_ip(instance: ProblemInstance):
     x = model.x
 
     # Objective function: Minimise the number of active (open) timeslots
-    def Objective_rule(model):
+    def objective_rule(model):
         return sum(y[t] for t in model.timeslots)
 
-    model.objective = pyo.Objective(rule=Objective_rule, sense=pyo.minimize)
+    model.objective = pyo.Objective(rule=objective_rule, sense=pyo.minimize)
 
     # Constraint: Ensure a unit of any job can be assigned to a timeslot only if slot is active (open)
     @model.Constraint(model.timeslots, model.jobs)
@@ -72,6 +72,7 @@ def solve_active_time_ip(instance: ProblemInstance):
 
     if results.solver.termination_condition == 'infeasible':
         print("No feasible solution found")
+        return 0
     else:
         print(f"Number of active time slots: {model.objective()}")
         print(f"Execution time: {results.solver.time}")
@@ -79,3 +80,4 @@ def solve_active_time_ip(instance: ProblemInstance):
             for j in model.jobs:
                 if(x[t,j]() != 0):
                     print("Job ", j, " scheduled in timeslot ", t, ": ", x[t, j]())
+        return results.solver.time
