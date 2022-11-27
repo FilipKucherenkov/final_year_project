@@ -1,7 +1,8 @@
 import pyomo.environ as pyo
 from pyomo.opt import SolverFactory
 
-from structures.problem_instance import ProblemInstance
+from input_generation.problem_instance import ProblemInstance
+from structures.scheduling.schedule import Schedule
 
 
 def solve_active_time_ip(instance: ProblemInstance):
@@ -9,16 +10,17 @@ def solve_active_time_ip(instance: ProblemInstance):
     Pyomo model for Integer Programming definition given in Chang et al 2017.
     :return:
     """
+
     # Create pyomo model
     model = pyo.ConcreteModel()
-
+    model.name = "IP Active Time Scheduling problem"
     # Parameter: Number of jobs to be done in parallel.
     model.G = pyo.Param(initialize=instance.number_of_parallel_jobs)
 
     # Parameter: Number of timeslots.
-    model.timeslots = instance.get_timeslots_lst()
+    model.timeslots = pyo.Set(initialize=instance.get_timeslots_lst())
     # Parameter: Jobs to be scheduled.
-    model.jobs = instance.get_jobs_lst()
+    model.jobs = pyo.Set(initialize=instance.get_jobs_lst())
 
     # Parameter: Release times for jobs.
     model.release_times = pyo.Param(model.jobs, initialize=instance.get_job_release_times_map())
@@ -67,17 +69,18 @@ def solve_active_time_ip(instance: ProblemInstance):
         else:
             return pyo.Constraint.Skip
 
-    solver = SolverFactory('gurobi')
+    solver = SolverFactory('cplex_direct')
     results = solver.solve(model)
 
     if results.solver.termination_condition == 'infeasible':
-        print("No feasible solution found")
-        return 0
+        schedule = Schedule(instance.jobs, instance.time_horizon.time_slots, False)
+        return schedule
+
     else:
-        print(f"Number of active time slots: {model.objective()}")
-        print(f"Execution time: {results.solver.time}")
+        schedule = Schedule(instance.jobs, instance.time_horizon.time_slots, True)
         for t in model.timeslots:
             for j in model.jobs:
-                if(x[t,j]() != 0):
-                    print("Job ", j, " scheduled in timeslot ", t, ": ", x[t, j]())
-        return results.solver.time
+                if x[t, j]() != 0:
+                    # Schedule job j at timeslot t in the solution.
+                    schedule.schedule_job(j, t)
+        return schedule

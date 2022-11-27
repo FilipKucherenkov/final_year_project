@@ -1,4 +1,4 @@
-from structures.job import Job
+from structures.scheduling.job import Job
 
 
 class Timeslot:
@@ -12,17 +12,14 @@ class Timeslot:
     Note: The purpose of this class is to only assist with implementing the greedy algorithms
     Not the optimisation models.
     """
-    start_time: int
-    end_time: int
-    capacity: int
-    jobs: list[Job]
-    is_active: bool
 
     def __init__(self, start_time: int, end_time: int, g: int):
         self.start_time = start_time
         self.end_time = end_time
         self.capacity = g
-        self.is_active = True
+        self.is_active = False
+        self.is_open = True
+        self.jobs = []
 
     def __str__(self):
         return f"[{self.start_time},{self.end_time}]"
@@ -32,6 +29,7 @@ class Timeslot:
 
     def add_job(self, job: Job):
         self.jobs.append(job)
+
     def is_timeslot_within_job_window(self, job: Job):
-        # A job j is said to be live at slot t if t ∈ [r j , d j ]
-        return job.release_time <= self.start_time <= job.deadline
+        # A job j is said to be live at slot t if t ∈ [r j , d j )
+        return job.release_time <= self.start_time < job.deadline

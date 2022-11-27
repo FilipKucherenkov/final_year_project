@@ -10,22 +10,24 @@ class Network:
 
     Note: getter methods are used assist with feeding input to the maxflow optimisation model.
     """
-    nodes: dict[str, Node] = {}
-    arcs: list[Arc] = []
-    source_node: Node
-    sink_node: Node
 
     def __init__(self, source_node: Node, sink_node: Node):
         self.source_node = source_node
         self.sink_node = sink_node
-        self.nodes["source"] = source_node
-        self.nodes["sink"] = sink_node
+        self.nodes: dict[str, Node] = {"source": source_node, "sink": sink_node}
+        self.arcs: list[Arc] = []
 
     def add_node(self, node: Node):
         self.nodes[node.value] = node
 
     def add_arc(self, arc: Arc):
         self.arcs.append(arc)
+
+    def get_nodes_values_lst(self):
+        nodes_lst = []
+        for node in self.nodes:
+            nodes_lst.append(node)
+        return nodes_lst
 
     def get_arcs_as_tuples(self):
         arcs_lst = []

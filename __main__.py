@@ -1,36 +1,45 @@
-import random
+from algorithms.greedy_with_blackbox_heuristic import test_network, greedy_with_blackbox_heuristic
+from input_generation.analysis_input_generator import AnalysisInputGenerator
 
-from algorithms.greedy_with_blackbox_heuristic import test, test_network
+from input_generation.problem_instance import ProblemInstance
 from models.active_time_ip import solve_active_time_ip
-from models.max_flow import solve_max_flow
-from models.max_flow_test import solve_max_flow_test
-from structures.problem_instance import ProblemInstance
-import matplotlib.pyplot as plt
-import numpy as np
+from stats.algorithms.execution_times.time_average_execution_time import generate_line_plot_for_running_times
+from stats.input_generation.generate_feasibility_bar_chart_for_instance import \
+    generate_feasibility_bar_chart_for_instance
 
 
 def main():
-    # # instance1: ProblemInstance = ProblemInstance(12, 4, 3)
-    # # execution_time = solve_active_time_ip(instance1)
-    # execution_times = []
-    # gs = []
-    #
-    # for i in range(2, 10):
-    #     for j in range(2, 20):
-    #         t = random.randint(20, 30)
-    #         instance1: ProblemInstance = ProblemInstance(t, j, i)
-    #         execution_time = solve_active_time_ip(instance1)
-    #         gs.append(i)
-    #         execution_times.append(execution_time)
-    #
-    # x = np.array(execution_times)
-    # y = np.array(gs)
-    # colors = np.array([i * 10 for i in range(1, len(gs) + 1)])
-    #
-    # plt.scatter(x, y, c=colors, cmap='viridis')
-    # plt.show()
-    test_network()
-    # solve_max_flow()
+    # instance1 = AnalysisInputGenerator.generate_infeasible_instance("Small set", -1)
 
+    # # instance2 = ProblemInstance("Moderate set", -1)
+    # # instance3 = ProblemInstance("Moderate set", -1)
+    # instance1.print_instance_info()
+    # network = generate_network(instance1.time_horizon.time_slots, instance1.jobs)
+    # network.print_network_info()
+    # instance = CustomInstance(6, 12, 2)
+    # instance.add_job(0, 0, 2, 2)
+    # instance.add_job(1, 0, 4, 2)
+    # instance.add_job(2, 1, 6, 1)
+    # instance.add_job(3, 4, 10, 4)
+    # instance.add_job(4, 5, 9, 3)
+    # instance.add_job(5, 0, 4, 4)
+    #
+    # instance2 = CustomInstance(6, 12, 2)
+    # instance2.add_job(0, 0, 2, 2)
+    # instance2.add_job(1, 0, 4, 2)
+    # instance2.add_job(2, 0, 4, 4)
+
+    # test_network()
+    # schedule = solve_active_time_ip(instance1)
+    # schedule.print_schedule_info()
+    # generate_plot_for_input_generation(instance1)
+    # print(instance1.is_feasible())
+    # schedule = greedy_with_blackbox_heuristic(instance1)
+    # schedule2 = solve_active_time_ip(instance1)
+    # schedule2.print_schedule_info()
+    # schedule.print_schedule_info()
+    # plot_average_execution_time()
+    # generate_feasibility_bar_chart_for_instance()
+    generate_line_plot_for_running_times()
 
 main()
