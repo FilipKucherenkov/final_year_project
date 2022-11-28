@@ -18,7 +18,6 @@ class CustomInstance:
         self.number_of_parallel_jobs = number_of_parallel_jobs
         # Generate time horizon
         self.time_horizon = TimeHorizon(self.number_of_timeslots, number_of_parallel_jobs)
-        print(f"NUMBER: {len(self.time_horizon.time_slots)}")
         # Jobs are empty initially
         self.jobs = []
 

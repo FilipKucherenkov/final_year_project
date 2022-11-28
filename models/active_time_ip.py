@@ -71,16 +71,17 @@ def solve_active_time_ip(instance: ProblemInstance):
 
     solver = SolverFactory('cplex_direct')
     results = solver.solve(model)
-
+    print(results)
     if results.solver.termination_condition == 'infeasible':
-        schedule = Schedule(instance.jobs, instance.time_horizon.time_slots, False)
+        schedule = Schedule(False, [])
         return schedule
 
     else:
-        schedule = Schedule(instance.jobs, instance.time_horizon.time_slots, True)
+        job_to_timeslot_mapping = []
         for t in model.timeslots:
             for j in model.jobs:
                 if x[t, j]() != 0:
                     # Schedule job j at timeslot t in the solution.
-                    schedule.schedule_job(j, t)
-        return schedule
+                    job_to_timeslot_mapping.append((f"Job_{j}", f"Slot_{t}"))
+
+        return Schedule(True, job_to_timeslot_mapping)

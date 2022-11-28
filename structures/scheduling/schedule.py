@@ -8,27 +8,19 @@ class Schedule:
     A schedule is infeasible if it does not satisfy the constraints of the Active Time problem.
     """
 
-    def __init__(self, jobs: list[Job], timeslots: list[Timeslot], is_feasible: bool):
+    def __init__(self, is_feasible: bool, job_to_timeslot_mapping):
         self.is_feasible = is_feasible
-        self.timeslots = timeslots[:] if len(timeslots) > 0 else []
-        self.jobs = jobs[:] if len(jobs) > 0 else []
+        self.schedule = job_to_timeslot_mapping
 
     # Calculate the number of active slots in this schedule
     def calculate_active_time(self):
-        count: int = 0
-        for t in self.timeslots:
-            if t.is_active:
+        count = 0
+        used = {}
+        for job, slot in self.schedule:
+            if slot not in used or not used[slot]:
+                used[slot] = True
                 count = count + 1
         return count
-
-    # Given a job number (e.g. 0, 1, 2) and a timeslot's start time
-    # schedule that job at the timeslot.
-    def schedule_job(self, job_number: int, timeslot_start):
-        job_to_schedule = self.jobs[job_number]
-        for timeslot in self.timeslots:
-            if timeslot.start_time == timeslot_start:
-                timeslot.add_job(job_to_schedule)
-                timeslot.is_active = True
 
     # Print extended information about solution
     # (e.g. at which timeslot was each job scheduled.

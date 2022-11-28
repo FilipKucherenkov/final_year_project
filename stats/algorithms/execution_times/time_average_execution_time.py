@@ -15,6 +15,7 @@ def generate_line_plot_for_running_times():
     generate_line_plot_for_running_time("Moderate", "Feasible")
     plt.clf()
     generate_line_plot_for_running_time("Large", "Feasible")
+    plt.clf()
 
 
 def generate_line_plot_for_running_time(instance_type: str, schedule_type: str):
@@ -48,7 +49,6 @@ def generate_line_plot_for_running_time(instance_type: str, schedule_type: str):
                              "execution_times",
                              "plots",
                              f"avg_running_time_plot_{schedule_type}_{instance_type}"))
-    plt.clf()
 
 
 # Time execution of an algorithm on a list of problem instances.

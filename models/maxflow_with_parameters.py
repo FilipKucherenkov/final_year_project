@@ -62,10 +62,10 @@ def solve_max_flow(network: Network, total_sum: int, problem_instance):
     solver = SolverFactory('cplex_direct')
     instance = model.create_instance()
     results = solver.solve(instance, warmstart=True)  # Add warmstart=True in future for optimization
-    # print(results)
+
     if results.solver.termination_condition == 'infeasible':
         # No feasible solution found
-        return Schedule(problem_instance.jobs, problem_instance.time_horizon.time_slots, False)
+        return Schedule(False, [])
     else:
         max_flow = instance.objective()
 
@@ -73,16 +73,17 @@ def solve_max_flow(network: Network, total_sum: int, problem_instance):
         # maximum flow (integral since capacities are integral) from s to d has value equal to the sum of all job
         # processing times
         if total_sum == max_flow:
-            schedule = Schedule(problem_instance.jobs, problem_instance.time_horizon.time_slots, True)
+            job_to_timeslot_mapping = []
+
             for (i, j) in instance.arcs:
                 source_node_info: list = i.split("_")  # As we care only about job and timeslot nodes
-                dest_node_info: list = i.split("_")  # [0] - node type (job or timeslot), [1] (node number)
-
+                dest_node_info: list = j.split("_")  # [0] - node type (job or timeslot), [1] (node number)
                 if source_node_info[0] == "j" and dest_node_info[0] == "t":
+
                     if instance.arc_flow[i, j]() == 1:  # we care only where the arc flow is 1
                         # Schedule job j at timeslot t
-                        schedule.schedule_job(source_node_info[1], dest_node_info[1])
-            return schedule
+                        job_to_timeslot_mapping.append((f"Job_{source_node_info[1]}", f"Slot_{dest_node_info[1]}"))
+            return Schedule(True, job_to_timeslot_mapping)
 
         # No feasible solution found
-        return Schedule(problem_instance.jobs, problem_instance.time_horizon.time_slots, False)
+        return Schedule(False, [])
