@@ -28,6 +28,7 @@ def generate_network(time_slots: list[Timeslot], jobs: list[Job]) -> Network:
         # Add arcs from source to each job node j with capacity pj
         network.add_arc(Arc(source, new_node, job.processing_time))
 
+    # TODO: When we make a given timeslot closed remove those nodes and their edges
     for timeslot in time_slots:
         if timeslot.is_open:
             # Add a node for each open timeslot t

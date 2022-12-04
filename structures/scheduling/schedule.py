@@ -27,8 +27,5 @@ class Schedule:
     def print_schedule_info(self):
         print(f"Total active time: {self.calculate_active_time()}")
         print(f"Is schedule feasible? {'Yes' if self.is_feasible else 'No'}")
-        # for timeslot in self.timeslots:
-        #     if len(timeslot.jobs) > 0:
-        #         print(f"Timeslot {timeslot.start_time}, scheduled jobs:")
-        #         for job in timeslot.jobs:
-        #             print(f"Job {job.number}, r:{job.release_time} d:{job.deadline} p:{job.processing_time}")
+        for placement in self.schedule:
+          print(placement)

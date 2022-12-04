@@ -1,6 +1,6 @@
-from models.maxflow_with_parameters import solve_max_flow
+from solvers.models.maxflow_with_parameters import solve_max_flow
 from input_generation.synthetic_data_generator import SyntheticDataGenerator
-from structures.helpers.generate_network import generate_network
+from structures.graph.generate_network import generate_network
 from structures.scheduling.time_horizon import TimeHorizon
 
 
@@ -38,7 +38,7 @@ class ProblemInstance:
             self.number_of_timeslots = 100
             self.number_of_jobs = 100
             if g == -1:
-                self.number_of_parallel_jobs = 5
+                self.number_of_parallel_jobs = 20
             else:
                 self.number_of_parallel_jobs = g
 
@@ -56,7 +56,7 @@ class ProblemInstance:
     def is_feasible(self):
         network = generate_network(self.time_horizon.time_slots, self.jobs)
         total_sum = sum(job.processing_time for job in self.jobs)
-        schedule = solve_max_flow(network, total_sum, self)
+        schedule = solve_max_flow(network, total_sum, "gurobi")
         return schedule.is_feasible
 
     # Return a list containing the start times of each timeslot (e.g 0,1,2...)
@@ -96,6 +96,16 @@ class ProblemInstance:
         for job in self.jobs:
             processing_times[job.number] = job.processing_time
         return processing_times
+
+    # Convert a problem instance to dictionary
+    def to_dict(self):
+        problem_data = {
+            "instance_type": self.instance_type,
+            "G": self.number_of_parallel_jobs,
+            "T": self.number_of_timeslots,
+            "jobs": [job.__dict__ for job in self.jobs]
+        }
+        return problem_data
 
     # Print information about jobs in this problem instance
     # (e.g. job number, release time, deadline, processing time...)

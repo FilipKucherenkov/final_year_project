@@ -1,5 +1,5 @@
-from models.maxflow_with_parameters import solve_max_flow
-from structures.helpers.generate_network import generate_network
+from solvers.models.maxflow_with_parameters import solve_max_flow
+from structures.graph.generate_network import generate_network
 from structures.scheduling.job import Job
 from structures.scheduling.time_horizon import TimeHorizon
 

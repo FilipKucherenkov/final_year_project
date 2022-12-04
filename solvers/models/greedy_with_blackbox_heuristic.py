@@ -1,12 +1,11 @@
 from input_generation.custom_instance import CustomInstance
-from models.maxflow_with_parameters import solve_max_flow
-from structures.helpers.generate_network import generate_network
-from structures.scheduling.job import Job
+from input_generation.problem_instance import ProblemInstance
+from solvers.models.maxflow_with_parameters import solve_max_flow
+from structures.graph.generate_network import generate_network
 from structures.scheduling.schedule import Schedule
-from structures.scheduling.time_horizon import TimeHorizon
 
 
-def greedy_with_blackbox_heuristic(instance):
+def greedy_with_blackbox_heuristic(instance: ProblemInstance, solver_type: str):
     """
     All time slots are assumed to be open initially. Consider time slots from left to right (i.e in increasing
     order). At a given time slot, close the slot and check if a feasible schedule exists in the open slots. If so,
@@ -16,12 +15,14 @@ def greedy_with_blackbox_heuristic(instance):
     time_horizon = instance.time_horizon
     jobs = instance.jobs
 
+    if not instance.is_feasible:
+        return Schedule(False, [])
     for timeslot in time_horizon.time_slots:
         timeslot.is_open = False
 
         network = generate_network(time_horizon.time_slots, jobs)
         total_sum = sum(job.processing_time for job in jobs)
-        schedule = solve_max_flow(network, total_sum, instance)
+        schedule = solve_max_flow(network, total_sum, solver_type)
 
         if schedule.is_feasible:
             return schedule
@@ -43,6 +44,6 @@ def test_network():
     network.print_network_info()
     total_sum = sum(job.processing_time for job in instance.jobs)
 
-    answer = solve_max_flow(network, total_sum, instance)
+    answer = solve_max_flow(network, total_sum)
     print(answer.is_feasible)
     print(answer.print_schedule_info()) # Total time Should be 5
