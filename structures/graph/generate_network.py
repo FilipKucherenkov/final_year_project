@@ -1,3 +1,6 @@
+from solvers.models.maxflow_cplex import solve_maxflow_cplex
+from solvers.models.maxflow_cplex_v2 import solve_maxflow_cplex_v2
+from solvers.models.maxflow_cplex_with_opt import solve_maxflow_cplex_with_opt
 from structures.graph.arc import Arc
 from structures.graph.network import Network
 from structures.graph.node import Node
@@ -28,7 +31,6 @@ def generate_network(time_slots: list[Timeslot], jobs: list[Job]) -> Network:
         # Add arcs from source to each job node j with capacity pj
         network.add_arc(Arc(source, new_node, job.processing_time))
 
-    # TODO: When we make a given timeslot closed remove those nodes and their edges
     for timeslot in time_slots:
         if timeslot.is_open:
             # Add a node for each open timeslot t
@@ -51,8 +53,8 @@ def generate_network(time_slots: list[Timeslot], jobs: list[Job]) -> Network:
 
 def test():
     # Create nodes
-    source: Node = Node("1")
-    sink: Node = Node("5")
+    source: Node = Node("s")
+    sink: Node = Node("t")
 
     node_1: Node = Node("2")
     node_2: Node = Node("3")
@@ -69,13 +71,13 @@ def test():
     network.add_arc(Arc(source, node_2, 3))
     network.add_arc(Arc(node_1, node_2, 3))
     network.add_arc(Arc(node_1, node_3, 4))
+    network.add_arc(Arc(node_2, node_3, 4))
     network.add_arc(Arc(node_3, sink, 1))
     network.add_arc(Arc(node_2, sink, 2))
 
-    network.print_network_info()
-
+    schedule = solve_maxflow_cplex(network.arcs, network.source_node, network.sink_node, 3)
+    schedule = solve_maxflow_cplex_v2(network.arcs, network.source_node, network.sink_node, 3)
     # Create network and add nodes
-    print("================================")
-    network2: Network = Network(source, sink)
-    network2.add_arc(Arc(source, node_1, 2))
-    network2.print_network_info()
+    schedule.print_schedule_info()
+    schedule.print_schedule_info()
+    # network.print_network_info()

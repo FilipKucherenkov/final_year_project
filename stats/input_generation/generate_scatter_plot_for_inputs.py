@@ -1,9 +1,8 @@
-from matplotlib import pyplot as plt
 from matplotlib.lines import Line2D
 import numpy as np
 import os
 
-from input_generation.problem_instance import ProblemInstance
+from input_generation.problem_instances.problem_instance import ProblemInstance
 import matplotlib.pyplot as plt
 
 

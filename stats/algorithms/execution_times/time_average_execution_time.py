@@ -3,17 +3,14 @@ import timeit
 import pandas as pd
 from matplotlib import pyplot as plt
 
-from algorithms.greedy_with_blackbox_heuristic import greedy_with_blackbox_heuristic
-from input_generation.analysis_input_generator import AnalysisInputGenerator
-from models.active_time_ip import solve_active_time_ip
+from input_generation.dataset_generator import DatasetGenerator
+from solvers.models.active_time_ip import solve_active_time_ip
 import seaborn as sns
+
+from solvers.greedy_algorithms.greedy_local_search import greedy_local_search
 
 
 def generate_line_plot_for_running_times():
-    generate_line_plot_for_running_time("Small", "Feasible")
-    plt.clf()
-    generate_line_plot_for_running_time("Moderate", "Feasible")
-    plt.clf()
     generate_line_plot_for_running_time("Large", "Feasible")
     plt.clf()
 
@@ -21,8 +18,8 @@ def generate_line_plot_for_running_times():
 def generate_line_plot_for_running_time(instance_type: str, schedule_type: str):
     stats = []
     for g in range(1, 100, 5):
-        instances = AnalysisInputGenerator.generate_multiple_feasible_instances(10, instance_type, g) \
-            if schedule_type == "Feasible" else AnalysisInputGenerator.generate_multiple_instances(10, instance_type, g)
+        instances = DatasetGenerator.generate_multiple_feasible_instances(1, instance_type, g) \
+            if schedule_type == "Feasible" else DatasetGenerator.generate_multiple_instances(1, instance_type, g)
         time_algo1 = time_algorithm("ip_model", instances)
         time_algo2 = time_algorithm("maxflow_greedy", instances)
         stats.append({
@@ -56,12 +53,16 @@ def time_algorithm(algorithm: str, instances):
     number_of_instances = len(instances)
     total_time_taken = 0
     for instance in instances:
-        if algorithm == "ip_model":
-            t = timeit.Timer(lambda: solve_active_time_ip(instance))
-            total_time_taken = total_time_taken + t.timeit(number=1)
-        elif algorithm == "maxflow_greedy":
-            t = timeit.Timer(lambda: greedy_with_blackbox_heuristic(instance))
-            total_time_taken = total_time_taken + t.timeit(number=1)
 
-    average_execution_time = total_time_taken / number_of_instances
-    return average_execution_time
+        if algorithm == "ip_model":
+            t = timeit.Timer(lambda: solve_active_time_ip(instance, "gurobi"))
+            times = t.repeat(5, 5)
+            total_time_taken = min(times) / 5
+
+        elif algorithm == "maxflow_greedy":
+            t = timeit.Timer(lambda: greedy_local_search(instance, "gurobi"))
+            times = t.repeat(5, 5)
+            total_time_taken = min(times) / 5
+
+    # average_execution_time = total_time_taken / number_of_instances
+    return total_time_taken

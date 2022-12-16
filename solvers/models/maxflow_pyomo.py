@@ -1,36 +1,41 @@
 import pyomo.environ as pyo
 from pyomo.opt import SolverFactory
 
+from structures.graph.generate_network import generate_network
 from structures.graph.network import Network
 from structures.scheduling.schedule import Schedule
 
-# import logging
-# logging.getLogger('pyomo.core').setLevel(logging.ERROR)  # To handle pyomo bug with repeating arcs
+import logging
+
+logging.getLogger('pyomo.core').setLevel(logging.ERROR)  # Disable logging for performance
 
 
-def solve_max_flow(network: Network, total_sum: int, solver_type: str):
+def solve_max_flow(instance, solver_type):
+    network = generate_network(instance.time_horizon.time_slots, instance.jobs)
+    total_sum = sum(job.processing_time for job in instance.jobs)
+    return solve_max_flow_model(network, total_sum, solver_type)
+
+
+def solve_max_flow_model(network: Network, total_sum: int, solver_type: str):
     """
-    Pyomo model for Linear programming definition derived from Network Models: “Wayne L. Winston (2004) Operations
+    Pyomo model for Linear Programming formulation derived from Network Models: “Wayne L. Winston (2004) Operations
     Research: Applications and Algorithms, p.414-459”
     :param network: Network object representation of the Active Time problem instance.
     :param total_sum: summation of the processing times of all jobs whose node representation is on the network.
     :param solver_type: specified solver (e.g. gurobi or cplex-direct)
-    :return:
+    :return: Schedule object containing Job to timeslot mapping
     """
-
     # Create pyomo model
     model = pyo.AbstractModel()
 
-    # Parameter: Nodes on the network
+    # Parameter: Set of nodes on the network
     model.nodes = pyo.Set(initialize=network.get_nodes_values_lst())
-
     # Parameter: Set of arcs in the form of tuples (Node1, Node2)
     model.arcs = pyo.Set(within=model.nodes * model.nodes, initialize=network.get_arcs_as_tuples())
     # Parameter: Source node
     model.source_node = pyo.Param(within=model.nodes, initialize="source")
     # Parameter: Sink node
     model.sink_node = pyo.Param(within=model.nodes, initialize="sink")
-
     # Parameter: Arc capacities
     model.arc_capacity = pyo.Param(model.arcs,
                                    initialize=network.get_arc_capacity_map())
@@ -38,10 +43,9 @@ def solve_max_flow(network: Network, total_sum: int, solver_type: str):
     # Decision Variable: flow that goes through an Arc
     model.arc_flow = pyo.Var(model.arcs, within=pyo.NonNegativeReals)
 
-    # Objective function: maximise the flow in the sink node
+    # Objective function: maximise the inflow to the sink node
     def objective_rule(model):
         return sum(model.arc_flow[i, j] for (i, j) in model.arcs if j == model.sink_node())
-
     model.objective = pyo.Objective(rule=objective_rule, sense=pyo.maximize)
 
     # Constraint: Ensure the flow through each arc is less than or equal to the arc's capacity. (Upper bound)
@@ -61,20 +65,20 @@ def solve_max_flow(network: Network, total_sum: int, solver_type: str):
 
     solver = SolverFactory(solver_type)
     instance = model.create_instance()
+
     results = solver.solve(instance, warmstart=True)  # Add warmstart=True in future for optimization
-    # print(results)
+
     if results.solver.termination_condition == 'infeasible':
         # No feasible solution found
         return Schedule(False, [])
     else:
         max_flow = instance.objective()
-
+        # instance.display()
         # An active time instance has a feasible schedule on the set of open time slots iff the
         # maximum flow (integral since capacities are integral) from s to d has value equal to the sum of all job
         # processing times
         if total_sum == max_flow:
             job_to_timeslot_mapping = []
-
             for (i, j) in instance.arcs:
                 source_node_info: list = i.split("_")  # As we care only about job and timeslot nodes
                 dest_node_info: list = j.split("_")  # [0] - node type (job or timeslot), [1] (node number)
@@ -82,7 +86,9 @@ def solve_max_flow(network: Network, total_sum: int, solver_type: str):
                     if instance.arc_flow[i, j]() == 1:  # we care only where the arc flow is 1
                         # Schedule job j at timeslot t
                         job_to_timeslot_mapping.append((f"Job_{source_node_info[1]}", f"Slot_{dest_node_info[1]}"))
-            return Schedule(True, job_to_timeslot_mapping)
+
+            schedule = Schedule(True, job_to_timeslot_mapping)
+            return schedule
 
         # No feasible solution found
         return Schedule(False, [])

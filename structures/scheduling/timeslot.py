@@ -9,20 +9,19 @@ class Timeslot:
 
     Note: A timeslot is active (open) if it has at lest one scheduled job in it.
 
-    Note: The purpose of this class is to only assist with implementing the greedy algorithms
+    Note: The purpose of this class is to only assist with implementing the greedy_algorithms algorithms
     Not the optimisation models.
     """
 
-    def __init__(self, start_time: int, end_time: int, g: int):
-        self.start_time = start_time
-        self.end_time = end_time
-        self.capacity = g
-        self.is_active = False
-        self.is_open = True
-        self.jobs = []
+    def __init__(self, start_time: int, g: int):
+        self.start_time: int = start_time
+        self.capacity: int = g
+        self.is_active: bool = False
+        self.is_open: bool = True
+        self.jobs: list[Job] = []
 
     def __str__(self):
-        return f"[{self.start_time},{self.end_time}]"
+        return f"{self.start_time}"
 
     def is_full(self) -> bool:
         return len(self.jobs) == self.capacity

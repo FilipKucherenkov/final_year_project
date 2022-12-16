@@ -1,7 +1,7 @@
 import pyomo.environ as pyo
 from pyomo.opt import SolverFactory
 
-from input_generation.problem_instance import ProblemInstance
+from input_generation.problem_instances.problem_instance import ProblemInstance
 from structures.scheduling.schedule import Schedule
 
 
@@ -66,7 +66,7 @@ def solve_active_time_ip(instance: ProblemInstance, solver_type: str):
 
     # Constraint: Ensure processing_times[j] units of a job j get assigned to active slots.
     def processing_time_assignment_rule(model, j):
-        return sum(model.x[t, j] for t in model.timeslots) == model.processing_times[j]
+        return sum(model.x[t, j] for t in model.timeslots) >= model.processing_times[j]
 
     model.processing_time_assignment_rule = pyo.Constraint(model.jobs, rule=processing_time_assignment_rule)
 
@@ -81,7 +81,7 @@ def solve_active_time_ip(instance: ProblemInstance, solver_type: str):
 
     solver = SolverFactory(solver_type)
     results = solver.solve(model)
-    print(results)
+    # print(results)
     # model.display()
 
     if results.solver.termination_condition == 'infeasible':
@@ -89,15 +89,12 @@ def solve_active_time_ip(instance: ProblemInstance, solver_type: str):
         return schedule
 
     else:
-        # for j in model.jobs:
-        #     # print(j, model.processing_times[j])
         job_to_timeslot_mapping = []
         for t in model.timeslots:
             for j in model.jobs:
 
                 if model.x[t, j]() == 1:
                     # Schedule job j at timeslot t in the solution.
-                    # print(j, t, model.y[t]())
                     job_to_timeslot_mapping.append((f"Job_{j}", f"Slot_{t}"))
 
         return Schedule(True, job_to_timeslot_mapping)

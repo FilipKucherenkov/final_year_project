@@ -11,14 +11,14 @@ class TimeHorizon:
     """
 
     def __init__(self, t: int, g: int):
-        self.slot_capacity = g
-        self.t = t
+        self.slot_capacity: int = g
+        self.t: int = t
         prev: int = 0
-        new_time_slots = []
+        new_time_slots: list[Timeslot] = []
         for i in range(1, t + 1):
-            new_time_slots.append(Timeslot(prev, i, g))
+            new_time_slots.append(Timeslot(prev, g))
             prev = i
-        self.time_slots = new_time_slots
+        self.time_slots: list[Timeslot] = new_time_slots
 
     def __str__(self):
         horizon: str = f"Time Horizon:"

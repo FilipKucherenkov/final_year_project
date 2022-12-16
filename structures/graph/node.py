@@ -4,3 +4,5 @@ class Node:
     """
     def __init__(self, value: str):
         self.value = value
+        self.is_visited = False
+        self.parent = -1

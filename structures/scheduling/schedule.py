@@ -8,9 +8,9 @@ class Schedule:
     A schedule is infeasible if it does not satisfy the constraints of the Active Time problem.
     """
 
-    def __init__(self, is_feasible: bool, job_to_timeslot_mapping):
-        self.is_feasible = is_feasible
-        self.schedule = job_to_timeslot_mapping
+    def __init__(self, is_feasible: bool, job_to_timeslot_mapping: list[(str, str)]):
+        self.is_feasible: bool = is_feasible
+        self.schedule: list[str] = job_to_timeslot_mapping
 
     # Calculate the number of active slots in this schedule
     def calculate_active_time(self):
@@ -28,4 +28,4 @@ class Schedule:
         print(f"Total active time: {self.calculate_active_time()}")
         print(f"Is schedule feasible? {'Yes' if self.is_feasible else 'No'}")
         for placement in self.schedule:
-          print(placement)
+            print(placement)

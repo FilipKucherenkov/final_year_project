@@ -2,17 +2,16 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
 from matplotlib.ticker import FuncFormatter
+from input_generation.problem_instances.parsed_instance import ParsedInstance
 
-from input_generation.analysis_input_generator import AnalysisInputGenerator
 
-
-def generate_feasibility_bar_chart_for_instance():
-    small_instances = AnalysisInputGenerator.generate_multiple_instances(100, "Small", -1)
-    moderate_instances = AnalysisInputGenerator.generate_multiple_instances(100, "Moderate", -1)
-    large_instances = AnalysisInputGenerator.generate_multiple_instances(100, "Large", -1)
-    stats = generate_instance_stats(small_instances + moderate_instances + large_instances)
+def generate_feasibility_bar_chart_for_dataset(dataset: list[ParsedInstance]):
+    """
+    Generate a barchart showing how many instances are feasible and how many are not in a dataset
+    :param dataset: list of parsed problem instances.
+    """
+    stats = generate_instance_stats(dataset)
 
     agr = stats.groupby(["Instance type", "Schedule"]).size().reset_index(name="Occurrences")
 
@@ -28,6 +27,9 @@ def generate_feasibility_bar_chart_for_instance():
 
 
 def generate_instance_stats(instances):
+    """
+    Given a parsed problem instance, return a df object containing its type and whether is feasible.
+    """
     stats = []
     for i in instances:
         is_feasible = i.is_feasible()
