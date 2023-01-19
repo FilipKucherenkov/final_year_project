@@ -47,7 +47,7 @@ class SyntheticDataGenerator:
         """
 
         for job in jobs:
-            random_time = random.randint(math.floor(job.release_time * (1 + alpha)), t)
+            random_time = random.randint(math.floor(job.release_time * (1 + alpha))+1, t)
             job.deadline = random_time
 
     @staticmethod

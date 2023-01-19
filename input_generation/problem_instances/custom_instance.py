@@ -13,9 +13,9 @@ class CustomInstance:
     Note: Getter methods are used to assist with feeding input to optimization models.
     """
 
-    def __init__(self, number_of_jobs, number_of_timeslots, number_of_parallel_jobs: int):
+    def __init__(self, number_of_timeslots, number_of_parallel_jobs: int):
         self.number_of_timeslots = number_of_timeslots
-        self.number_of_jobs = number_of_jobs
+        self.number_of_jobs = 0
         self.number_of_parallel_jobs = number_of_parallel_jobs
         # Generate time horizon
         self.time_horizon = TimeHorizon(self.number_of_timeslots, number_of_parallel_jobs)
@@ -38,6 +38,7 @@ class CustomInstance:
         new_job.release_time = job_release
         new_job.deadline = job_deadline
         new_job.processing_time = job_processing
+        self.number_of_jobs += 1
         self.jobs.append(new_job)
 
     # Return a list containing the start times of each timeslot (e.g 0,1,2...)
@@ -77,6 +78,17 @@ class CustomInstance:
         for job in self.jobs:
             processing_times[job.number] = job.processing_time
         return processing_times
+
+    # Convert a problem instance to dictionary
+    def to_dict(self):
+        problem_data = {
+            "instance_id": self.instance_id,
+            "number_of_jobs": self.number_of_jobs,
+            "G": self.number_of_parallel_jobs,
+            "T": self.number_of_timeslots,
+            "jobs": [job.__dict__ for job in self.jobs],
+        }
+        return problem_data
 
     # Print information about jobs in this problem instance
     # (e.g. job number, release time, deadline, processing time...)

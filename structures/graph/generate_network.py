@@ -72,12 +72,12 @@ def test():
     network.add_arc(Arc(node_1, node_2, 3))
     network.add_arc(Arc(node_1, node_3, 4))
     network.add_arc(Arc(node_2, node_3, 4))
-    network.add_arc(Arc(node_3, sink, 1))
+    # network.add_arc(Arc(node_3, sink, 1))
     network.add_arc(Arc(node_2, sink, 2))
 
     schedule = solve_maxflow_cplex(network.arcs, network.source_node, network.sink_node, 3)
-    schedule = solve_maxflow_cplex_v2(network.arcs, network.source_node, network.sink_node, 3)
+    schedule = solve_maxflow_cplex_with_opt(network.arcs, network.source_node, network.sink_node, 3)
     # Create network and add nodes
-    schedule.print_schedule_info()
-    schedule.print_schedule_info()
+
+
     # network.print_network_info()

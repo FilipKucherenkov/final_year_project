@@ -1,7 +1,9 @@
-from input_generation.generate_input_data import parse_data_set
+from input_generation.generate_input_data import parse_data_set, generate_data_set_with_varying_t_length
 from input_generation.problem_instances.custom_instance import CustomInstance
+from solvers.solver_handler import solve_instance
 from stats.algorithms.execution_times.compare_execution_times_from_dataset \
-    import compare_running_times_on_dataset_with_varying_number_of_jobs
+    import compare_running_times_on_dataset_with_varying_number_of_jobs, \
+    compare_running_times_on_dataset_with_changes_in_t
 from structures.graph.generate_network import test
 
 
@@ -22,7 +24,7 @@ def main():
     # instance2.add_job(0, 0, 2, 2)
     # instance2.add_job(1, 0, 4, 2)
     # instance2.add_job(2, 0, 4, 4)
-    instance3 = CustomInstance(3, 12, 3)
+    instance3 = CustomInstance(12, 3)
 
     instance3.add_job(0, 0, 2, 2)
     instance3.add_job(1, 0, 2, 2)
@@ -63,8 +65,11 @@ def main():
     instances, dataset_name = parse_data_set("data/feasible_sets/instances_with_changing_number_of_jobs_set.json")
     # compare_running_times_on_dataset_with_changes_in_batch_size(instances, dataset_name)
     # generate_input_data()
-    compare_running_times_on_dataset_with_varying_number_of_jobs(instances, "maxflow_comparison")
+    # compare_running_times_on_dataset_with_changes_in_t(instances, "maxflow_comparison")
 
+    compare_running_times_on_dataset_with_varying_number_of_jobs(instances, "test_reading_basis")
+
+    # generate_data_set_with_varying_t_length()
     # network = generate_network(instance3.time_horizon.time_slots, instance3.jobs)
     # j_sum = sum(job.processing_time for job in instance3.jobs)
     # schedule = solve_maxflow_cplex(network.arcs, network.source_node, network.sink_node, j_sum)
@@ -78,7 +83,7 @@ def main():
 
     # schedule3 = solve_instance(instance3, "Greedy-local-search-with-opt-v2", "cplex")
     # schedule3.print_schedule_info()
-    # schedule4 = solve_instance(instance3, "Greedy-local-search-with-reopt", "cplex")
+    # schedule4 = solve_instance(instance3, "Greedy-local-search-with-reopt-v2", "cplex")
     # schedule4.print_schedule_info()
     # test()
 

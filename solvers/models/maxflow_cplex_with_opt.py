@@ -1,24 +1,34 @@
+import os
+
 import cplex
 
 from structures.scheduling.schedule import Schedule
 
 
-def solve_maxflow_cplex_with_opt(arcs, source_node, sink_node, job_processing_sum, arc_bounds):
+def solve_maxflow_cplex_with_opt(arcs, source_node, sink_node, job_processing_sum):
     # Create cplex Model and specify properties
     model = cplex.Cplex()
-    model.set_problem_name("Max Flow model")
-
-    model.set_problem_type(cplex.Cplex.problem_type.LP)
-    model.parameters.lpmethod.set(model.parameters.lpmethod.values.network)
-
     # Disable logging when measuring time.
     model.set_log_stream(None)
     model.set_error_stream(None)
     model.set_warning_stream(None)
     model.set_results_stream(None)
 
+    model.set_problem_name("Max Flow model")
+    if os.path.isfile("lpex.bas"):
+        model.start.read_basis("lpex.bas")
+    if os.path.isfile("model.sol"):
+        model.start.read_start("model.sol")
+
+
+    model.set_problem_type(cplex.Cplex.problem_type.LP)
+    # model.parameters.lpmethod.set(model.parameters.lpmethod.values.network)
+
+
+
+
     # Parameter: add the different arcs
-    names = [f"{arc.source_node.value}#{arc.terminal_node.value}" for arc in arcs]
+    names = [f"n{arc.source_node.value}n{arc.terminal_node.value}" for arc in arcs]
 
     # Objective: Maximise the flow in the sink node.
     w_obj = []
@@ -35,11 +45,11 @@ def solve_maxflow_cplex_with_opt(arcs, source_node, sink_node, job_processing_su
 
     upr_bnd = []
     for arc in arcs:
-        if f"{arc.source_node.value}#{arc.terminal_node.value}" in arc_bounds:
-            #print(arc_bounds[f"{arc.source_node.value}#{arc.terminal_node.value}"])
-            upr_bnd.append(arc_bounds[f"{arc.source_node.value}#{arc.terminal_node.value}"])
-        else:
-            upr_bnd.append(arc.capacity)
+        # if f"n{arc.source_node.value}n{arc.terminal_node.value}" in arc_bounds:
+        #     #print(arc_bounds[f"{arc.source_node.value}#{arc.terminal_node.value}"])
+        #     upr_bnd.append(arc_bounds[f"n{arc.source_node.value}n{arc.terminal_node.value}"])
+        # else:
+        upr_bnd.append(arc.capacity)
 
     # Set sense for the objective
     model.objective.set_sense(model.objective.sense.maximize)
@@ -75,12 +85,12 @@ def solve_maxflow_cplex_with_opt(arcs, source_node, sink_node, job_processing_su
             # Find all arcs where the current terminal node equals the arc's terminal node.
             # Those are the inflow arcs for the current terminal node.
             if arc2.terminal_node == n2:
-                arc_names.append(f"{arc2.source_node.value}#{n2.value}")
+                arc_names.append(f"n{arc2.source_node.value}n{n2.value}")
                 arc_c.append(1.0)
             # Find all arcs where the current terminal node equals the arc's source node.
             # Those are the outflow arcs for the current terminal node.
             if arc2.source_node == n2:
-                arc_names.append(f"{n2.value}#{arc2.terminal_node.value}")
+                arc_names.append(f"n{n2.value}n{arc2.terminal_node.value}")
                 arc_c.append(-1.0)
 
         # print([arc_names, arc_c])
@@ -101,8 +111,13 @@ def solve_maxflow_cplex_with_opt(arcs, source_node, sink_node, job_processing_su
                                  lin_expr=constraints,
                                  senses=constraint_senses,
                                  rhs=rhs)
+
+
     # Solve the problem
     model.solve()
+    # print(model.get_time())
+    # print(model.variables.get_names())
+    # print(model.linear_constraints.get_names())
 
     if model.solution.get_objective_value() == job_processing_sum:
         job_to_timeslot_mapping = []
@@ -110,16 +125,18 @@ def solve_maxflow_cplex_with_opt(arcs, source_node, sink_node, job_processing_su
         new_bounds = {}
         for variable, value in zip(model.variables.get_names(), model.solution.get_values()):
             # print(variable, value)
-            new_bounds[variable] = value
-            arc_info = variable.split("#")
+            # new_bounds[variable] = value
+            arc_info = variable.split("n")
 
-            source_node_info: list = arc_info[0].split("_")  # As we care only about job and timeslot nodes
-            dest_node_info: list = arc_info[1].split("_")  # [0] - node type (job or timeslot), [1] (node number)
+            source_node_info: list = arc_info[1].split("_")  # As we care only about job and timeslot nodes
+            dest_node_info: list = arc_info[2].split("_")  # [0] - node type (job or timeslot), [1] (node number)
             if source_node_info[0] == "j" and dest_node_info[0] == "t":
                 if value == 1:  # we care only where the arc flow is 1
                     # Schedule job j at timeslot t
                     job_to_timeslot_mapping.append((f"Job_{source_node_info[1]}", f"Slot_{dest_node_info[1]}"))
 
-        return Schedule(True, job_to_timeslot_mapping), new_bounds
+        model.solution.basis.write("lpex.bas")
+        model.solution.write("model.sol")
+        return Schedule(True, job_to_timeslot_mapping)
     else:
-        return Schedule(False, []), {}
+        return Schedule(False, [])

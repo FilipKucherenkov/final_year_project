@@ -12,20 +12,43 @@ RESULTS_PATH = os.path.join(os.getcwd(), "stats", "algorithms", "execution_times
 
 def compare_running_times_on_dataset_with_varying_number_of_jobs(dataset: list[ParsedInstance], dataset_name):
     # ip_model_stats = time_algorithm("Active-time-IP", dataset)
-    greedy_stats = time_algorithm("Greedy-local-search", dataset)
-    greedy_stats_with_opt = time_algorithm("Greedy-local-search-with-opt", dataset)
-    greedy_stats_with_opt_v2 = time_algorithm("Greedy-local-search-with-opt-v2", dataset)
-    #greedy_stats_with_reopt = time_algorithm("Greedy-local-search-with-reopt", dataset)
+    # greedy_stats = time_algorithm("Greedy-local-search: Pyomo", dataset)
+    # greedy_stats_with_opt = time_algorithm("Greedy-local-search: CPLEX (V1)", dataset)
+    # greedy_stats_with_opt_v2 = time_algorithm("Greedy-local-search: CPLEX (V2)", dataset)
+    greedy_stats_with_reopt = time_algorithm("Greedy-local-search-with-reopt-v2", dataset)
 
     # max_flow_stats = time_algorithm("Maxflow-LP", dataset)
     # erf_stats = time_algorithm("Earliest-released-first", dataset)
 
-    df = pd.DataFrame(greedy_stats_with_opt + greedy_stats_with_opt_v2 + greedy_stats)
+    df = pd.DataFrame(greedy_stats_with_reopt)
     # df = pd.DataFrame(greedy_stats + greedy_stats_with_opt)
     print(df)
     sns.lineplot(x="Number of jobs", y="Average time taken", hue="Algorithm", data=df)
     plt.legend(loc='upper right')
     plt.xlabel("Number of jobs per instance")
+    plt.ylabel("Running time in seconds")
+    plt.savefig(os.path.join(os.getcwd(),
+                             "stats",
+                             "algorithms",
+                             "execution_times",
+                             "plots",
+                             f"{dataset_name}"))
+
+
+def compare_running_times_on_dataset_with_changes_in_t(dataset: list[ParsedInstance], dataset_name):
+    if not os.path.exists(RESULTS_PATH):
+        os.makedirs(RESULTS_PATH)
+
+    greedy_stats = time_algorithm("Greedy-local-search: Pyomo", dataset)
+    greedy_stats_with_opt = time_algorithm("Greedy-local-search: CPLEX (V1)", dataset)
+    greedy_stats_with_opt_v2 = time_algorithm("Greedy-local-search: CPLEX (V2)", dataset)
+
+    df = pd.DataFrame(greedy_stats + greedy_stats_with_opt + greedy_stats_with_opt_v2)
+    df.to_csv(os.path.join(RESULTS_PATH, f"{dataset_name}"), encoding='utf-8', index=False)
+    print(df)
+    sns.lineplot(x="Number of timeslots", y="Average time taken", hue="Algorithm", data=df)
+    plt.legend(loc='upper right')
+    plt.xlabel("Number of timeslots m")
     plt.ylabel("Running time in seconds")
     plt.savefig(os.path.join(os.getcwd(),
                              "stats",
