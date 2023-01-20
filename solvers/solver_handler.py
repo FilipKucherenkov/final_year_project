@@ -7,6 +7,7 @@ from solvers.greedy_algorithms.greedy_local_search import greedy_local_search
 from solvers.greedy_algorithms.greedy_local_search_with_cplex import greedy_local_search_with_cplex
 from solvers.greedy_algorithms.greedy_local_search_with_cplex_v2 import greedy_local_search_with_cplex_v2
 from solvers.greedy_algorithms.greedy_local_search_with_reopt import greedy_local_search_with_reopt
+from solvers.models.maxflow_cplex_with_reopt import solve_maxflow_cplex_with_reopt
 from solvers.models.maxflow_pyomo import solve_max_flow
 
 
@@ -36,6 +37,8 @@ def solve_instance(instance, algorithm, solver_type):
         return solve_max_flow(instance, solver_type)
     elif algorithm == "Earliest-released-first":
         return earliest_released_first(instance)
+    elif algorithm == "Greedy-local-search: CPLEX Re-optimization":
+        return solve_maxflow_cplex_with_reopt(instance)
     else:
         logging.error(f"Aborting due to unsupported solver type: {algorithm}")
         return
