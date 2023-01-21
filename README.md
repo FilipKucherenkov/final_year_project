@@ -1,4 +1,4 @@
-# ATSP-for-cloud-computing
+# Robustness analysis of Active Time Scheduling problem.
 
 ### 1. Input Generation
 In order to generate a json file with custom problem instance use the `generate_custom_instance` script from the `input_generation` package. The script requires 3 separate arguments:
