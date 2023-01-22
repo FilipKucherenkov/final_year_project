@@ -31,18 +31,9 @@ class DatasetGenerator:
 
         instances: list[ProblemInstance] = []
         for i in range(0, n):
-            if instance_type == "Small":
-                instance = DatasetGenerator.generate_feasible_instance("Small", number_of_jobs,
-                                                                       number_of_timeslots, batch_size)
-                instances.append(instance)
-            elif instance_type == "Moderate":
-                instance = DatasetGenerator.generate_feasible_instance("Moderate", number_of_jobs,
-                                                                       number_of_timeslots, batch_size)
-                instances.append(instance)
-            else:
-                instance = DatasetGenerator.generate_feasible_instance("Large", number_of_jobs,
-                                                                       number_of_timeslots, batch_size)
-                instances.append(instance)
+            instance = DatasetGenerator.generate_feasible_instance(instance_type, number_of_jobs,
+                                                                   number_of_timeslots, batch_size)
+            instances.append(instance)
         return instances
 
     @staticmethod

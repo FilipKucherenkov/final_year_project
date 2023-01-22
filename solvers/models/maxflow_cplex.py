@@ -20,10 +20,10 @@ def solve_maxflow_cplex(arcs, source_node, sink_node, job_processing_sum):
     # model.set_problem_type(cplex.Cplex.problem_type.LP)
     model.parameters.lpmethod.set(model.parameters.lpmethod.values.network)
     # Disable logging when measuring time.
-    # model.set_log_stream(None)
-    # model.set_error_stream(None)
-    # model.set_warning_stream(None)
-    # model.set_results_stream(None)
+    model.set_log_stream(None)
+    model.set_error_stream(None)
+    model.set_warning_stream(None)
+    model.set_results_stream(None)
 
     # Add a variable for each arc in the network to a one-dimensional vector.
     names = [f"{arc.source_node.value}#{arc.terminal_node.value}" for arc in arcs]
@@ -106,7 +106,7 @@ def solve_maxflow_cplex(arcs, source_node, sink_node, job_processing_sum):
     # sol = (model.solution.get_values())
 
     # print(model.solution.get_values())
-    print("Objective", model.solution.get_objective_value(), job_processing_sum)
+    # print("Objective", model.solution.get_objective_value(), job_processing_sum)
     if model.solution.get_objective_value() == job_processing_sum:
         # print("Objective", model.solution.get_objective_value(), job_processing_sum)
         job_to_timeslot_mapping = []

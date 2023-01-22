@@ -1,8 +1,12 @@
 import argparse
 import json
+import logging
 import os
 
 from input_generation.problem_instances.custom_instance import CustomInstance
+
+# Set log level
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
 
 # Parse script arguments
 parser = argparse.ArgumentParser(description='A program to generate problem instance in a json file')
@@ -23,6 +27,9 @@ def generate_custom_problem_instance():
     number_of_timeslots = int(args.T)
     number_of_parallel_jobs = int(args.G)
 
+    logging.debug(f"T provided by user: {number_of_timeslots}")
+    logging.debug(f"G provided by user: {number_of_parallel_jobs}")
+
     # Create a new problem instance with the provided properties
     new_problem_instance = CustomInstance(number_of_timeslots, number_of_parallel_jobs)
 
@@ -39,11 +46,16 @@ def generate_custom_problem_instance():
     if not os.path.exists('data/custom_instances'):
         os.makedirs('data/custom_instances')
 
-    with open(f"data/custom_instances/{args.name}.json", "w") as f:
-        json.dump({
-            "instance_name": f"{args.name}",
-            "instance": new_problem_instance.to_dict()
-        }, f, indent=4)
+    try:
+        path = f"data/custom_instances/{args.name}.json"
+        with open(path, "w") as f:
+            json.dump({
+                "instance_name": f"{args.name}",
+                "instance": new_problem_instance.to_dict()
+            }, f, indent=4)
+        logging.info(f"Successfully created json file: {path}")
+    except:
+        logging.error(f"Failed to create json file, please try again")
 
 
 generate_custom_problem_instance()

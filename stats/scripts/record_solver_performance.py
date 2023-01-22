@@ -14,6 +14,9 @@ def record_solver_performance():
     """
     Record the performance of a solver on a given data set.
     User can choose: algorithm, dataset, solver and type of analysis.
+
+    python3 -m stats.scripts.record_solver_performance --file "data/feasible_sets/instances_with_changes_in_batch_size_set.json" --analysis_type "runtime" --algorithm "Greedy-local-search: CPLEX Re-optimization"
+
     """
     # Parse script arguments
     parser = argparse.ArgumentParser(description='Script that records performance')
@@ -38,19 +41,33 @@ def record_solver_performance():
 
     # Record runtime performance
     if args.analysis_type == "runtime":
-        results["runtime"] = {}
+        results["instance_results"] = []
         logging.info(f"Recording {args.algorithm} runtime on {dataset_name}...")
         for i, instance in enumerate(instances):
             time_taken = record_execution_time_on_instance(instance, args.algorithm, args.solver_type)
-            results["runtime"][f"instance_{i}"] = time_taken
+            results["instance_results"] = results["instance_results"] + [{
+                                                            "Algorithm": f"{args.algorithm}",
+                                                            "Instance_index": f"instance_{i}",
+                                                            "ID": instance.instance_id,
+                                                            "T": instance.number_of_timeslots,
+                                                            "G": instance.number_of_parallel_jobs,
+                                                            "J": instance.number_of_jobs,
+                                                            "runtime_in_sec": time_taken}]
 
     # Record objective value performance.
     elif args.analysis_type == "objective":
-        results["objective_value"] = {}
+        results["instance_results"] = []
         logging.info(f"Recording {args.algorithm} objective value on {dataset_name}...")
         for i, instance in enumerate(instances):
             schedule = solve_instance(instance, args.algorithm, args.solver_type)
-            results["objective_value"][f"instance_{i}"] = schedule.calculate_active_time()
+            results["instance_results"] = results["instance_results"] + [{
+                                                            "Algorithm": f"{args.algorithm}",
+                                                            "Instance_index": f"instance_{i}",
+                                                            "ID": instance.instance_id,
+                                                            "T": instance.number_of_timeslots,
+                                                            "G": instance.number_of_parallel_jobs,
+                                                            "J": instance.number_of_jobs,
+                                                            "objective_value": schedule.calculate_active_time()}]
 
     logging.info(f"Results recorded successfully")
 
