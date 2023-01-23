@@ -97,7 +97,6 @@ def solve_maxflow_cplex_v2(arcs, source_node, sink_node, job_processing_sum, bat
     model.solve()
     # sol = (model.solution.get_values())
 
-
     # print(model.solution.get_values())
     # print("Objective", model.solution.get_objective_value(), job_processing_sum)
     if model.solution.get_objective_value() == job_processing_sum:
