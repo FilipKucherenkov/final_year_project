@@ -21,11 +21,15 @@ def greedy_local_search_with_cplex_v2(instance: ProblemInstance, solver_type: st
     # 1. Find initial solution.
     network = generate_network(time_horizon.time_slots, jobs)
     total_sum = sum(job.processing_time for job in jobs)
-    initial_schedule = solve_maxflow_cplex_v2(network.arcs, network.source_node, network.sink_node, total_sum)
+    initial_schedule = solve_maxflow_cplex_v2(network.arcs,
+                                              network.source_node,
+                                              network.sink_node,
+                                              total_sum,
+                                              instance.number_of_parallel_jobs)
 
     if not initial_schedule.is_feasible:
         # If no feasible schedule can be found return.
-        return Schedule(False, [])
+        return Schedule(False, [], instance.number_of_parallel_jobs)
 
     # 2. Attempt to find a better solution.
     for timeslot in time_horizon.time_slots:
@@ -37,7 +41,11 @@ def greedy_local_search_with_cplex_v2(instance: ProblemInstance, solver_type: st
         total_sum = sum(job.processing_time for job in jobs)
 
         # Flow values is used to pass the assigned flow values from previous computations.
-        schedule = solve_maxflow_cplex_v2(network.arcs, network.source_node, network.sink_node, total_sum)
+        schedule = solve_maxflow_cplex_v2(network.arcs,
+                                          network.source_node,
+                                          network.sink_node,
+                                          total_sum,
+                                          instance.number_of_parallel_jobs)
 
         if schedule.is_feasible:
             # 2.3. If a better solution is found update the initial schedule.

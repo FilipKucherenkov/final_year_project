@@ -10,19 +10,20 @@ import logging
 logging.getLogger('pyomo.core').setLevel(logging.ERROR)  # Disable logging for performance
 
 
-def solve_max_flow(instance, solver_type):
+def solve_max_flow(instance, solver_type: str):
     network = generate_network(instance.time_horizon.time_slots, instance.jobs)
     total_sum = sum(job.processing_time for job in instance.jobs)
-    return solve_max_flow_model(network, total_sum, solver_type)
+    return solve_max_flow_model(network, total_sum, solver_type, instance.number_of_parallel_jobs)
 
 
-def solve_max_flow_model(network: Network, total_sum: int, solver_type: str):
+def solve_max_flow_model(network: Network, total_sum: int, solver_type: str, batch_size: int):
     """
     Pyomo model for Linear Programming formulation derived from Network Models: “Wayne L. Winston (2004) Operations
     Research: Applications and Algorithms, p.414-459”
     :param network: Network object representation of the Active Time problem instance.
     :param total_sum: summation of the processing times of all jobs whose node representation is on the network.
     :param solver_type: specified solver (e.g. gurobi or cplex-direct)
+    :param batch_size: number of jobs that can be scheduled in parallel
     :return: Schedule object containing Job to timeslot mapping
     """
     # Create pyomo model
@@ -70,7 +71,7 @@ def solve_max_flow_model(network: Network, total_sum: int, solver_type: str):
 
     if results.solver.termination_condition == 'infeasible':
         # No feasible solution found
-        return Schedule(False, [])
+        return Schedule(False, [], batch_size)
     else:
         max_flow = instance.objective()
         # instance.display()
@@ -87,8 +88,8 @@ def solve_max_flow_model(network: Network, total_sum: int, solver_type: str):
                         # Schedule job j at timeslot t
                         job_to_timeslot_mapping.append((f"Job_{source_node_info[1]}", f"Slot_{dest_node_info[1]}"))
 
-            schedule = Schedule(True, job_to_timeslot_mapping)
+            schedule = Schedule(True, job_to_timeslot_mapping, batch_size)
             return schedule
 
         # No feasible solution found
-        return Schedule(False, [])
+        return Schedule(False, [], batch_size)

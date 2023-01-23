@@ -2,7 +2,7 @@ import cplex
 from structures.scheduling.schedule import Schedule
 
 
-def solve_maxflow_cplex(arcs, source_node, sink_node, job_processing_sum):
+def solve_maxflow_cplex(arcs, source_node, sink_node, job_processing_sum, batch_size):
     """
     CPLEX model for Linear Programming formulation for the Maximum Flow problem
     :param arcs: set of arcs on the network.
@@ -123,8 +123,8 @@ def solve_maxflow_cplex(arcs, source_node, sink_node, job_processing_sum):
                     # Schedule job j at timeslot t
                     job_to_timeslot_mapping.append((f"Job_{source_node_info[1]}", f"Slot_{dest_node_info[1]}"))
 
-        return Schedule(True, job_to_timeslot_mapping)
+        return Schedule(True, job_to_timeslot_mapping, batch_size)
     else:
-        return Schedule(False, [])
+        return Schedule(False, [], batch_size)
 
 

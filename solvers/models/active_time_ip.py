@@ -85,7 +85,7 @@ def solve_active_time_ip(instance: ProblemInstance, solver_type: str):
     # model.display()
 
     if results.solver.termination_condition == 'infeasible':
-        schedule = Schedule(False, [])
+        schedule = Schedule(False, [], instance.number_of_parallel_jobs)
         return schedule
 
     else:
@@ -97,4 +97,4 @@ def solve_active_time_ip(instance: ProblemInstance, solver_type: str):
                     # Schedule job j at timeslot t in the solution.
                     job_to_timeslot_mapping.append((f"Job_{j}", f"Slot_{t}"))
 
-        return Schedule(True, job_to_timeslot_mapping)
+        return Schedule(True, job_to_timeslot_mapping, instance.number_of_parallel_jobs)

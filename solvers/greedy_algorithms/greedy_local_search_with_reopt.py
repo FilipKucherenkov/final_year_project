@@ -28,7 +28,7 @@ def greedy_local_search_with_reopt(instance: ProblemInstance, solver_type: str):
 
     if not initial_schedule.is_feasible:
         # If no feasible schedule can be found return.
-        return Schedule(False, [])
+        return Schedule(False, [], instance.number_of_parallel_jobs)
 
     # 2. Attempt to find a better solution.
     for timeslot in time_horizon.time_slots:
@@ -40,8 +40,11 @@ def greedy_local_search_with_reopt(instance: ProblemInstance, solver_type: str):
         total_sum = sum(job.processing_time for job in jobs)
 
         # Flow values is used to pass the assigned flow values from previous computations.
-        schedule = solve_maxflow_cplex_with_opt(network.arcs, network.source_node, network.sink_node,
-                                                total_sum)
+        schedule = solve_maxflow_cplex_with_opt(network.arcs,
+                                                network.source_node,
+                                                network.sink_node,
+                                                total_sum,
+                                                instance.number_of_parallel_jobs)
         # initial_bounds = flow_bounds
         # print(schedule.is_feasible)
         if schedule.is_feasible:

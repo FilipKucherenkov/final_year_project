@@ -22,4 +22,4 @@ def earliest_released_first(instance: ParsedInstance):
 
             job_to_timeslot_mapping.append((f"Job_{job.number}", f"Slot_{job.release_time + i}"))
 
-    return Schedule(True, job_to_timeslot_mapping)
+    return Schedule(True, job_to_timeslot_mapping, instance.number_of_parallel_jobs)

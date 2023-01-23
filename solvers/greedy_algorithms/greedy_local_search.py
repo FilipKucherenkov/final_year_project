@@ -24,11 +24,11 @@ def greedy_local_search(instance: ProblemInstance, solver_type: str):
     # 1. Find initial solution.
     network = generate_network(time_horizon.time_slots, jobs)
     total_sum = sum(job.processing_time for job in jobs)
-    initial_schedule = solve_max_flow_model(network, total_sum, solver_type)
+    initial_schedule = solve_max_flow_model(network, total_sum, solver_type, instance.number_of_parallel_jobs)
 
     if not initial_schedule.is_feasible:
         # If no feasible schedule can be found return.
-        return Schedule(False, [])
+        return Schedule(False, [], instance.number_of_parallel_jobs)
 
     # 2. Attempt to find a better solution.
     for timeslot in time_horizon.time_slots:
@@ -40,7 +40,7 @@ def greedy_local_search(instance: ProblemInstance, solver_type: str):
         total_sum = sum(job.processing_time for job in jobs)
 
         # Flow values is used to pass the assigned flow values from previous computations.
-        schedule = solve_max_flow_model(network, total_sum, solver_type)
+        schedule = solve_max_flow_model(network, total_sum, solver_type, instance.number_of_parallel_jobs)
 
         if schedule.is_feasible:
             # 2.3. If a better solution is found update the initial schedule.

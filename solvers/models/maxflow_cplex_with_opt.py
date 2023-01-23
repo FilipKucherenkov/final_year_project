@@ -5,7 +5,7 @@ import cplex
 from structures.scheduling.schedule import Schedule
 
 
-def solve_maxflow_cplex_with_opt(arcs, source_node, sink_node, job_processing_sum):
+def solve_maxflow_cplex_with_opt(arcs, source_node, sink_node, job_processing_sum, batch_size):
     # Create cplex Model and specify properties
     model = cplex.Cplex()
     # Disable logging when measuring time.
@@ -137,6 +137,6 @@ def solve_maxflow_cplex_with_opt(arcs, source_node, sink_node, job_processing_su
 
         model.solution.basis.write("lpex.bas")
         model.solution.write("model.sol")
-        return Schedule(True, job_to_timeslot_mapping)
+        return Schedule(True, job_to_timeslot_mapping, batch_size)
     else:
-        return Schedule(False, [])
+        return Schedule(False, [], batch_size)

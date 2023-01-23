@@ -2,7 +2,7 @@ import cplex
 from structures.scheduling.schedule import Schedule
 
 
-def solve_maxflow_cplex_v2(arcs, source_node, sink_node, job_processing_sum):
+def solve_maxflow_cplex_v2(arcs, source_node, sink_node, job_processing_sum, batch_size):
     # for arc in arcs:
     #     print(arc.source_node.value, arc.terminal_node.value, arc.capacity)
     # Create cplex Model and specify properties
@@ -116,6 +116,6 @@ def solve_maxflow_cplex_v2(arcs, source_node, sink_node, job_processing_sum):
                     # Schedule job j at timeslot t
                     job_to_timeslot_mapping.append((f"Job_{source_node_info[1]}", f"Slot_{dest_node_info[1]}"))
 
-        return Schedule(True, job_to_timeslot_mapping)
+        return Schedule(True, job_to_timeslot_mapping, batch_size)
     else:
-        return Schedule(False, [])
+        return Schedule(False, [], batch_size)

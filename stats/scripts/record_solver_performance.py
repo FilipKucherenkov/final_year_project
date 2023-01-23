@@ -46,13 +46,13 @@ def record_solver_performance():
         for i, instance in enumerate(instances):
             time_taken = record_execution_time_on_instance(instance, args.algorithm, args.solver_type)
             results["instance_results"] = results["instance_results"] + [{
-                                                            "Algorithm": f"{args.algorithm}",
-                                                            "Instance_index": f"instance_{i}",
-                                                            "ID": instance.instance_id,
-                                                            "T": instance.number_of_timeslots,
-                                                            "G": instance.number_of_parallel_jobs,
-                                                            "J": instance.number_of_jobs,
-                                                            "runtime_in_sec": time_taken}]
+                "Algorithm": f"{args.algorithm}",
+                "Instance_index": f"instance_{i}",
+                "ID": instance.instance_id,
+                "T": instance.number_of_timeslots,
+                "G": instance.number_of_parallel_jobs,
+                "J": instance.number_of_jobs,
+                "runtime_in_sec": time_taken}]
 
     # Record objective value performance.
     elif args.analysis_type == "objective":
@@ -61,13 +61,14 @@ def record_solver_performance():
         for i, instance in enumerate(instances):
             schedule = solve_instance(instance, args.algorithm, args.solver_type)
             results["instance_results"] = results["instance_results"] + [{
-                                                            "Algorithm": f"{args.algorithm}",
-                                                            "Instance_index": f"instance_{i}",
-                                                            "ID": instance.instance_id,
-                                                            "T": instance.number_of_timeslots,
-                                                            "G": instance.number_of_parallel_jobs,
-                                                            "J": instance.number_of_jobs,
-                                                            "objective_value": schedule.calculate_active_time()}]
+                "Algorithm": f"{args.algorithm}",
+                "Instance_index": f"instance_{i}",
+                "ID": instance.instance_id,
+                "T": instance.number_of_timeslots,
+                "G": instance.number_of_parallel_jobs,
+                "J": instance.number_of_jobs,
+                "objective_value": schedule.calculate_active_time(),
+                "batch_utilization": schedule.calculate_batch_utilization_ratio()}]
 
     logging.info(f"Results recorded successfully")
 

@@ -3,13 +3,14 @@ import os
 
 import cplex
 
+from input_generation.problem_instances.parsed_instance import ParsedInstance
 from structures.graph.generate_network import generate_network
 from structures.scheduling.schedule import Schedule
 
 
 # arcs, source_node, sink_node, job_processing_sum, closed_timeslots
 
-def solve_maxflow_cplex_with_reopt(instance):
+def solve_maxflow_cplex_with_reopt(instance: ParsedInstance):
     """
     Re-optimization for the Greedy-local-search algorithm proposed by Kumar and Khuller 2018
     The algorithm creates a CPLEX model based on a LP formulation for solving maximum flow problem. It
@@ -123,7 +124,8 @@ def solve_maxflow_cplex_with_reopt(instance):
     if model.solution.get_objective_value() == job_processing_sum:
 
         # Construct initial solution in a Schedule object
-        init_schedule = construct_cplex_solution(model.variables.get_names(), model.solution.get_values())
+        init_schedule = construct_cplex_solution(model.variables.get_names(),
+                                                 model.solution.get_values(), instance.number_of_parallel_jobs)
 
         # Start the greedy local search by performing incremental changes to the model.
         for j, timeslot in enumerate(time_horizon.time_slots):
@@ -147,7 +149,8 @@ def solve_maxflow_cplex_with_reopt(instance):
             if model.solution.get_status() != "1" and model.solution.get_objective_value() == job_processing_sum:
                 # If solution is feasible and the maximum flow equals the summation of job processing times
                 # Update the initial solution with the better one.
-                init_schedule = construct_cplex_solution(model.variables.get_names(), model.solution.get_values())
+                init_schedule = construct_cplex_solution(model.variables.get_names(),
+                                                         model.solution.get_values(), instance.number_of_parallel_jobs)
 
 
             else:
@@ -165,10 +168,10 @@ def solve_maxflow_cplex_with_reopt(instance):
 
     else:
         # Solution is infeasible
-        return Schedule(False, [])
+        return Schedule(False, [], instance.number_of_parallel_jobs)
 
 
-def construct_cplex_solution(variable_names, values):
+def construct_cplex_solution(variable_names, values, batch_size):
     """
     Helper function to construct a Schedule object based
     on results obtained by CPLEX.
@@ -188,4 +191,4 @@ def construct_cplex_solution(variable_names, values):
                 # Schedule job j at timeslot t
                 job_to_timeslot_mapping.append((f"Job_{source_node_info[1]}", f"Slot_{dest_node_info[1]}"))
 
-    return Schedule(True, job_to_timeslot_mapping)
+    return Schedule(True, job_to_timeslot_mapping, batch_size)
