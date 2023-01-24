@@ -1,7 +1,8 @@
 import logging
 
+from solvers.heuristic.fcfs_with_back_filling import erf_with_back_filling
 from solvers.models.active_time_ip import solve_active_time_ip
-from solvers.greedy_algorithms.earliest_released_first import earliest_released_first
+from solvers.heuristic.earliest_released_first import earliest_released_first
 from solvers.greedy_algorithms.greedy_local_search import greedy_local_search
 from solvers.greedy_algorithms.greedy_local_search_with_cplex import greedy_local_search_with_cplex
 from solvers.greedy_algorithms.greedy_local_search_with_cplex_v2 import greedy_local_search_with_cplex_v2
@@ -29,10 +30,12 @@ def solve_instance(instance, algorithm, solver_type):
         return greedy_local_search_with_cplex_v2(instance, solver_type)
     elif algorithm == "Maxflow-LP":
         return solve_max_flow(instance, solver_type)
-    elif algorithm == "Earliest-released-first":
-        return earliest_released_first(instance)
     elif algorithm == "Greedy-local-search: CPLEX Re-optimization":
         return solve_maxflow_cplex_with_reopt(instance)
+    elif algorithm == "Earliest-released-first":
+        return earliest_released_first(instance)
+    elif algorithm == "Earliest-released-first-with-back-filling":
+        return erf_with_back_filling(instance)
     else:
         logging.error(f"Aborting due to unsupported algorithm: {algorithm}")
         return

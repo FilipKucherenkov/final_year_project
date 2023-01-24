@@ -15,7 +15,6 @@ def earliest_released_first(instance: ParsedInstance):
 
     # 0. Note: Important to deep copy input to avoid modifying problem instance.
     jobs = copy.deepcopy(instance.jobs)
-
     for job in jobs:
         # 1. Schedule each job at its release time, ignoring capacity constraint.
         for i in range(0, job.processing_time):
