@@ -5,18 +5,17 @@ from solvers.greedy_algorithms.earliest_released_first import earliest_released_
 from solvers.greedy_algorithms.greedy_local_search import greedy_local_search
 from solvers.greedy_algorithms.greedy_local_search_with_cplex import greedy_local_search_with_cplex
 from solvers.greedy_algorithms.greedy_local_search_with_cplex_v2 import greedy_local_search_with_cplex_v2
-from solvers.greedy_algorithms.greedy_local_search_with_reopt import greedy_local_search_with_reopt
 from solvers.models.maxflow_cplex_with_reopt import solve_maxflow_cplex_with_reopt
 from solvers.models.maxflow_pyomo import solve_max_flow
 
 
 def solve_instance(instance, algorithm, solver_type):
     """
-    Solve a given problem instance for the Active-time-problem
-    :param instance: Problem instance object
+    Solve a given problem instance of the Active-time-problem
+    :param instance: ParsedInstance object
     :param algorithm: specified algorithm (e.g active-time-ip, max-flow or Greedy-local-search)
     :param solver_type: specified solver (e.g. gurobi or cplex-direct)
-    :return:
+    :return: Schedule object containing the solution.
     """
     logging.info(f"Attempting to solve instance using {algorithm}")
 
@@ -35,5 +34,5 @@ def solve_instance(instance, algorithm, solver_type):
     elif algorithm == "Greedy-local-search: CPLEX Re-optimization":
         return solve_maxflow_cplex_with_reopt(instance)
     else:
-        logging.error(f"Aborting due to unsupported solver type: {algorithm}")
+        logging.error(f"Aborting due to unsupported algorithm: {algorithm}")
         return
