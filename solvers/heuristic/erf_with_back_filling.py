@@ -20,7 +20,7 @@ def erf_with_back_filling(instance: ParsedInstance):
 
     # Stores whether a timeslot is busy
     is_active = [[False for _ in range(time_horizon_length)] for _ in range(time_horizon_length)]
-
+    busy_cols = {}
     # 2. Process jobs
     for job in jobs:
         processing_units = job.processing_time
@@ -30,10 +30,20 @@ def erf_with_back_filling(instance: ParsedInstance):
             while processing_units > 0 and job.release_time + j < job.deadline:
                 # slot is busy
                 if not is_active[row][job.release_time + j]:
-                    is_active[row][job.release_time + j] = True
-                    job_to_timeslot_mapping.append((f"Job_{job.number}", f"Slot_{job.release_time + j}"))
 
-                    processing_units = processing_units - 1
+                    # Mark slots in this col as busy as we cannot schedule job units of the same job in parallel
+                    if job.number not in busy_cols:
+                        busy_cols[job.number] = [job.release_time + j]
+                    if job.release_time + j not in busy_cols[job.number]:
+                        is_active[row][job.release_time + j] = True
+
+                        busy_cols[job.number] = busy_cols[job.number] + [job.release_time + j]
+                        # schedule job
+                        job_to_timeslot_mapping.append((f"Job_{job.number}", f"Slot_{job.release_time + j}"))
+
+                        processing_units = processing_units - 1
+
                 j = j + 1
 
     return Schedule(True, job_to_timeslot_mapping, instance.number_of_parallel_jobs)
+

@@ -5,7 +5,7 @@ from solvers.solver_handler import solve_instance
 from stats.algorithms.execution_times.compare_execution_times_from_dataset \
     import compare_running_times_on_dataset_with_varying_number_of_jobs, \
     compare_running_times_on_dataset_with_changes_in_t
-from stats.scripts.analyse_solver_results import  compare_running_times_for_greedy_local_search, \
+from stats.scripts.analyse_solver_results import compare_running_times_for_greedy_local_search, \
     compare_runtime_on_dataset_1, compare_runtime_on_dataset_2, compare_utilization_perc_on_dataset_2
 from structures.graph.generate_network import test
 
@@ -15,7 +15,7 @@ def main():
     # instance1.print_instance_info()
     # network = generate_network(instance1.time_horizon.time_slots, instance1.jobs)
     # network.print_network_info()
-    # instance = CustomInstance( 12, 3)
+    # instance = CustomInstance(12, 3)
     # instance.add_job(0, 0, 2, 2)
     # instance.add_job(1, 0, 4, 2)
     # instance.add_job(2, 1, 6, 1)
@@ -50,7 +50,8 @@ def main():
     # test_network()
 
     # schedule = solve_maxflow_cplex_with_reopt(instance)
-    # schedule2 = schedule = solve_instance(instance, "Active-time-IP", "gurobi")
+    # schedule = solve_instance(instance, "Earliest-released-first-with-back-filling", "gurobi")
+    # schedule2 = solve_instance(instance, "Active-time-IP", "gurobi")
     # schedule.print_schedule_info()
     # schedule2.print_schedule_info()
 
@@ -58,5 +59,6 @@ def main():
     compare_runtime_on_dataset_2("Runtime_on_dataset_2")
     compare_utilization_perc_on_dataset_2("Batch_util_on_dataset_2")
     compare_running_times_for_greedy_local_search("Greedy_comparison")
+
 
 main()

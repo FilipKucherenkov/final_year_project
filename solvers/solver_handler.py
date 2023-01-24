@@ -1,6 +1,6 @@
 import logging
 
-from solvers.heuristic.fcfs_with_back_filling import erf_with_back_filling
+from solvers.heuristic.erf_with_back_filling import erf_with_back_filling
 from solvers.models.active_time_ip import solve_active_time_ip
 from solvers.heuristic.earliest_released_first import earliest_released_first
 from solvers.greedy_algorithms.greedy_local_search import greedy_local_search
