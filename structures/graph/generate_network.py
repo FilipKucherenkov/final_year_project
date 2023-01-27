@@ -1,6 +1,5 @@
 from solvers.models.maxflow_cplex import solve_maxflow_cplex
 from solvers.models.maxflow_cplex_v2 import solve_maxflow_cplex_v2
-from solvers.models.maxflow_cplex_with_opt import solve_maxflow_cplex_with_opt
 from structures.graph.arc import Arc
 from structures.graph.network import Network
 from structures.graph.node import Node
@@ -72,11 +71,10 @@ def test():
     network.add_arc(Arc(node_1, node_2, 3))
     network.add_arc(Arc(node_1, node_3, 4))
     network.add_arc(Arc(node_2, node_3, 4))
-    # network.add_arc(Arc(node_3, sink, 1))
+    network.add_arc(Arc(node_3, sink, 1))
     network.add_arc(Arc(node_2, sink, 2))
 
-    schedule = solve_maxflow_cplex(network.arcs, network.source_node, network.sink_node, 3)
-    schedule = solve_maxflow_cplex_with_opt(network.arcs, network.source_node, network.sink_node, 3)
+    schedule = solve_maxflow_cplex(network.arcs, network.source_node, network.sink_node, 3, 0)
     # Create network and add nodes
 
 

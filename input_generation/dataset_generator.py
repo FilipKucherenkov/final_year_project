@@ -5,6 +5,7 @@ class DatasetGenerator:
     """
     DatasetGenerator class containing static methods for generating datasets with problem instances.
     """
+
     @staticmethod
     def generate_multiple_instances(n: int, instance_type: str, number_of_jobs: int,
                                     number_of_timeslots: int, batch_size: int):

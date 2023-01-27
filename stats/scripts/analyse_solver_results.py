@@ -12,20 +12,13 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(mes
 
 
 def compare_runtime_on_dataset_1(filename: str):
-    """
-    Produces a line plot to compare the runtime of the IP model and
-    the Greedy local search algorithm on a data set with changes in the length
-    of time horizon (25, 50, 75, 100) where the batch size G=20 and the number of jobs J=100 (fixed).
-    """
     plt.clf()
     files = [
         "data/results/runtime/Greedy-local-search: CPLEX "
-        "Re-optimization/Greedy-local-search: CPLEX "
-        "Re-optimization-on-changes_in_number_of_timeslots_comparison_set.json",
-        "data/results/runtime/Active-time-IP/Active-time-IP-on-changes_in_number_of_timeslots_comparison_set.json"
+        "Re-optimization/results_dataset_1.json",
+        "data/results/runtime/Active-time-IP/results_dataset_1.json"
     ]
     df = construct_df_from_files(files)
-
     sns.lineplot(x="T", y="runtime_in_sec", hue="Algorithm", data=df)
     sns.scatterplot(x="T", y="runtime_in_sec", data=df, hue="Algorithm", legend=False)
     # plt.legend(loc='upper right')

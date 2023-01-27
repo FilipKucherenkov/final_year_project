@@ -78,7 +78,7 @@ def record_solver_performance():
     if not os.path.exists(f"data/results/{args.analysis_type}/{args.algorithm}"):
         os.makedirs(f"data/results/{args.analysis_type}/{args.algorithm}")
     try:
-        path = f"data/results/{args.analysis_type}/{args.algorithm}/{args.algorithm}-on-{dataset_name}.json"
+        path = f"data/results/{args.analysis_type}/{args.algorithm}/results_{dataset_name}.json"
         with open(path, "w") as f:
             json.dump(results, f, indent=4)
         logging.info(f"Results recorded successfully: {path}")

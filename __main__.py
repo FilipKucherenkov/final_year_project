@@ -1,4 +1,3 @@
-from input_generation.generate_input_data import parse_data_set, generate_data_set_with_varying_t_length
 from input_generation.problem_instances.custom_instance import CustomInstance
 from solvers.models.maxflow_cplex_with_reopt import solve_maxflow_cplex_with_reopt
 from solvers.solver_handler import solve_instance
@@ -55,10 +54,10 @@ def main():
     # schedule.print_schedule_info()
     # schedule2.print_schedule_info()
 
-    compare_runtime_on_dataset_1("Runtime_on_dataset_1")
-    compare_runtime_on_dataset_2("Runtime_on_dataset_2")
-    compare_utilization_perc_on_dataset_2("Batch_util_on_dataset_2")
-    compare_running_times_for_greedy_local_search("Greedy_comparison")
-
+    # compare_runtime_on_dataset_1("Runtime_on_dataset_1")
+    # compare_runtime_on_dataset_2("Runtime_on_dataset_2")
+    # compare_utilization_perc_on_dataset_2("Batch_util_on_dataset_2")
+    # compare_running_times_for_greedy_local_search("Greedy_comparison")
+    compare_runtime_on_dataset_1("results")
 
 main()

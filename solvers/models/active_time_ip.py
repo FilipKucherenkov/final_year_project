@@ -66,7 +66,7 @@ def solve_active_time_ip(instance: ProblemInstance, solver_type: str):
 
     # Constraint: Ensure processing_times[j] units of a job j get assigned to active slots.
     def processing_time_assignment_rule(model, j):
-        return sum(model.x[t, j] for t in model.timeslots) >= model.processing_times[j]
+        return sum(model.x[t, j] for t in model.timeslots) == model.processing_times[j]
 
     model.processing_time_assignment_rule = pyo.Constraint(model.jobs, rule=processing_time_assignment_rule)
 

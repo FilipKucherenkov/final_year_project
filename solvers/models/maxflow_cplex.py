@@ -104,9 +104,10 @@ def solve_maxflow_cplex(arcs, source_node, sink_node, job_processing_sum, batch_
     # Solve the problem
     model.solve()
     # sol = (model.solution.get_values())
-
+    for variable, value in zip(model.variables.get_names(), model.solution.get_values()):
+        print(f"{variable} and {value}")
     # print(model.solution.get_values())
-    # print("Objective", model.solution.get_objective_value(), job_processing_sum)
+    print("Objective", model.solution.get_objective_value(), job_processing_sum)
     if model.solution.get_objective_value() == job_processing_sum:
         # print("Objective", model.solution.get_objective_value(), job_processing_sum)
         job_to_timeslot_mapping = []
