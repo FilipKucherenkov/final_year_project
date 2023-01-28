@@ -44,7 +44,6 @@ class Schedule:
         total_utilization = 0
         for t, util_perc in utilization_ration_map.items():
             total_utilization = total_utilization + util_perc
-
         return total_utilization / len(utilization_ration_map)
 
     # Print extended information about solution

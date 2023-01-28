@@ -47,12 +47,12 @@ def solve_maxflow_cplex_v2(arcs, source_node, sink_node, job_processing_sum, bat
 
         # # Check if node has been visited. If it has, skip it
         # # otherwise we will add a duplicate constraint.
-        if n1 in visited_arcs:
+        if n2 in visited_arcs:
             continue
 
         # Make sure the node is not the source or the sink
         # as constraints for those are covered in the other.
-        if n1 == sink_node or n1 == source_node:
+        if n2 == sink_node or n2 == source_node:
             continue
 
         # Mark node as visited
@@ -65,13 +65,13 @@ def solve_maxflow_cplex_v2(arcs, source_node, sink_node, job_processing_sum, bat
         for arc2 in arcs:
             # Find all arcs where the current terminal node equals the arc's terminal node.
             # Those are the inflow arcs for the current terminal node.
-            if arc2.terminal_node == n1:
-                arc_names.append(f"{arc2.source_node.value}#{n1.value}")
+            if arc2.terminal_node == n2:
+                arc_names.append(f"{arc2.source_node.value}#{n2.value}")
                 arc_c.append(1.0)
             # Find all arcs where the current terminal node equals the arc's source node.
             # Those are the outflow arcs for the current terminal node.
-            if arc2.source_node == n1:
-                arc_names.append(f"{n1.value}#{arc2.terminal_node.value}")
+            if arc2.source_node == n2:
+                arc_names.append(f"{n2.value}#{arc2.terminal_node.value}")
                 arc_c.append(-1.0)
 
         # print([arc_names, arc_c])

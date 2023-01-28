@@ -1,6 +1,6 @@
 import copy
 
-from problem_classes.problem_instances import ParsedInstance
+from problem_classes.problem_instances.parsed_instance import ParsedInstance
 from problem_classes.scheduling.schedule import Schedule
 
 

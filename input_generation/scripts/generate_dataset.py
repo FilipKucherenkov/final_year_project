@@ -2,6 +2,7 @@ import argparse
 import json
 import logging
 import os
+import random
 
 from input_generation.dataset_generator import DatasetGenerator
 
@@ -42,6 +43,7 @@ def generate_dataset_with_random_instances():
     logging.debug(f"Attempting to create a data set containing instances with changes in {args.P}")
 
     instances = []
+
     if parameter_to_change == "G":
         for param in number_of_parallel_jobs_lst:
             instances = instances + (
@@ -58,18 +60,19 @@ def generate_dataset_with_random_instances():
                                                                       "Feasible_instance",
                                                                       int(number_of_jobs_lst[0]),
                                                                       int(param),
-                                                                      int(20 *
-                                                                          int(number_of_parallel_jobs_lst[0]) / 100)
+                                                                      int(number_of_parallel_jobs_lst[0])
                                                                       ))
 
     elif parameter_to_change == "J":
         for param in number_of_jobs_lst:
+            random_perc = random.randint(5, 20)
             instances = instances + (
                 DatasetGenerator.generate_multiple_feasible_instances(int(args.N),
                                                                       "Feasible_instance",
                                                                       int(param),
-                                                                      int(number_of_timeslots_lst[0]),
-                                                                      int(number_of_parallel_jobs_lst[0])
+                                                                      int(param),
+                                                                      int(random_perc *
+                                                                          int(param) / 100)
                                                                       ))
 
     # Check if directory is present

@@ -1,11 +1,11 @@
 import pyomo.environ as pyo
 from pyomo.opt import SolverFactory
 
-from problem_classes.problem_instances import ProblemInstance
+from problem_classes.problem_instances.parsed_instance import ParsedInstance
 from problem_classes.scheduling.schedule import Schedule
 
 
-def solve_active_time_ip(instance: ProblemInstance, solver_type: str):
+def solve_active_time_ip(instance: ParsedInstance, solver_type: str):
     """
     Create and solve Pyomo model for Integer programming formulation given by Chang et al. 2017
     :param instance: Problem instance object

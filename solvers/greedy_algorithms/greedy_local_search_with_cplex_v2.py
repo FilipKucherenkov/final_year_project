@@ -1,12 +1,12 @@
 import copy
 
-from problem_classes.problem_instances import ProblemInstance
+from problem_classes.problem_instances.parsed_instance import ParsedInstance
 from solvers.models.maxflow_cplex_v2 import solve_maxflow_cplex_v2
 from problem_classes.graph.generate_network import generate_network
 from problem_classes.scheduling.schedule import Schedule
 
 
-def greedy_local_search_with_cplex_v2(instance: ProblemInstance, solver_type: str):
+def greedy_local_search_with_cplex_v2(instance: ParsedInstance, solver_type: str):
     """
     All time slots are assumed to be open initially. Consider time slots from left to right (i.e in increasing
     order). At a given time slot, close the slot and check if a feasible schedule exists in the open slots. If so,

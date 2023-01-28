@@ -1,4 +1,4 @@
-from problem_classes.problem_instances import ProblemInstance
+from problem_classes.problem_instances.problem_instance import ProblemInstance
 
 
 class DatasetGenerator:

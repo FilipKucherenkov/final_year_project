@@ -34,4 +34,9 @@
 - J = 100
 - G = {5, 10, 25, 50, 100, 150}
 
-###
+### 6. Data set contains 30 random problem instances with proportional changes in J, T and G (5 instances per change): `dataset_6.json`
+#### Note: Proportional change in G has been selected randomly from (5 - 20)% (longer processing time)
+#### Parameters: 
+- T = {25, 50, 75, 100, 125, 150}
+- J = {25, 50, 75, 100, 125, 150}
+- G = choose randomly from(5 - 20)% % of T 

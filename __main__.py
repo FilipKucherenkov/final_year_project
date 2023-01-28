@@ -1,4 +1,6 @@
-from stats.scripts.analyse_solver_results import compare_runtime_on_dataset_1
+from stats.scripts.analyse_solver_results import compare_runtime_on_dataset_1, \
+    compare_running_times_for_greedy_local_search, compare_utilization_perc_on_dataset_1, compare_runtime_on_dataset_4, \
+    compare_runtime_on_dataset_5, compare_runtime_on_dataset_6, compare_utilization_perc_on_dataset_4
 
 
 def main():
@@ -50,6 +52,14 @@ def main():
     # compare_runtime_on_dataset_2("Runtime_on_dataset_2")
     # compare_utilization_perc_on_dataset_2("Batch_util_on_dataset_2")
     # compare_running_times_for_greedy_local_search("Greedy_comparison")
-    compare_runtime_on_dataset_1("results")
+    # compare_runtime_on_dataset_1("results")
+
+    # Generate plots
+    # compare_running_times_for_greedy_local_search("Local-search-comparison")
+    # compare_utilization_perc_on_dataset_1("Batch-util-dataset1")
+    # compare_runtime_on_dataset_4("Runtime-on-dataset-4")
+    # compare_runtime_on_dataset_5("Runtime-on-dataset-5")
+    # compare_runtime_on_dataset_6("Runtime-on-dataset-6")
+    compare_utilization_perc_on_dataset_4("Batch-util-dataset-4")
 
 main()

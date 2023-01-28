@@ -2,12 +2,10 @@ import copy
 
 import cplex
 
-from problem_classes.problem_instances import ParsedInstance
 from problem_classes.graph.generate_network import generate_network
+from problem_classes.problem_instances.parsed_instance import ParsedInstance
 from problem_classes.scheduling.schedule import Schedule
 
-
-# arcs, source_node, sink_node, job_processing_sum, closed_timeslots
 
 def solve_maxflow_cplex_with_reopt(instance: ParsedInstance):
     """
