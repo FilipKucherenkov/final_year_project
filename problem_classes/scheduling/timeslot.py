@@ -1,4 +1,4 @@
-from structures.scheduling.job import Job
+from problem_classes.scheduling.job import Job
 
 
 class Timeslot:

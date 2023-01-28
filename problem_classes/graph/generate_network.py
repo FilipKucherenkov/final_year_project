@@ -1,10 +1,10 @@
 from solvers.models.maxflow_cplex import solve_maxflow_cplex
 from solvers.models.maxflow_cplex_v2 import solve_maxflow_cplex_v2
-from structures.graph.arc import Arc
-from structures.graph.network import Network
-from structures.graph.node import Node
-from structures.scheduling.job import Job
-from structures.scheduling.timeslot import Timeslot
+from problem_classes.graph.arc import Arc
+from problem_classes.graph.network import Network
+from problem_classes.graph.node import Node
+from problem_classes.scheduling.job import Job
+from problem_classes.scheduling.timeslot import Timeslot
 
 
 def generate_network(time_slots: list[Timeslot], jobs: list[Job]) -> Network:

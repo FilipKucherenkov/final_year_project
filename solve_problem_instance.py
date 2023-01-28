@@ -3,8 +3,7 @@ import json
 import os
 import logging
 
-from input_generation.problem_instances.custom_instance import CustomInstance
-from input_generation.problem_instances.parsed_instance import ParsedInstance
+from problem_classes.problem_instances import ParsedInstance
 from solvers.solver_handler import solve_instance
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')

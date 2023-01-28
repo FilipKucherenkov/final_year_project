@@ -1,7 +1,7 @@
 import copy
 
-from input_generation.problem_instances.parsed_instance import ParsedInstance
-from structures.scheduling.schedule import Schedule
+from problem_classes.problem_instances import ParsedInstance
+from problem_classes.scheduling.schedule import Schedule
 
 
 def erf_with_back_filling(instance: ParsedInstance):

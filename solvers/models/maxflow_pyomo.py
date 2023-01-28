@@ -1,9 +1,9 @@
 import pyomo.environ as pyo
 from pyomo.opt import SolverFactory
 
-from structures.graph.generate_network import generate_network
-from structures.graph.network import Network
-from structures.scheduling.schedule import Schedule
+from problem_classes.graph.generate_network import generate_network
+from problem_classes.graph.network import Network
+from problem_classes.scheduling.schedule import Schedule
 
 import logging
 

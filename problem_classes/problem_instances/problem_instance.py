@@ -1,29 +1,40 @@
+import uuid
+
 from solvers.models.maxflow_pyomo import solve_max_flow_model
-from structures.graph.generate_network import generate_network
-from structures.scheduling.job import Job
-from structures.scheduling.time_horizon import TimeHorizon
+from input_generation.synthetic_data_generator import SyntheticDataGenerator
+from problem_classes.graph.generate_network import generate_network
+from problem_classes.scheduling.time_horizon import TimeHorizon
 
 
-class ParsedInstance:
+class ProblemInstance:
     """
-        Simple class to represent a problem instance of the Active time scheduling problem. This class is used when parsing
-        a problem data set and better study algorithm/model performance.
+    Simple class to represent a problem instance of the Active time scheduling problem. This class uses the static
+    methods from the SyntheticDataGenerator class to randomly generate jobs with their release times, deadlines and
+    processing times. It also holds information about the length of the time horizon and the number of
+    jobs G that can be scheduled at each timeslot.
 
-        Note: Getter methods are used to assist with feeding input to optimization models.
+    Note: Getter methods are used to assist with feeding input to optimization models.
     """
 
-    def __init__(self, instance_info: dict):
-        # Parse json and create instance
-        self.instance_id = instance_info["instance_id"]
-        self.number_of_parallel_jobs = instance_info["G"]
-        self.number_of_timeslots = instance_info["T"]
-        self.number_of_jobs = instance_info["number_of_jobs"]
+    def __init__(self, instance_type: str, number_of_jobs: int, number_of_timeslots: int, batch_size: int):
+        # Generate a unique instance id
+        self.instance_id = str(uuid.uuid4())
+
+        # Generate specific instance types when specified
+        self.instance_type = instance_type
+        self.number_of_jobs = number_of_jobs
+        self.number_of_timeslots = number_of_timeslots
+        self.number_of_parallel_jobs = batch_size
+
         # Generate time horizon
-        self.time_horizon = TimeHorizon(instance_info["T"], instance_info["G"])
-        self.jobs = [Job(job["number"],
-                         job["release_time"],
-                         job["deadline"],
-                         job["processing_time"], ) for job in instance_info["jobs"]]
+        self.time_horizon = TimeHorizon(number_of_timeslots, batch_size)
+        # Generate jobs
+        self.jobs = SyntheticDataGenerator.generate_jobs(number_of_jobs)
+
+        # Generate random properties for each job
+        SyntheticDataGenerator.generate_release_times_for_jobs(self.jobs, self.number_of_timeslots)
+        SyntheticDataGenerator.generate_deadlines_for_jobs(self.jobs, self.number_of_timeslots)
+        SyntheticDataGenerator.generate_processing_times_for_jobs(self.jobs)
 
     # Checks feasibility of instance based on a Max-flow computation
     def is_feasible(self):
@@ -73,10 +84,12 @@ class ParsedInstance:
     # Convert a problem instance to dictionary
     def to_dict(self):
         problem_data = {
+            "instance_id": self.instance_id,
             "instance_type": self.instance_type,
+            "number_of_jobs": self.number_of_jobs,
             "G": self.number_of_parallel_jobs,
             "T": self.number_of_timeslots,
-            "jobs": [job.__dict__ for job in self.jobs]
+            "jobs": [job.__dict__ for job in self.jobs],
         }
         return problem_data
 

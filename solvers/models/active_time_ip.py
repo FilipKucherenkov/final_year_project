@@ -1,8 +1,8 @@
 import pyomo.environ as pyo
 from pyomo.opt import SolverFactory
 
-from input_generation.problem_instances.problem_instance import ProblemInstance
-from structures.scheduling.schedule import Schedule
+from problem_classes.problem_instances import ProblemInstance
+from problem_classes.scheduling.schedule import Schedule
 
 
 def solve_active_time_ip(instance: ProblemInstance, solver_type: str):

@@ -1,14 +1,14 @@
 from matplotlib.lines import Line2D
 import numpy as np
 import os
-
-from input_generation.problem_instances.problem_instance import ProblemInstance
 import matplotlib.pyplot as plt
+
+from problem_classes.problem_instances.parsed_instance import ParsedInstance
 
 
 # Generate Scatter plot to visualize where on the time horizon were
 # the release times and deadlines generated
-def generate_plot_for_input_generation(instance: ProblemInstance):
+def plot_instance_constraints_on_time_horizon(instance: ParsedInstance):
     plt.rcParams["figure.figsize"] = [7.00, 3.50]
     plt.rcParams["figure.autolayout"] = True
     plt.grid()

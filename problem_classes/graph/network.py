@@ -1,5 +1,5 @@
-from structures.graph.arc import Arc
-from structures.graph.node import Node
+from problem_classes.graph.arc import Arc
+from problem_classes.graph.node import Node
 
 
 class Network:

@@ -1,11 +1,11 @@
 import copy
 
-from input_generation.problem_instances.custom_instance import CustomInstance
-from input_generation.problem_instances.problem_instance import ProblemInstance
+from problem_classes.problem_instances import CustomInstance
+from problem_classes.problem_instances import ProblemInstance
 from solvers.models.active_time_ip import solve_active_time_ip
 from solvers.models.maxflow_pyomo import solve_max_flow_model
-from structures.graph.generate_network import generate_network
-from structures.scheduling.schedule import Schedule
+from problem_classes.graph.generate_network import generate_network
+from problem_classes.scheduling.schedule import Schedule
 
 
 def greedy_local_search(instance: ProblemInstance, solver_type: str):

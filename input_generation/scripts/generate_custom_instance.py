@@ -3,7 +3,7 @@ import json
 import logging
 import os
 
-from input_generation.problem_instances.custom_instance import CustomInstance
+from problem_classes.problem_instances import CustomInstance
 
 # Set log level
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')

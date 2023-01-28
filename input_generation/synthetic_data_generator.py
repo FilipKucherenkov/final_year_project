@@ -1,7 +1,7 @@
 import math
 import random
 
-from structures.scheduling.job import Job
+from problem_classes.scheduling.job import Job
 
 
 class SyntheticDataGenerator:

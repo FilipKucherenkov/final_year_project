@@ -1,12 +1,4 @@
-from input_generation.problem_instances.custom_instance import CustomInstance
-from solvers.models.maxflow_cplex_with_reopt import solve_maxflow_cplex_with_reopt
-from solvers.solver_handler import solve_instance
-from stats.algorithms.execution_times.compare_execution_times_from_dataset \
-    import compare_running_times_on_dataset_with_varying_number_of_jobs, \
-    compare_running_times_on_dataset_with_changes_in_t
-from stats.scripts.analyse_solver_results import compare_running_times_for_greedy_local_search, \
-    compare_runtime_on_dataset_1, compare_runtime_on_dataset_2, compare_utilization_perc_on_dataset_2
-from structures.graph.generate_network import test
+from stats.scripts.analyse_solver_results import compare_runtime_on_dataset_1
 
 
 def main():

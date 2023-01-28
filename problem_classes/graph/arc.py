@@ -1,4 +1,4 @@
-from structures.graph.node import Node
+from problem_classes.graph.node import Node
 
 
 class Arc:

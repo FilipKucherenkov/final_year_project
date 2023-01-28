@@ -1,45 +1,36 @@
-import uuid
 from solvers.models.maxflow_pyomo import solve_max_flow_model
-from structures.graph.generate_network import generate_network
-from structures.scheduling.job import Job
-from structures.scheduling.time_horizon import TimeHorizon
+from problem_classes.graph.generate_network import generate_network
+from problem_classes.scheduling.job import Job
+from problem_classes.scheduling.time_horizon import TimeHorizon
 
 
-class CustomInstance:
+class ParsedInstance:
     """
-    Simple class to represent a problem instance of the Active time scheduling problem. This class is used to generate
-    manual test cases to better study algorithm/model performance.
+        Simple class to represent a problem instance of the Active time scheduling problem. This class is used when parsing
+        a problem data set and better study algorithm/model performance.
 
-    Note: Getter methods are used to assist with feeding input to optimization models.
+        Note: Getter methods are used to assist with feeding input to optimization models.
     """
 
-    def __init__(self, number_of_timeslots, number_of_parallel_jobs: int):
-        self.number_of_timeslots = number_of_timeslots
-        self.number_of_jobs = 0
-        self.number_of_parallel_jobs = number_of_parallel_jobs
+    def __init__(self, instance_info: dict):
+        # Parse json and create instance
+        self.instance_id = instance_info["instance_id"]
+        self.number_of_parallel_jobs = instance_info["G"]
+        self.number_of_timeslots = instance_info["T"]
+        self.number_of_jobs = instance_info["number_of_jobs"]
         # Generate time horizon
-        self.time_horizon = TimeHorizon(self.number_of_timeslots, number_of_parallel_jobs)
-        # Jobs are empty initially
-        self.jobs = []
-
-        # Generate a unique instance id
-        self.instance_id = str(uuid.uuid4())
+        self.time_horizon = TimeHorizon(instance_info["T"], instance_info["G"])
+        self.jobs = [Job(job["number"],
+                         job["release_time"],
+                         job["deadline"],
+                         job["processing_time"], ) for job in instance_info["jobs"]]
 
     # Checks feasibility of instance based on a Max-flow computation
     def is_feasible(self):
         network = generate_network(self.time_horizon.time_slots, self.jobs)
         total_sum = sum(job.processing_time for job in self.jobs)
-        schedule = solve_max_flow_model(network, total_sum, self)
+        schedule = solve_max_flow_model(network, total_sum, "gurobi", self.number_of_parallel_jobs)
         return schedule.is_feasible
-
-    # Create a new Job and add it to the problem instance
-    def add_job(self, job_number: int, job_release: int, job_deadline: int, job_processing: int):
-        new_job = Job(job_number)
-        new_job.release_time = job_release
-        new_job.deadline = job_deadline
-        new_job.processing_time = job_processing
-        self.number_of_jobs += 1
-        self.jobs.append(new_job)
 
     # Return a list containing the start times of each timeslot (e.g 0,1,2...)
     def get_timeslots_lst(self) -> list[int]:
@@ -82,11 +73,10 @@ class CustomInstance:
     # Convert a problem instance to dictionary
     def to_dict(self):
         problem_data = {
-            "instance_id": self.instance_id,
-            "number_of_jobs": self.number_of_jobs,
+            "instance_type": self.instance_type,
             "G": self.number_of_parallel_jobs,
             "T": self.number_of_timeslots,
-            "jobs": [job.__dict__ for job in self.jobs],
+            "jobs": [job.__dict__ for job in self.jobs]
         }
         return problem_data
 

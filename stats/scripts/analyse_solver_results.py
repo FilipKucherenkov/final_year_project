@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 
+from stats.scripts.analysis_helpers.helpers import construct_df_from_files
+
 RESULTS_PATH = os.path.join(os.getcwd(), "stats", "algorithms", "runtime_analysis")
 
 # Set log level
@@ -18,7 +20,7 @@ def compare_runtime_on_dataset_1(filename: str):
         "Re-optimization/results_dataset_1.json",
         "data/results/runtime/Active-time-IP/results_dataset_1.json"
     ]
-    df = construct_df_from_files(files)
+    df = construct_df_from_files(files, "instance_results")
     sns.lineplot(x="T", y="runtime_in_sec", hue="Algorithm", data=df)
     sns.scatterplot(x="T", y="runtime_in_sec", data=df, hue="Algorithm", legend=False)
     # plt.legend(loc='upper right')
@@ -45,7 +47,7 @@ def compare_runtime_on_dataset_2(file_name: str):
         "Re-optimization-on-Proportional changes in params Small.json",
         "data/results/runtime/Active-time-IP/Active-time-IP-on-Proportional changes in params Small.json"
     ]
-    df = construct_df_from_files(files)
+    df = construct_df_from_files(files, "instance_results")
 
     sns.lineplot(x="T", y="runtime_in_sec", hue="Algorithm", data=df)
     sns.scatterplot(x="T", y="runtime_in_sec", data=df, hue="Algorithm", legend=False)
@@ -73,7 +75,7 @@ def compare_utilization_perc_on_dataset_2(file_name: str):
         "Re-optimization-on-Proportional changes in params Small.json",
         "data/results/objective/Active-time-IP/Active-time-IP-on-Proportional changes in params Small.json"
     ]
-    df = construct_df_from_files(files)
+    df = construct_df_from_files(files, "instance_results")
     sns.barplot(x='T', y='batch_utilization', hue='Algorithm', data=df, palette='magma')
     df.groupby(['T', 'G']).mean()
     plt.xlabel("Number of timeslots")
@@ -100,7 +102,7 @@ def compare_running_times_for_greedy_local_search(file_name: str):
     ]
     plt.clf()
     # Construct dataframe
-    df = construct_df_from_files(files)
+    df = construct_df_from_files(files, "instance_results")
 
     sns.lineplot(x="T", y="runtime_in_sec", hue="Algorithm", data=df)
     sns.scatterplot(x="T", y="runtime_in_sec", data=df, hue="Algorithm", legend=False)
@@ -113,28 +115,3 @@ def compare_running_times_for_greedy_local_search(file_name: str):
                              f"{file_name}"))
 
 
-def construct_df_from_files(files: list[str]):
-    """
-    Given a list of paths to json files, construct a DataFrame object with the
-    data from the parsed files for further analysis.
-    :param files: list of strings (file paths to json files).
-    :return: DataFrame object containing the parsed data.
-    """
-    # Parse json
-    dataframes = []
-    dataset_name = ""
-
-    for file in files:
-        try:
-            with open(file) as json_file:
-                data = json.load(json_file)
-
-                dataset_name = data["data_set_name"]
-                dataframes.append(pd.DataFrame.from_dict(pd.json_normalize(data["instance_results"])))
-                logging.info(f"Successfully loaded json file: {file}")
-        except:
-            logging.error(f"Failed to parse json, please try again: {file}")
-            return
-
-    df = pd.concat(dataframes)
-    return df

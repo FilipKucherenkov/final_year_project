@@ -1,47 +1,45 @@
 import uuid
-
 from solvers.models.maxflow_pyomo import solve_max_flow_model
-from input_generation.synthetic_data_generator import SyntheticDataGenerator
-from structures.graph.generate_network import generate_network
-from structures.scheduling.time_horizon import TimeHorizon
+from problem_classes.graph.generate_network import generate_network
+from problem_classes.scheduling.job import Job
+from problem_classes.scheduling.time_horizon import TimeHorizon
 
 
-class ProblemInstance:
+class CustomInstance:
     """
-    Simple class to represent a problem instance of the Active time scheduling problem. This class uses the static
-    methods from the SyntheticDataGenerator class to randomly generate jobs with their release times, deadlines and
-    processing times. It also holds information about the length of the time horizon and the number of
-    jobs G that can be scheduled at each timeslot.
+    Simple class to represent a problem instance of the Active time scheduling problem. This class is used to generate
+    manual test cases to better study algorithm/model performance.
 
     Note: Getter methods are used to assist with feeding input to optimization models.
     """
 
-    def __init__(self, instance_type: str, number_of_jobs: int, number_of_timeslots: int, batch_size: int):
+    def __init__(self, number_of_timeslots, number_of_parallel_jobs: int):
+        self.number_of_timeslots = number_of_timeslots
+        self.number_of_jobs = 0
+        self.number_of_parallel_jobs = number_of_parallel_jobs
+        # Generate time horizon
+        self.time_horizon = TimeHorizon(self.number_of_timeslots, number_of_parallel_jobs)
+        # Jobs are empty initially
+        self.jobs = []
+
         # Generate a unique instance id
         self.instance_id = str(uuid.uuid4())
-
-        # Generate specific instance types when specified
-        self.instance_type = instance_type
-        self.number_of_jobs = number_of_jobs
-        self.number_of_timeslots = number_of_timeslots
-        self.number_of_parallel_jobs = batch_size
-
-        # Generate time horizon
-        self.time_horizon = TimeHorizon(number_of_timeslots, batch_size)
-        # Generate jobs
-        self.jobs = SyntheticDataGenerator.generate_jobs(number_of_jobs)
-
-        # Generate random properties for each job
-        SyntheticDataGenerator.generate_release_times_for_jobs(self.jobs, self.number_of_timeslots)
-        SyntheticDataGenerator.generate_deadlines_for_jobs(self.jobs, self.number_of_timeslots)
-        SyntheticDataGenerator.generate_processing_times_for_jobs(self.jobs)
 
     # Checks feasibility of instance based on a Max-flow computation
     def is_feasible(self):
         network = generate_network(self.time_horizon.time_slots, self.jobs)
         total_sum = sum(job.processing_time for job in self.jobs)
-        schedule = solve_max_flow_model(network, total_sum, "gurobi", self.number_of_parallel_jobs)
+        schedule = solve_max_flow_model(network, total_sum, self)
         return schedule.is_feasible
+
+    # Create a new Job and add it to the problem instance
+    def add_job(self, job_number: int, job_release: int, job_deadline: int, job_processing: int):
+        new_job = Job(job_number)
+        new_job.release_time = job_release
+        new_job.deadline = job_deadline
+        new_job.processing_time = job_processing
+        self.number_of_jobs += 1
+        self.jobs.append(new_job)
 
     # Return a list containing the start times of each timeslot (e.g 0,1,2...)
     def get_timeslots_lst(self) -> list[int]:
@@ -85,7 +83,6 @@ class ProblemInstance:
     def to_dict(self):
         problem_data = {
             "instance_id": self.instance_id,
-            "instance_type": self.instance_type,
             "number_of_jobs": self.number_of_jobs,
             "G": self.number_of_parallel_jobs,
             "T": self.number_of_timeslots,

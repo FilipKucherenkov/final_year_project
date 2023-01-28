@@ -22,8 +22,16 @@
 - J = 100
 - G = 20
 
-### 4. Data set with changes in the number of jobs
-### 5. Data set with changes in the batch size
-### 6. Data set with changes with changes in jobs and proportional changes in the rest
-### 7. Data set with changes in the batch-size and proportional changes in the rest
+### 4. Data set contains 30 random problem instances with changes in the number of jobs (5 instances per change): `dataset_4.json`
+#### Parameters: 
+- T = 100
+- J = {25,50,75,100,150,250}
+- G = 5
 
+### 5. Data set contains 30 random problem instances with changes in the batch size (5 instances per change): `dataset_5.json`
+#### Parameters: 
+- T = 100
+- J = 100
+- G = {5, 10, 25, 50, 100, 150}
+
+###

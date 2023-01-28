@@ -1,5 +1,5 @@
 import cplex
-from structures.scheduling.schedule import Schedule
+from problem_classes.scheduling.schedule import Schedule
 
 
 def solve_maxflow_cplex(arcs, source_node, sink_node, job_processing_sum, batch_size):

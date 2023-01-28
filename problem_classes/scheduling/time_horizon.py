@@ -1,6 +1,6 @@
 import math
 
-from structures.scheduling.timeslot import Timeslot
+from problem_classes.scheduling.timeslot import Timeslot
 
 
 class TimeHorizon:

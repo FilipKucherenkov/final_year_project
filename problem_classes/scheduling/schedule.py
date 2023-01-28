@@ -1,5 +1,5 @@
-from structures.scheduling.job import Job
-from structures.scheduling.timeslot import Timeslot
+from problem_classes.scheduling.job import Job
+from problem_classes.scheduling.timeslot import Timeslot
 
 
 class Schedule:
