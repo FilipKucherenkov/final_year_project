@@ -1,4 +1,4 @@
-from solvers.models.maxflow_pyomo import solve_max_flow_model
+from solvers.maflow_models.maxflow_pyomo import solve_max_flow_model
 from problem_classes.graph.generate_network import generate_network
 from problem_classes.scheduling.job import Job
 from problem_classes.scheduling.time_horizon import TimeHorizon

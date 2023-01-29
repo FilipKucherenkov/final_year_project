@@ -1,5 +1,4 @@
 import copy
-
 import cplex
 
 from problem_classes.graph.generate_network import generate_network
@@ -7,26 +6,22 @@ from problem_classes.problem_instances.parsed_instance import ParsedInstance
 from problem_classes.scheduling.schedule import Schedule
 
 
-def solve_maxflow_cplex_with_reopt(instance: ParsedInstance):
+def greedy_local_search_with_reopt(instance: ParsedInstance):
     """
-    Re-optimization for the Greedy-local-search algorithm proposed by Kumar and Khuller 2018
-    The algorithm creates a CPLEX model based on a LP formulation for solving maximum flow problem. It
-    obtains an initial solution and then performs incremental changes to the model to simulate the local search
-    approach.
-    :param instance: ParsedInstance object for the Active-time problem.
-    :return: Schedule object with the solution
+    Greedy local search performed entirely in CPLEX utilizing the "modify and reoptimize" feature.
+    :param instance: ParsedInstance object for the problem instance.
+    :return: Schedule object containing the solution
     """
     # Note: Important to deep copy input to avoid modifying the problem instance.
     time_horizon = copy.deepcopy(instance.time_horizon)
     jobs = copy.deepcopy(instance.jobs)
 
-    # Generate flow network representation of the problem.
+    # Build the corresponding flow network
     network = generate_network(time_horizon.time_slots, jobs)
-    total_sum = sum(job.processing_time for job in jobs)
 
     # Create cplex Model and specify properties
     model = cplex.Cplex()
-    model.set_problem_name("Max Flow model")
+    model.set_problem_name("Greedy-local-search")
     model.parameters.lpmethod.set(model.parameters.lpmethod.values.network)
 
     # Disable logging when measuring time.
@@ -126,13 +121,11 @@ def solve_maxflow_cplex_with_reopt(instance: ParsedInstance):
 
         # Start the greedy local search by performing incremental changes to the model.
         for j, timeslot in enumerate(time_horizon.time_slots):
-            # Close timeslot. Note: this is kept here for readability, but it does not add value
-            timeslot.is_open = False
 
             for k, arc in enumerate(network.arcs):
                 if arc.source_node.value == f"t_{timeslot.start_time}":
-                    # Add a constraints for arcs which contain as source the closed
-                    # "time slot" node to represent the closure.
+                    # Add a constraints for arcs which contain as source the "closed time slot"
+                    # node to represent the closure.
                     c_name = [f"{arc.source_node.value}#{network.sink_node.value}"]
                     c_v = [1.0]
                     const = [[c_name, c_v]]
@@ -149,19 +142,14 @@ def solve_maxflow_cplex_with_reopt(instance: ParsedInstance):
                 init_schedule = construct_cplex_solution(model.variables.get_names(),
                                                          model.solution.get_values(), instance.number_of_parallel_jobs)
 
-
             else:
                 # If solution is infeasible or does not satisfy the job summation constraint
                 # Remove the previously added constraint (e.g open the timeslot).
-                timeslot.is_open = True
-
                 for k, arc in enumerate(network.arcs):
                     if arc.source_node.value == f"t_{timeslot.start_time}":
-                        # Need to add constaint on flow for arcs source to sink
                         model.linear_constraints.delete("opt" + "r" + str(k) + "c" + str(j))
 
         return init_schedule
-
 
     else:
         # Solution is infeasible
@@ -181,7 +169,7 @@ def construct_cplex_solution(variable_names, values, batch_size):
     for variable, value in zip(variable_names, values):
         arc_info = variable.split("#")
 
-        source_node_info: list = arc_info[0].split("_")  # As we care only about job and timeslot nodes
+        source_node_info: list = arc_info[0].split("_")  # Since we care only about job and timeslot nodes
         dest_node_info: list = arc_info[1].split("_")  # [0] - node type (job or timeslot), [1] (node number)
         if source_node_info[0] == "j" and dest_node_info[0] == "t":
             if value == 1:  # we care only where the arc flow is 1

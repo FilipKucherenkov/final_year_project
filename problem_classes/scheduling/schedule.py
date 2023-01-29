@@ -25,6 +25,8 @@ class Schedule:
 
     # Calculate the batch utilization ratio of a schedule
     def calculate_batch_utilization_ratio(self):
+        if not self.is_feasible:
+            return 0
         occurrences_map = {}
 
         for mapping in self.schedule:

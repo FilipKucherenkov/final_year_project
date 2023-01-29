@@ -1,6 +1,6 @@
 import uuid
 
-from solvers.models.maxflow_pyomo import solve_max_flow_model
+from solvers.maflow_models.maxflow_pyomo import solve_max_flow_model
 from input_generation.synthetic_data_generator import SyntheticDataGenerator
 from problem_classes.graph.generate_network import generate_network
 from problem_classes.scheduling.time_horizon import TimeHorizon

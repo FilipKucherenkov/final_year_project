@@ -152,6 +152,25 @@ def compare_runtime_on_dataset_5(filename: str):
                              f"{filename}"))
 
 
+def compare_utilization_perc_on_dataset_5(file_name: str):
+    # create plot
+    plt.clf()
+    files = [
+        "data/results/objective/Greedy-local-search: CPLEX "
+        "Re-optimization/results_dataset_5.json",
+        "data/results/objective/Active-time-IP/results_dataset_5.json"
+    ]
+    df = construct_df_from_files(files, "instance_results")
+    sns.barplot(x='G', y='batch_utilization', hue='Algorithm', data=df, palette='magma')
+    df.groupby(['J', 'G']).mean()
+    plt.xlabel("Batch size")
+    plt.ylabel("Average batch utilization %")
+    plt.savefig(os.path.join(os.getcwd(),
+                             "stats",
+                             "plots",
+                             f"{file_name}"))
+
+
 def compare_runtime_on_dataset_6(filename: str):
     plt.clf()
     files = [
@@ -169,6 +188,25 @@ def compare_runtime_on_dataset_6(filename: str):
                              "stats",
                              "plots",
                              f"{filename}"))
+
+
+def compare_utilization_perc_on_dataset_6(file_name: str):
+    # create plot
+    plt.clf()
+    files = [
+        "data/results/objective/Greedy-local-search: CPLEX "
+        "Re-optimization/results_dataset_6.json",
+        "data/results/objective/Active-time-IP/results_dataset_6.json"
+    ]
+    df = construct_df_from_files(files, "instance_results")
+    sns.barplot(x='G', y='batch_utilization', hue='Algorithm', data=df, palette='magma')
+    df.groupby(['J', 'G']).mean()
+    plt.xlabel("Batch size")
+    plt.ylabel("Average batch utilization %")
+    plt.savefig(os.path.join(os.getcwd(),
+                             "stats",
+                             "plots",
+                             f"{file_name}"))
 
 
 def compare_running_times_for_greedy_local_search(file_name: str):

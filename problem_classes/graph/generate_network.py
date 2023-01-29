@@ -1,5 +1,5 @@
-from solvers.models.maxflow_cplex import solve_maxflow_cplex
-from solvers.models.maxflow_cplex_v2 import solve_maxflow_cplex_v2
+from solvers.maflow_models.maxflow_cplex import solve_maxflow_cplex
+from solvers.maflow_models.maxflow_cplex_v2 import solve_maxflow_cplex_v2
 from problem_classes.graph.arc import Arc
 from problem_classes.graph.network import Network
 from problem_classes.graph.node import Node
