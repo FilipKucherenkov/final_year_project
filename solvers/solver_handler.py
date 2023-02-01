@@ -36,7 +36,7 @@ def solve_instance(instance, method, solver_type):
         return greedy_local_search_with_reopt(instance)
     elif method == "Earliest-released-first":
         return earliest_released_first(instance)
-    elif method == "Earliest-released-first-with-back-filling":
+    elif method == "Earliest-released-first-with-density-heuristic":
         return erf_with_back_filling(instance)
     else:
         logging.error(f"Aborting due to unsupported method: {method}")

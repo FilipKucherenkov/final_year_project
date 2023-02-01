@@ -18,7 +18,6 @@ def earliest_released_first(instance: ParsedInstance):
     for job in jobs:
         # 1. Schedule each job at its release time, ignoring capacity constraint.
         for i in range(0, job.processing_time):
-
             job_to_timeslot_mapping.append((f"Job_{job.number}", f"Slot_{job.release_time + i}"))
 
     return Schedule(True, job_to_timeslot_mapping, instance.number_of_parallel_jobs)

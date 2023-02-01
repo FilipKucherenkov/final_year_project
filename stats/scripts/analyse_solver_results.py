@@ -3,7 +3,7 @@ import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from stats.scripts.analysis_helpers.helpers import construct_df_from_files
+from stats.scripts.analysis_helpers.helpers import construct_df_from_files, count_optimal_objectives
 
 RESULTS_PATH = os.path.join(os.getcwd(), "stats", "algorithms", "runtime_analysis")
 
@@ -23,7 +23,7 @@ def generate_all_plots():
     # compare_objectives_on_dataset_1("Objectives-dataset-1")
 
     # Print objective stats for an algorithm on dataset compared to the optimal
-    # count_optimal_objectives("dataset_6", "Greedy-local-search: CPLEX Re-optimization")
+    count_optimal_objectives("dataset_7", "Earliest-released-first")
 
     # Batch-utilization plots
     # compare_utilization_perc_on_dataset_1("Batch-util-dataset_1")
@@ -33,9 +33,9 @@ def generate_all_plots():
     # compare_utilization_perc_on_dataset_6("Batch-util-dataset-6")
 
     # Local search optimization
-    compare_running_times_for_greedy_local_search("Runtime-dataset-3-local-search")
-    compare_running_times_for_change_in_objective_and_horizon("Change-in-objective-dataset-3")
-    compare_running_times_for_change_in_objective_and_jobs("Change-in-objective-dataset-7")
+    # compare_running_times_for_greedy_local_search("Runtime-dataset-3-local-search")
+    # compare_running_times_for_change_in_objective_and_horizon("Change-in-objective-dataset-3")
+    # compare_running_times_for_change_in_objective_and_jobs("Change-in-objective-dataset-7")
 
 
 def compare_runtime_on_dataset_1(filename: str):
@@ -298,8 +298,8 @@ def compare_running_times_for_change_in_objective_and_horizon(file_name: str):
 
 def compare_running_times_for_change_in_objective_and_jobs(file_name: str):
     files = [
-        "data/results/runtime/Greedy-local-search: CPLEX (V1)/results_dataset_3.json",
-        "data/results/runtime/Greedy-local-search: CPLEX (V2)/results_dataset_3.json",
+        "data/results/runtime/Greedy-local-search: CPLEX (V1)/results_dataset_7.json",
+        "data/results/runtime/Greedy-local-search: CPLEX (V2)/results_dataset_7.json",
     ]
     plt.clf()
     # Construct dataframe
