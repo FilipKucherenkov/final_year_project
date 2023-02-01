@@ -15,12 +15,12 @@
 - J = {25, 50, 100, 150, 250, 500}
 - G = 20 % of T 
 
-### 3. Data set contains 20 random problem instances with changes in the time horizon (5 instances per change): `dataset_3.json`
-#### Note: This set is used only to compare the 3 versions of the Greedy-local-search algorithm
+### 3. Data set contains 30 random problem instances with changes in the time horizon (5 instances per change): `dataset_3.json`
+#### Note: This set is used only to compare the change in runtime when we use a different objective
 #### Parameters: 
-- T = {25, 50, 75, 100}
-- J = 100
-- G = 20
+- T = {25, 50, 75, 100, 125}
+- J = 25
+- G = 5
 
 ### 4. Data set contains 30 random problem instances with changes in the number of jobs (5 instances per change): `dataset_4.json`
 #### Parameters: 
@@ -40,3 +40,10 @@
 - T = {25, 50, 75, 100, 125, 150}
 - J = {25, 50, 75, 100, 125, 150}
 - G = choose randomly from(5 - 20)% % of T 
+
+### 7. Data set contains 30 random problem instances with changes in the number of jobs (5 instances per change): `dataset_7.json`
+#### Note: This set is used only to compare the change in runtime when we use a different objective
+#### Parameters: 
+- T = {25}
+- J = {25, 50, 75, 100}
+- G = 5

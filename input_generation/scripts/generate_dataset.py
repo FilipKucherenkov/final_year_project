@@ -14,9 +14,9 @@ parser = argparse.ArgumentParser(description="Program to generate data set with 
                                              "parameter")
 
 parser.add_argument("--name", help="Specify a name for the dataset.", default="default_dataset_name")
-parser.add_argument("--T_range", help="list of timeslots separated with commas (e.g. 1,10,100)", default="100")
+parser.add_argument("--T_range", help="list of timeslots separated with commas (e.g. 1,10,100)", default="25")
 parser.add_argument("--G_range", help="list of batch-sizes separated with commas (e.g. 1,10,100)", default="5")
-parser.add_argument("--J_range", help="list of jobs separated with commas (e.g. 1,10,100)", default="100")
+parser.add_argument("--J_range", help="list of jobs separated with commas (e.g. 1,10,100)", default="25")
 parser.add_argument("--P", help="parameter of interest: G, T or J", default="100")
 parser.add_argument("--N", help="number of instances to generate for each parameter", default=5)
 
@@ -28,7 +28,7 @@ def generate_dataset_with_random_instances():
     Generate a custom problem instance inside a json file that can be then used by solvers given
     a provided set of command-line arguments.
 
-    Use: python3 -m input_generation.scripts.generate_random_instances --T_range "25, 50, 100, 150, 250, 500" --P "T" --name "test"
+    Use: python3 -m input_generation.scripts.generate_dataset --T_range "25, 50, 100, 150, 250, 500" --P "T" --name "test"
 
     """
     number_of_timeslots_lst = args.T_range.split(",")
@@ -70,9 +70,8 @@ def generate_dataset_with_random_instances():
                 DatasetGenerator.generate_multiple_feasible_instances(int(args.N),
                                                                       "Feasible_instance",
                                                                       int(param),
-                                                                      int(param),
-                                                                      int(random_perc *
-                                                                          int(param) / 100)
+                                                                      int(number_of_timeslots_lst[0]),
+                                                                      int(number_of_parallel_jobs_lst[0])
                                                                       ))
 
     # Check if directory is present

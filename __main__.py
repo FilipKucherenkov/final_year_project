@@ -1,9 +1,6 @@
 from problem_classes.problem_instances.custom_instance import CustomInstance
 from solvers.solver_handler import solve_instance
-from stats.scripts.analyse_solver_results import compare_runtime_on_dataset_1, \
-    compare_running_times_for_greedy_local_search, compare_utilization_perc_on_dataset_1, compare_runtime_on_dataset_4, \
-    compare_runtime_on_dataset_5, compare_runtime_on_dataset_6, compare_utilization_perc_on_dataset_4, \
-    compare_utilization_perc_on_dataset_5, compare_utilization_perc_on_dataset_6, compare_utilization_perc_on_dataset_2
+from stats.scripts.analyse_solver_results import generate_all_plots
 
 
 def main():
@@ -20,12 +17,8 @@ def main():
     # instance.add_job(5, 0, 4, 4)
 
     instance = CustomInstance(12, 2)
-    instance.add_job(0, 0, 4, 2)
-    instance.add_job(1, 0, 4, 2)
-    instance.add_job(2, 0, 4, 2)
-    instance.add_job(3, 0, 4, 2)
-    instance.add_job(4, 0, 4, 2)
-
+    instance.add_job(0, 0, 3, 2)
+    instance.add_job(0, 0, 3, 3)
 
     # instance2 = CustomInstance(6, 12, 10)
     # instance2.add_job(0, 0, 2, 2)
@@ -52,26 +45,11 @@ def main():
 
     # schedule = solve_maxflow_cplex_with_reopt(instance)
     # schedule = solve_instance(instance, "Earliest-released-first-with-back-filling", "gurobi")
-    schedule2 = solve_instance(instance, "Active-time-IP", "gurobi")
-    # schedule.print_schedule_info()
-    schedule2.print_schedule_info()
+    # schedule2 = solve_instance(instance, "Active-time-IP", "gurobi")
+    # # schedule.print_schedule_info()
+    # schedule2.print_schedule_info()
 
-    # compare_runtime_on_dataset_1("Runtime_on_dataset_1")
-    # compare_runtime_on_dataset_2("Runtime_on_dataset_2")
-    # compare_utilization_perc_on_dataset_2("Batch_util_on_dataset_2")
-    # compare_running_times_for_greedy_local_search("Greedy_comparison")
-    # compare_runtime_on_dataset_1("results")
+    generate_all_plots()
 
-    # Generate plots
-    # compare_running_times_for_greedy_local_search("Local-search-comparison")
-    #
-    # compare_runtime_on_dataset_4("Runtime-on-dataset-4")
-    # compare_runtime_on_dataset_5("Runtime-on-dataset-5")
-    # compare_runtime_on_dataset_6("Runtime-on-dataset-6")
-    # compare_utilization_perc_on_dataset_1("Batch-util-dataset_1")
-    # compare_utilization_perc_on_dataset_2("Batch-util-dataset_2")
-    # compare_utilization_perc_on_dataset_4("Batch-util-dataset-4")
-    # compare_utilization_perc_on_dataset_5("Batch-util-dataset-5")
-    # compare_utilization_perc_on_dataset_6("Batch-util-dataset-6")
 
 main()

@@ -3,7 +3,7 @@ import json
 import logging
 import os
 
-from problem_classes.problem_instances import ProblemInstance
+from problem_classes.problem_instances.problem_instance import ProblemInstance
 
 # Set log level
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
@@ -31,7 +31,7 @@ def generate_random_problem_instance():
     logging.debug(f"G provided by user: {number_of_parallel_jobs}")
     logging.debug(f"J provided by user: {number_of_jobs}")
 
-    # Create a new problem instance with the provided properties
+    # Create a new random problem instance with the provided properties
     new_problem_instance = ProblemInstance(f"{args.name}", number_of_jobs, number_of_timeslots, number_of_parallel_jobs)
 
     # Check if directory is present

@@ -15,6 +15,9 @@ args = parser.parse_args()
 
 
 def analyse_dataset(file: str):
+    """
+    Run: python3 -m stats.scripts.analyse_dataset --file "data/feasible_sets/dataset_6.json"
+    """
     try:
         with open(file) as json_file:
             data = json.load(json_file)
