@@ -1,6 +1,6 @@
 import logging
 
-from solvers.heuristic.erf_with_back_filling import erf_with_back_filling
+from solvers.heuristic.erf_with_density_heuristic import erf_with_density_heuristic
 
 from solvers.heuristic.earliest_released_first import earliest_released_first
 from solvers.greedy_local_search.greedy_local_search import greedy_local_search
@@ -37,7 +37,7 @@ def solve_instance(instance, method, solver_type):
     elif method == "Earliest-released-first":
         return earliest_released_first(instance)
     elif method == "Earliest-released-first-with-density-heuristic":
-        return erf_with_back_filling(instance)
+        return erf_with_density_heuristic(instance)
     else:
         logging.error(f"Aborting due to unsupported method: {method}")
         return

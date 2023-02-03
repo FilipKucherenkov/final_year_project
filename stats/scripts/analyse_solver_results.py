@@ -23,7 +23,7 @@ def generate_all_plots():
     # compare_objectives_on_dataset_1("Objectives-dataset-1")
 
     # Print objective stats for an algorithm on dataset compared to the optimal
-    count_optimal_objectives("dataset_7", "Earliest-released-first")
+    count_optimal_objectives("dataset_1", "Earliest-released-first-with-density-heuristic")
 
     # Batch-utilization plots
     # compare_utilization_perc_on_dataset_1("Batch-util-dataset_1")

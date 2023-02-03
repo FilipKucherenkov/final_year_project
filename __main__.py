@@ -44,8 +44,8 @@ def main():
     # test_network()
 
     # schedule = solve_maxflow_cplex_with_reopt(instance)
-    # schedule = solve_instance(instance, "Earliest-released-first", "gurobi")
-    # # # schedule2 = solve_instance(instance, "Active-time-IP", "gurobi")
+    # schedule = solve_instance(instance, "Earliest-released-first-with-density-heuristic", "gurobi")
+    # # # # schedule2 = solve_instance(instance, "Active-time-IP", "gurobi")
     # schedule.print_schedule_info()
     # schedule2.print_schedule_info()
 
