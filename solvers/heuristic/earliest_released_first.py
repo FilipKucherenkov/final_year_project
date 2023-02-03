@@ -6,10 +6,9 @@ from problem_classes.scheduling.schedule import Schedule
 
 def earliest_released_first(instance: ParsedInstance):
     """
-    Simple greedy_algorithms algorithm which schedules each job at its release time, ignoring the
-    capacity constraints.
+    Schedule a job at its release time.
     :param instance: parsed problem instance.
-    :return: Schedule object containing the job to timeslot mappings.
+    :return: Schedule object containing the solution.
     """
     job_to_timeslot_mapping = []
 
