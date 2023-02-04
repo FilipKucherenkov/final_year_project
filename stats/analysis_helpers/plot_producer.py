@@ -1,17 +1,21 @@
 import os
-
-from stats.analysis_helpers.helpers import construct_df_from_files
-
 import matplotlib.pyplot as plt
 import seaborn as sns
+
+from stats.analysis_helpers.helpers import construct_df_from_files
 
 
 class PlotProducer:
 
-    def __init__(self, result_files: list, file_name: str):
+    def __init__(self, result_files: list, file_name: str, dataset_name: str):
+        # Create data folders if they do not exist
+        if not os.path.exists(f"data/plots/{dataset_name}"):
+            os.makedirs(f"data/plots/{dataset_name}")
+
         # Merge files in a dataframe object
         self.df = construct_df_from_files(result_files, "instance_results")
         self.file_name = file_name
+        self.dataset_name = dataset_name
 
     def generate_line_plot(self, x: str, y: str, x_label: str, y_label: str):
         plt.clf()
@@ -21,18 +25,20 @@ class PlotProducer:
         plt.xlabel(x_label)
         plt.ylabel(y_label)
         plt.savefig(os.path.join(os.getcwd(),
-                                 "stats",
+                                 "data",
                                  "plots",
+                                 f"{self.dataset_name}",
                                  f"{self.file_name}"))
 
-    def generate_bar_plot(self,  x: str, y: str, x_label: str, y_label: str):
+    def generate_bar_plot(self, x: str, y: str, x_label: str, y_label: str):
         plt.clf()
         sns.barplot(x=f"{x}", y=f"{y}", hue="Algorithm", data=self.df, palette="magma")
         plt.xlabel(f"{x_label}")
         plt.ylabel(f"{y_label}")
         plt.savefig(os.path.join(os.getcwd(),
-                                 "stats",
+                                 "data",
                                  "plots",
+                                 f"{self.dataset_name}",
                                  f"{self.file_name}"))
 
     def generate_scatter_plot(self):

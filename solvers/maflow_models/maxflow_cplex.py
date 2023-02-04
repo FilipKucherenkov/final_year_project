@@ -1,5 +1,17 @@
 import cplex
+
+from problem_classes.graph.generate_network import generate_network
 from problem_classes.scheduling.schedule import Schedule
+
+
+def solve_max_flow(instance):
+    network = generate_network(instance.time_horizon.time_slots, instance.jobs)
+    total_sum = sum(job.processing_time for job in instance.jobs)
+    return solve_maxflow_cplex(network.arcs,
+                               network.source_node,
+                               network.sink_node,
+                               total_sum,
+                               instance.number_of_parallel_jobs)
 
 
 def solve_maxflow_cplex(arcs, source_node, sink_node, job_processing_sum, batch_size):
@@ -107,7 +119,7 @@ def solve_maxflow_cplex(arcs, source_node, sink_node, job_processing_sum, batch_
     # for variable, value in zip(model.variables.get_names(), model.solution.get_values()):
     #     print(f"{variable} and {value}")
     # print(model.solution.get_values())
-    #print("Objective", model.solution.get_objective_value(), job_processing_sum)
+    # print("Objective", model.solution.get_objective_value(), job_processing_sum)
     if model.solution.get_objective_value() == job_processing_sum:
         # print("Objective", model.solution.get_objective_value(), job_processing_sum)
         job_to_timeslot_mapping = []
@@ -127,5 +139,3 @@ def solve_maxflow_cplex(arcs, source_node, sink_node, job_processing_sum, batch_
         return Schedule(True, job_to_timeslot_mapping, batch_size)
     else:
         return Schedule(False, [], batch_size)
-
-

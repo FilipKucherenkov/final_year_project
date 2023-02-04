@@ -9,8 +9,7 @@ from solvers.greedy_local_search.greedy_local_search_with_cplex_v2 import greedy
 from solvers.greedy_local_search.greedy_local_search_cplex_with_reopt import greedy_local_search_with_reopt
 from solvers.ip_models.active_time_ip import solve_active_time_ip
 from solvers.ip_models.unbounded_active_time_ip import solve_unbounded_active_time_ip
-
-from solvers.maflow_models.maxflow_pyomo import solve_max_flow
+from solvers.maflow_models.maxflow_cplex import solve_max_flow
 
 
 def solve_instance(instance, method, solver_type):
@@ -32,7 +31,7 @@ def solve_instance(instance, method, solver_type):
     elif method == "Greedy-local-search: CPLEX (V2)":
         return greedy_local_search_with_cplex_v2(instance)
     elif method == "Maxflow-LP":
-        return solve_max_flow(instance, solver_type)
+        return solve_max_flow(instance)
     elif method == "Greedy-local-search: CPLEX Re-optimization":
         return greedy_local_search_with_reopt(instance)
     elif method == "Earliest-released-first":
