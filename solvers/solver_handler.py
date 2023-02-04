@@ -8,6 +8,7 @@ from solvers.greedy_local_search.greedy_local_search_with_cplex import greedy_lo
 from solvers.greedy_local_search.greedy_local_search_with_cplex_v2 import greedy_local_search_with_cplex_v2
 from solvers.greedy_local_search.greedy_local_search_cplex_with_reopt import greedy_local_search_with_reopt
 from solvers.ip_models.active_time_ip import solve_active_time_ip
+from solvers.ip_models.unbounded_active_time_ip import solve_unbounded_active_time_ip
 
 from solvers.maflow_models.maxflow_pyomo import solve_max_flow
 
@@ -38,6 +39,8 @@ def solve_instance(instance, method, solver_type):
         return earliest_released_first(instance)
     elif method == "Earliest-released-first-with-density-heuristic":
         return erf_with_density_heuristic(instance)
+    elif method == "1":
+        return solve_unbounded_active_time_ip(instance, "gurobi")
     else:
         logging.error(f"Aborting due to unsupported method: {method}")
         return

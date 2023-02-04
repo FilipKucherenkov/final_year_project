@@ -6,10 +6,10 @@ from problem_classes.scheduling.time_horizon import TimeHorizon
 
 class ParsedInstance:
     """
-        Simple class to represent a problem instance of the Active time scheduling problem. This class is used when parsing
-        a problem data set and better study algorithm/model performance.
+    Simple class to represent a problem instance of the Active time scheduling problem. This class is used when parsing
+    a problem data set.
 
-        Note: Getter methods are used to assist with feeding input to optimization models.
+    Note: Getter methods are used to assist with feeding input to optimization models.
     """
 
     def __init__(self, instance_info: dict):

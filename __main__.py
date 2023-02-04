@@ -1,6 +1,5 @@
 from problem_classes.problem_instances.custom_instance import CustomInstance
-from solvers.solver_handler import solve_instance
-from stats.scripts.analyse_solver_results import generate_all_plots
+from stats.analysis_helpers.plot_functions import generate_all_plots
 
 
 def main():
@@ -48,7 +47,8 @@ def main():
     # # # # schedule2 = solve_instance(instance, "Active-time-IP", "gurobi")
     # schedule.print_schedule_info()
     # schedule2.print_schedule_info()
-
+    # schedule = solve_instance(instance, "1", "gurobi")
+    # schedule.print_schedule_info()
     generate_all_plots()
 
 

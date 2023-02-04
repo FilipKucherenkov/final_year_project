@@ -7,8 +7,15 @@ from problem_classes.problem_instances.parsed_instance import ParsedInstance
 from solvers.solver_handler import solve_instance
 
 
-def record_execution_time_on_instance(instance: ParsedInstance, algorithm: str, solver_type: str):
-    t = timeit.Timer(lambda: solve_instance(instance, algorithm, solver_type))
+def record_execution_time_on_instance(instance: ParsedInstance, method: str, solver_type: str):
+    """
+    Record a method's runtime performance on a parsed instance.
+    :param instance: ParsedInstance object
+    :param method: Method to be used for solving the instance
+    :param solver_type: type of solver (e.g. gurobi or cplex-direct)
+    :return:the total time taken to obtain a result.
+    """
+    t = timeit.Timer(lambda: solve_instance(instance, method, solver_type))
     times = t.repeat(3, 3)
     total_time_taken = min(times) / 3
     return total_time_taken
@@ -67,11 +74,10 @@ def count_optimal_objectives(dataset_name: str, method: str):
     total_close_to_opt = sum(1 for v in opt_stats if 1.2 >= v["OPT"] > 1)
     better_than_optimal = sum(1 for v in opt_stats if v["OPT"] < 1)
     total_rest = sum(1 for v in opt_stats if 1.2 <= v["OPT"])
+    print(f"===================================================================")
+    print(f"Dataset: {dataset_name}")
     print(f"Number of optimal solutions: {int(total_optimal_solutions)}/{len(opt_stats)}")
-    print(f"Below optimal: {better_than_optimal}")
+    print(f"ALG(J) < OPT(J): {better_than_optimal}")
     print(f"OPT(J) < ALG(J) < 1.2: {total_close_to_opt}")
     print(f"ALG(J) > 1.2: {total_rest}")
     print(opt_stats)
-
-
-

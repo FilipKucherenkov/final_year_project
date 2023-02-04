@@ -5,7 +5,7 @@ import os
 
 from problem_classes.problem_instances.parsed_instance import ParsedInstance
 from solvers.solver_handler import solve_instance
-from stats.scripts.analysis_helpers.helpers import record_execution_time_on_instance
+from stats.analysis_helpers.helpers import record_execution_time_on_instance
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
 
