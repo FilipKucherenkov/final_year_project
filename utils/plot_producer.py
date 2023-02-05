@@ -2,7 +2,7 @@ import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from stats.analysis_helpers.helpers import construct_df_from_files
+from utils.parsing import construct_df_from_files
 
 
 class PlotProducer:

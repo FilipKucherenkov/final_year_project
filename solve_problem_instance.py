@@ -1,10 +1,9 @@
 import argparse
-import json
 import os
 import logging
 
-from problem_classes.problem_instances.parsed_instance import ParsedInstance
 from solvers.solver_handler import solve_instance
+from utils.parsing import parse_problem_instance
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
 
@@ -40,25 +39,6 @@ def solve_problem_instance():
     solution = solve_instance(parsed_instance, args.algorithm, args.solver_type)
     if solution:
         solution.print_schedule_info()
-
-
-def parse_problem_instance(file_name):
-    """
-    Given a path to a json file containing a problem instance, parse it.
-    :param file_name: str for the file path to the instance file.
-    :return: Parsed instance object
-    """
-    # Open instance file.
-    f = open(file_name)
-
-    # Parse data.
-    data = json.load(f)
-    f.close()
-
-    # Create a ParsedInstance object for each problem instance in the dataset.
-    new_instance = ParsedInstance(data["instance"])
-    logging.info("Successfully parsed instance file: {}".format(data["instance_name"]))
-    return new_instance
 
 
 solve_problem_instance()

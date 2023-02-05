@@ -1,10 +1,9 @@
 import logging
 import os
 import matplotlib.pyplot as plt
-import seaborn as sns
 
-from stats.analysis_helpers.helpers import construct_df_from_files, count_optimal_objectives
-from stats.analysis_helpers.plot_producer import PlotProducer
+from utils.plot_producer import PlotProducer
+from utils.statistics import count_optimal_objectives
 
 RESULTS_PATH = os.path.join(os.getcwd(), "stats", "algorithms", "runtime_analysis")
 

@@ -24,8 +24,8 @@ class DatasetGenerator:
         return instances
 
     @staticmethod
-    def generate_multiple_feasible_instances(n: int, instance_type: str, number_of_jobs:
-    int, number_of_timeslots: int, batch_size: int):
+    def generate_multiple_feasible_instances(n: int, instance_type: str,
+                                             number_of_jobs: int, number_of_timeslots: int, batch_size: int):
         """
         Generate a list containing <n> feasible problem instances of <instance_type> with <g> as a parameter
         """
@@ -38,8 +38,8 @@ class DatasetGenerator:
         return instances
 
     @staticmethod
-    def generate_feasible_instance(instance_type: str, number_of_jobs:
-    int, number_of_timeslots: int, batch_size: int):
+    def generate_feasible_instance(instance_type: str,
+                                   number_of_jobs: int, number_of_timeslots: int, batch_size: int):
         """
         Generate a feasible problem instance of <instance_type> with <g> as a parameter
         """
@@ -50,8 +50,8 @@ class DatasetGenerator:
         return instance
 
     @staticmethod
-    def generate_infeasible_instance(instance_type: str, number_of_jobs:
-    int, number_of_timeslots: int, batch_size: int):
+    def generate_infeasible_instance(instance_type: str,
+                                     number_of_jobs: int, number_of_timeslots: int, batch_size: int):
         """
         Generate an infeasible problem instance of <instance_type> with <g> as a parameter
         """

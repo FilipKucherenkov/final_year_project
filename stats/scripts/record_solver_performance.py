@@ -88,25 +88,4 @@ def record_solver_performance():
         return
 
 
-def parse_data_set(file_name):
-    """
-    Given a file path containing a dataset, parse it to a list of ParsedInstance objects for further processing.
-    :param file_name: str for the file path to the dataset file.
-    :return: list of ParsedInstance objects.
-    """
-    # Open dataset file.
-    f = open(file_name)
-
-    # Parse data.
-    data = json.load(f)
-    f.close()
-
-    instance_list: list[ParsedInstance] = []
-    for instance_info in data["instances"]:
-        # Create a ParsedInstance object for each problem instance in the dataset.
-        instance_list.append(ParsedInstance(instance_info))
-
-    return instance_list, data["dataset_name"]
-
-
 record_solver_performance()

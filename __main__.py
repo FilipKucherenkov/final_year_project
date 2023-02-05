@@ -1,5 +1,5 @@
 from problem_classes.problem_instances.custom_instance import CustomInstance
-from stats.analysis_helpers.plot_functions import generate_all_plots
+from utils.plot_functions import generate_all_plots
 
 
 def main():
