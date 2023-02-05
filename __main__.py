@@ -1,4 +1,6 @@
+from input_generation.perturbator import Perturbator
 from problem_classes.problem_instances.custom_instance import CustomInstance
+from solvers.solver_handler import solve_instance
 from utils.plot_functions import generate_all_plots
 
 
@@ -44,12 +46,17 @@ def main():
 
     # schedule = solve_maxflow_cplex_with_reopt(instance)
     # schedule = solve_instance(instance, "Earliest-released-first-with-density-heuristic", "gurobi")
-    # # # # schedule2 = solve_instance(instance, "Active-time-IP", "gurobi")
+    schedule2 = solve_instance(instance, "Active-time-IP", "gurobi")
+
     # schedule.print_schedule_info()
     # schedule2.print_schedule_info()
     # schedule = solve_instance(instance, "1", "gurobi")
     # schedule.print_schedule_info()
-    generate_all_plots()
+    # generate_all_plots()
+
+    # Perturb
+    p = Perturbator("data/custom_instances/test.json")
+    p.perturb_instance(10, 0.01)
 
 
 main()

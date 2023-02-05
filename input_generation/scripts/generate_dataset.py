@@ -5,6 +5,7 @@ import os
 import random
 
 from input_generation.dataset_generator import DatasetGenerator
+from utils.file_writers import write_dataset_to_file
 
 # Set log level
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
@@ -77,19 +78,9 @@ def generate_dataset_with_random_instances():
     # Check if directory is present
     if not os.path.exists('data/feasible_sets'):
         os.makedirs('data/feasible_sets')
-    try:
-        for instance in instances: print(instance.to_dict())
-        path = f"data/feasible_sets/{args.name}.json"
-        with open(path, "w") as f:
-            json.dump({
-                "dataset_name": f"{args.name}",
-                "instances": [instance.to_dict() for instance in instances]
-            }, f, indent=4)
-        logging.info(f"Successfully created data set file: {path}")
 
-    except:
-        logging.error("Failed to create json file, try again.")
-        return
+    # Write data set to file
+    write_dataset_to_file(instances, args.name, f"data/feasible_sets/{args.name}.json")
 
 
 generate_dataset_with_random_instances()

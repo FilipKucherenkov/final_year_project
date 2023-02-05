@@ -82,7 +82,7 @@ def solve_active_time_ip(instance: ParsedInstance, solver_type: str):
     solver = SolverFactory(solver_type)
     results = solver.solve(model)
     # print(results)
-    # model.display()
+    model.display()
 
     if results.solver.termination_condition == 'infeasible':
         schedule = Schedule(False, [], instance.number_of_parallel_jobs)

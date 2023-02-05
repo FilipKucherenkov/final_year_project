@@ -4,6 +4,7 @@ import logging
 import os
 
 from problem_classes.problem_instances.custom_instance import CustomInstance
+from utils.file_writers import write_instance_to_file
 
 # Set log level
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
@@ -46,16 +47,7 @@ def generate_custom_problem_instance():
     if not os.path.exists('data/custom_instances'):
         os.makedirs('data/custom_instances')
 
-    try:
-        path = f"data/custom_instances/{args.name}.json"
-        with open(path, "w") as f:
-            json.dump({
-                "instance_name": f"{args.name}",
-                "instance": new_problem_instance.to_dict()
-            }, f, indent=4)
-        logging.info(f"Successfully created json file: {path}")
-    except:
-        logging.error(f"Failed to create json file, please try again")
+    write_instance_to_file(new_problem_instance, args.name, f"data/custom_instances/{args.name}.json")
 
 
 generate_custom_problem_instance()

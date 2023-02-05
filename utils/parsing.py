@@ -9,7 +9,7 @@ def parse_data_set(file_name):
     """
     Given a file path containing a dataset, parse it to a list of ParsedInstance objects for further processing.
     :param file_name: str for the file path to the dataset file.
-    :return: list of ParsedInstance objects.
+    :return: list of ParsedInstance objects and the name of the dataset.
     """
     # Open dataset file.
     f = open(file_name)
