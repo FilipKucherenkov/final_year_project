@@ -1,7 +1,7 @@
 from input_generation.perturbator import Perturbator
 from problem_classes.problem_instances.custom_instance import CustomInstance
 from solvers.solver_handler import solve_instance
-from utils.plot_functions import generate_all_plots
+from utils.plot_functions import generate_all_plots, print_objective_performance_on_all_datasets
 
 
 def main():
@@ -16,6 +16,27 @@ def main():
     instance.add_job(3, 4, 10, 4)
     instance.add_job(4, 5, 9, 3)
     instance.add_job(5, 0, 4, 4)
+
+    instance_with_overlaps = CustomInstance(12, 10)
+    instance_with_overlaps.add_job(0, 0, 2, 2)
+    instance_with_overlaps.add_job(1, 1, 3, 2)
+    instance_with_overlaps.add_job(2, 4, 10, 2)
+
+    instance_2 = CustomInstance(2, 10)
+    instance_2.add_job(0,0,2,1)
+    instance_2.add_job(1, 0, 2, 1)
+    instance_2.add_job(2, 0, 2, 1)
+    instance_2.add_job(3, 0, 2, 1)
+    instance_2.add_job(4, 0, 2, 1)
+    instance_2.add_job(5, 0, 2, 1)
+    instance_2.add_job(6, 0, 2, 1)
+    instance_2.add_job(7, 0, 2, 1)
+    instance_2.add_job(8, 0, 2, 1)
+    instance_2.add_job(9, 0, 2, 1)
+    instance_2.add_job(10, 0, 2, 1)
+    instance_2.add_job(11, 0, 2, 1)
+    instance_2.add_job(12, 0, 2, 1)
+    instance_2.add_job(13, 0, 2, 1)
 
     # instance = CustomInstance(12, 2)
     # instance.add_job(0, 0, 3, 2)
@@ -46,17 +67,23 @@ def main():
 
     # schedule = solve_maxflow_cplex_with_reopt(instance)
     # schedule = solve_instance(instance, "Earliest-released-first-with-density-heuristic", "gurobi")
-    schedule2 = solve_instance(instance, "Active-time-IP", "gurobi")
+    # schedule2 = solve_instance(instance_2, "Active-time-IP", "gurobi")
 
     # schedule.print_schedule_info()
     # schedule2.print_schedule_info()
     # schedule = solve_instance(instance, "1", "gurobi")
     # schedule.print_schedule_info()
-    # generate_all_plots()
+    generate_all_plots()
 
     # Perturb
-    p = Perturbator("data/custom_instances/test.json")
-    p.perturb_instance(10, 0.01)
+    # p = Perturbator("data/custom_instances/test.json")
+    # p.perturb_instance(10, 0.01)
 
+    # Available methods:
+    # 1. Earliest-released-first
+    # 2. Earliest-released-first-with-density-heuristic
+    # 3. Maxflow-LP
+    # 4. Greedy-local-search: CPLEX Re-optimization
+    # print_objective_performance_on_all_datasets("Active-time-IP")
 
 main()

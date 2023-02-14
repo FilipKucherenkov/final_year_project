@@ -29,7 +29,7 @@ class CustomInstance:
     def is_feasible(self):
         network = generate_network(self.time_horizon.time_slots, self.jobs)
         total_sum = sum(job.processing_time for job in self.jobs)
-        schedule = solve_max_flow_model(network, total_sum, self)
+        schedule = solve_max_flow_model(network, total_sum, "cplex_direct", self.number_of_parallel_jobs)
         return schedule.is_feasible
 
     # Create a new Job and add it to the problem instance
