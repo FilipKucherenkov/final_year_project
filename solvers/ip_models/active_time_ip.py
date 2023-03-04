@@ -2,6 +2,7 @@ import pyomo.environ as pyo
 from pyomo.opt import SolverFactory
 
 from problem_classes.problem_instances.parsed_instance import ParsedInstance
+from problem_classes.scheduling.recovery_schedule import RecoverySchedule
 from problem_classes.scheduling.schedule import Schedule
 
 
@@ -80,21 +81,29 @@ def solve_active_time_ip(instance: ParsedInstance, solver_type: str):
     # model.job_window_assignment_rule = pyo.Constraint( model.timeslots, model.jobs, rule=job_window_assignment_rule)
 
     solver = SolverFactory(solver_type)
+    solver.options['mipgap'] = 0000000.1  # Set gap tolerance to 0.01
     results = solver.solve(model)
+
     # print(results)
-    model.display()
+    # model.display()
 
     if results.solver.termination_condition == 'infeasible':
         schedule = Schedule(False, [], instance.number_of_parallel_jobs)
         return schedule
 
     else:
-        job_to_timeslot_mapping = []
-        for t in model.timeslots:
-            for j in model.jobs:
+        schedule = RecoverySchedule(True,
+                                    instance.number_of_parallel_jobs,
+                                    instance.number_of_jobs,
+                                    instance.number_of_timeslots)
 
+        job_to_timeslot_mapping = []
+        for j in model.jobs:
+            for t in model.timeslots:
                 if model.x[t, j]() == 1:
                     # Schedule job j at timeslot t in the solution.
+                    schedule.add_mapping(j, t)
                     job_to_timeslot_mapping.append((f"Job_{j}", f"Slot_{t}"))
 
-        return Schedule(True, job_to_timeslot_mapping, instance.number_of_parallel_jobs)
+        # return Schedule(True, job_to_timeslot_mapping, instance.number_of_parallel_jobs)
+        return schedule

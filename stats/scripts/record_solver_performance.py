@@ -3,6 +3,7 @@ import json
 import logging
 import os
 from solvers.solver_handler import solve_instance
+from utils.file_writers import write_results_to_file
 from utils.parsing import parse_data_set
 from utils.performance_monitors import record_execution_time_on_instance
 
@@ -72,19 +73,7 @@ def record_solver_performance():
     logging.info(f"Results recorded successfully")
 
     # Generate folder if it does not exist.
-    if not os.path.exists(f"data/results/{args.analysis_type}"):
-        os.makedirs(f"data/results/{args.analysis_type}")
-    if not os.path.exists(f"data/results/{args.analysis_type}/{args.algorithm}"):
-        os.makedirs(f"data/results/{args.analysis_type}/{args.algorithm}")
-    try:
-        path = f"data/results/{args.analysis_type}/{args.algorithm}/results_{dataset_name}.json"
-        with open(path, "w") as f:
-            json.dump(results, f, indent=4)
-        logging.info(f"Results recorded successfully: {path}")
-
-    except:
-        logging.error("Failed to create json file with results")
-        return
+    write_results_to_file(args.analysis_type, args.algorithm, dataset_name, results)
 
 
 record_solver_performance()

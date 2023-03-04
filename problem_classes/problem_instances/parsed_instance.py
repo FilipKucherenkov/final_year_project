@@ -14,10 +14,14 @@ class ParsedInstance:
 
     def __init__(self, instance_info: dict):
         # Parse json and create instance
-        self.instance_id = instance_info["instance_id"]
+        if "instance_id" in instance_info:
+            self.instance_id = instance_info["instance_id"]
+        if "number_of_jobs" in instance_info:
+            self.number_of_jobs = instance_info["number_of_jobs"]
+        else:
+            self.number_of_jobs = len(instance_info["jobs"])
         self.number_of_parallel_jobs = instance_info["G"]
         self.number_of_timeslots = instance_info["T"]
-        self.number_of_jobs = instance_info["number_of_jobs"]
         # Generate time horizon
         self.time_horizon = TimeHorizon(instance_info["T"], instance_info["G"])
         self.jobs = [Job(job["number"],
@@ -73,7 +77,6 @@ class ParsedInstance:
     # Convert a problem instance to dictionary
     def to_dict(self):
         problem_data = {
-            "instance_type": self.instance_type,
             "G": self.number_of_parallel_jobs,
             "T": self.number_of_timeslots,
             "jobs": [job.__dict__ for job in self.jobs]

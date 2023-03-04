@@ -13,10 +13,10 @@ from solvers.maflow_models.maxflow_cplex import solve_max_flow
 
 def solve_instance(instance, method, solver_type):
     """
-    Solve a provided problem instance of the Active-time-problem
+    Solve a ATSP problem instance.
     :param instance: ParsedInstance object for the problem instance
     :param method: specified method (e.g active-time-ip, max-flow or Greedy-local-search)
-    :param solver_type: specified solver (e.g. gurobi or cplex-direct)
+    :param solver_type: specified solver (e.g. cplex-direct)
     :return: Schedule object containing the solution.
     """
     logging.info(f"Attempting to solve instance using {method}")

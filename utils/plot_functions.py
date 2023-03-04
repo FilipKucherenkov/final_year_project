@@ -388,3 +388,89 @@ def runtime_gls_3_plot(file_name: str, dataset_name: str):
     ]
     plot_producer = PlotProducer(files, file_name, dataset_name)
     plot_producer.generate_line_plot("J", "runtime_in_sec", "Number of jobs", "Running time in seconds")
+
+
+# ======== Perturbations ======== #
+
+def rmse_gamma_displot_moderate_instance(method1, method2):
+    moderate_instances = [
+        "results_0e3f7403-5ead-4c0e-8f6c-4dedf931d689.json",
+        "results_1e07f2e9-1e56-4731-8f8b-cacc425ccbc3.json",
+        "results_3be5eecc-6b84-4f5c-9534-fee77017e023.json",
+        "results_04ed6b37-3724-4821-9730-d11a57708ba5.json",
+        "results_5a979bf6-1670-4fc5-beb4-c2e35ce2363d.json",
+        "results_93bd11be-79ca-4d81-9749-f9b3a80303d8.json",
+        "results_27721db8-63df-4e11-beee-892eee7faa27.json",
+        "results_bab7c328-ed55-4cde-91ca-2f3158771d39.json",
+        "results_d2f10c62-85f4-4ef3-a063-2f17de8a82c8.json",
+        "results_e67c7a57-4c94-4511-afd6-7cad90632ff4.json",
+    ]
+
+    dir_path = f"data/results/perturbation/{method1}/"
+    directory = os.fsencode(dir_path)
+    files = []
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        file_path = f"data/results/perturbation/{method1}/{filename}"
+
+        if filename.endswith(".json") and filename in moderate_instances:
+            files.append(file_path)
+
+    dir_path2 = f"data/results/perturbation/{method2}/"
+    directory2 = os.fsencode(dir_path2)
+    for file in os.listdir(directory2):
+        filename = os.fsdecode(file)
+        file_path = f"data/results/perturbation/{method2}/{filename}"
+        if filename.endswith(".json") and filename in moderate_instances:
+            files.append(file_path)
+
+    plot_producer = PlotProducer(files, "Moderate_instances_rmse_gamma_distribution", "perturbations", True)
+    # print(plot_producer.df)
+    # plot_producer.generate_strip_plot("gamma", "rmse_value", "Gamma", "RMSE")
+    plot_producer.generate_displot("RMSE", "RMSE", "gamma")
+
+    plot_producer = PlotProducer(files, "Moderate_instances_rmse_epsilon_distribution", "perturbations", True)
+    plot_producer.generate_displot("RMSE", "RMSE", "epsilon")
+
+    # new_df = plot_producer.df[plot_producer.df["gamma"] == 5]
+    # plot_producer.generate_swarm_plot("gamma", "rmse_value", "Gamma", "RMSE")
+
+#
+# def rmse_gamma_displot_large_instance(method1, method2):
+#     moderate_instances = [
+#         "results_0e3f7403-5ead-4c0e-8f6c-4dedf931d689.json",
+#         "results_1e07f2e9-1e56-4731-8f8b-cacc425ccbc3.json",
+#         "results_3be5eecc-6b84-4f5c-9534-fee77017e023.json",
+#         "results_04ed6b37-3724-4821-9730-d11a57708ba5.json",
+#         "results_5a979bf6-1670-4fc5-beb4-c2e35ce2363d.json",
+#         "results_93bd11be-79ca-4d81-9749-f9b3a80303d8.json",
+#         "results_27721db8-63df-4e11-beee-892eee7faa27.json",
+#         "results_bab7c328-ed55-4cde-91ca-2f3158771d39.json",
+#         "results_d2f10c62-85f4-4ef3-a063-2f17de8a82c8.json",
+#         "results_e67c7a57-4c94-4511-afd6-7cad90632ff4.json",
+#     ]
+#
+#     dir_path = f"data/results/perturbation/{method1}/"
+#     directory = os.fsencode(dir_path)
+#     files = []
+#     for file in os.listdir(directory):
+#         filename = os.fsdecode(file)
+#         file_path = f"data/results/perturbation/{method1}/{filename}"
+#
+#         if filename.endswith(".json") and filename in moderate_instances:
+#             files.append(file_path)
+#
+#     dir_path2 = f"data/results/perturbation/{method2}/"
+#     directory2 = os.fsencode(dir_path2)
+#     for file in os.listdir(directory2):
+#         filename = os.fsdecode(file)
+#         file_path = f"data/results/perturbation/{method2}/{filename}"
+#         if filename.endswith(".json") and filename in moderate_instances:
+#             files.append(file_path)
+#
+#     plot_producer = PlotProducer(files, "perturbations", f"{method1}_rmse_gamma", True)
+#     # print(plot_producer.df)
+#     # plot_producer.generate_strip_plot("gamma", "rmse_value", "Gamma", "RMSE")
+#     plot_producer.generate_displot("rmse_value" )
+#     # new_df = plot_producer.df[plot_producer.df["gamma"] == 5]
+#     # plot_producer.generate_swarm_plot("gamma", "rmse_value", "Gamma", "RMSE")
