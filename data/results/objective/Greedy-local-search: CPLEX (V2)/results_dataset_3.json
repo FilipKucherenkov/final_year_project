@@ -1,0 +1,206 @@
+{
+    "algorithm": "Greedy-local-search: CPLEX (V2)",
+    "data_set_name": "dataset_3",
+    "instance_results": [
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_0",
+            "ID": "5fa9b29a-c4d4-4b35-88ed-1b20262fc8c8",
+            "T": 25,
+            "G": 20,
+            "J": 100,
+            "objective_value": 19,
+            "batch_utilization": 94.73684210526316
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_1",
+            "ID": "469b9716-cad2-4f8f-9308-0f104eff7a13",
+            "T": 25,
+            "G": 20,
+            "J": 100,
+            "objective_value": 14,
+            "batch_utilization": 84.64285714285714
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_2",
+            "ID": "08bf22c0-34d8-407a-a995-45c100c24ee9",
+            "T": 25,
+            "G": 20,
+            "J": 100,
+            "objective_value": 11,
+            "batch_utilization": 50.0
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_3",
+            "ID": "27f62a8c-de24-4b31-ad41-598f80d0eb3b",
+            "T": 25,
+            "G": 20,
+            "J": 100,
+            "objective_value": 11,
+            "batch_utilization": 45.90909090909091
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_4",
+            "ID": "e893dbdd-2810-40c8-bad3-a2e03ef24c48",
+            "T": 25,
+            "G": 20,
+            "J": 100,
+            "objective_value": 16,
+            "batch_utilization": 95.3125
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_5",
+            "ID": "135c14f7-d2e7-4321-ba84-1b7d8c589894",
+            "T": 50,
+            "G": 20,
+            "J": 100,
+            "objective_value": 40,
+            "batch_utilization": 96.125
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_6",
+            "ID": "403472a2-ec9c-499b-8b63-a1520b03da7e",
+            "T": 50,
+            "G": 20,
+            "J": 100,
+            "objective_value": 17,
+            "batch_utilization": 89.41176470588235
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_7",
+            "ID": "2d9b22d8-0130-4e85-b2ec-ce521e8810bf",
+            "T": 50,
+            "G": 20,
+            "J": 100,
+            "objective_value": 25,
+            "batch_utilization": 94.8
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_8",
+            "ID": "91f0fbfc-d7a1-4389-8431-b26e31cbbb76",
+            "T": 50,
+            "G": 20,
+            "J": 100,
+            "objective_value": 9,
+            "batch_utilization": 55.55555555555556
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_9",
+            "ID": "87233bdd-0e8c-438a-9a65-5edae460e1d5",
+            "T": 50,
+            "G": 20,
+            "J": 100,
+            "objective_value": 16,
+            "batch_utilization": 87.8125
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_10",
+            "ID": "b82dd8eb-b5ef-4e48-a69f-7defd99af7d7",
+            "T": 75,
+            "G": 20,
+            "J": 100,
+            "objective_value": 57,
+            "batch_utilization": 89.29824561403508
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_11",
+            "ID": "449623d4-fcf6-4bf3-9ac7-7741eaa5a29b",
+            "T": 75,
+            "G": 20,
+            "J": 100,
+            "objective_value": 38,
+            "batch_utilization": 86.3157894736842
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_12",
+            "ID": "2ad9f13d-06a6-4a92-99dc-abb5099e70a3",
+            "T": 75,
+            "G": 20,
+            "J": 100,
+            "objective_value": 21,
+            "batch_utilization": 94.28571428571429
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_13",
+            "ID": "6b2b52b3-fc76-47ec-a135-3b683b534f4d",
+            "T": 75,
+            "G": 20,
+            "J": 100,
+            "objective_value": 42,
+            "batch_utilization": 90.71428571428571
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_14",
+            "ID": "171b8e67-93a1-4c36-9f3f-abd8a79aff95",
+            "T": 75,
+            "G": 20,
+            "J": 100,
+            "objective_value": 19,
+            "batch_utilization": 87.10526315789474
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_15",
+            "ID": "59ce0167-4277-4210-93d1-9847555d34a4",
+            "T": 100,
+            "G": 20,
+            "J": 100,
+            "objective_value": 53,
+            "batch_utilization": 91.60377358490567
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_16",
+            "ID": "22ac86d3-3173-402b-89c3-902cba67ddf7",
+            "T": 100,
+            "G": 20,
+            "J": 100,
+            "objective_value": 23,
+            "batch_utilization": 88.47826086956522
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_17",
+            "ID": "cb9a0439-7bef-41d0-9221-8725e103aa70",
+            "T": 100,
+            "G": 20,
+            "J": 100,
+            "objective_value": 74,
+            "batch_utilization": 93.64864864864865
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_18",
+            "ID": "d900d769-1daa-4e05-93c5-b64bdb9581b8",
+            "T": 100,
+            "G": 20,
+            "J": 100,
+            "objective_value": 74,
+            "batch_utilization": 91.35135135135135
+        },
+        {
+            "Algorithm": "Greedy-local-search: CPLEX (V2)",
+            "Instance_index": "instance_19",
+            "ID": "7b7383ae-f3a8-47c6-8f40-81d8a0962d7b",
+            "T": 100,
+            "G": 20,
+            "J": 100,
+            "objective_value": 38,
+            "batch_utilization": 87.23684210526316
+        }
+    ]
+}

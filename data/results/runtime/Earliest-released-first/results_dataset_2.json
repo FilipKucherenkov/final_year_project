@@ -1,0 +1,276 @@
+{
+    "algorithm": "Earliest-released-first",
+    "data_set_name": "dataset_2",
+    "instance_results": [
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_0",
+            "ID": "35fa8883-f4fa-4133-9d19-958bceed0b8f",
+            "T": 25,
+            "G": 5,
+            "J": 25,
+            "runtime_in_sec": 0.00032817633333333723
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_1",
+            "ID": "6e189dcc-56e2-473f-9133-abf5368c5297",
+            "T": 25,
+            "G": 5,
+            "J": 25,
+            "runtime_in_sec": 0.000320426999999975
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_2",
+            "ID": "524ea82d-dc56-4027-9f8f-0348dd275bc6",
+            "T": 25,
+            "G": 5,
+            "J": 25,
+            "runtime_in_sec": 0.0003053923333333393
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_3",
+            "ID": "107c1b8b-4c03-464c-aeaf-c026a415a0a9",
+            "T": 25,
+            "G": 5,
+            "J": 25,
+            "runtime_in_sec": 0.00031885433333334046
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_4",
+            "ID": "51743c35-d3e7-49b8-ae99-f33192bdf3cd",
+            "T": 25,
+            "G": 5,
+            "J": 25,
+            "runtime_in_sec": 0.0003142089999999727
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_5",
+            "ID": "e15963d3-2e72-4beb-a45d-54e6403af6d6",
+            "T": 50,
+            "G": 10,
+            "J": 50,
+            "runtime_in_sec": 0.0006135103333333447
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_6",
+            "ID": "403d8188-88f6-4698-a0f6-f762b8b4e5d6",
+            "T": 50,
+            "G": 10,
+            "J": 50,
+            "runtime_in_sec": 0.000572821333333362
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_7",
+            "ID": "2d1afbd8-eb3f-45de-9f30-0f142cdeb50d",
+            "T": 50,
+            "G": 10,
+            "J": 50,
+            "runtime_in_sec": 0.0006566736666666628
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_8",
+            "ID": "a6c57868-27b0-4224-b732-82bf39752ee3",
+            "T": 50,
+            "G": 10,
+            "J": 50,
+            "runtime_in_sec": 0.0006255796666666535
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_9",
+            "ID": "c8da198d-dae0-47b9-b686-930fa90819bd",
+            "T": 50,
+            "G": 10,
+            "J": 50,
+            "runtime_in_sec": 0.000625704999999995
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_10",
+            "ID": "3f1a61d8-c604-45fb-b0ff-9c295d43e293",
+            "T": 100,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.0013750680000000164
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_11",
+            "ID": "7b80e089-86ef-4525-89ac-c8fdf2d64c16",
+            "T": 100,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.0015247806666666512
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_12",
+            "ID": "e6b73234-a1ce-4ee0-bc29-8a4bc7a7b187",
+            "T": 100,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.0013343116666666432
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_13",
+            "ID": "82cefebe-7c1a-49de-9ed9-e62a850472f1",
+            "T": 100,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.0014523606666666522
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_14",
+            "ID": "8daf34dc-bf1f-43d4-a018-fa9d72b7fafb",
+            "T": 100,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.001579380666666667
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_15",
+            "ID": "42c6042d-0318-47a2-b67d-e7b59ebb9550",
+            "T": 150,
+            "G": 30,
+            "J": 150,
+            "runtime_in_sec": 0.002242861666666688
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_16",
+            "ID": "58b182bc-e2b3-4ae5-a7fe-01f26134e741",
+            "T": 150,
+            "G": 30,
+            "J": 150,
+            "runtime_in_sec": 0.0018653363333333377
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_17",
+            "ID": "8e09bfe9-1020-4e29-b497-2332b432a850",
+            "T": 150,
+            "G": 30,
+            "J": 150,
+            "runtime_in_sec": 0.0033056403333333226
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_18",
+            "ID": "4c31a0f4-cb08-4fe3-9e55-0d93f8521beb",
+            "T": 150,
+            "G": 30,
+            "J": 150,
+            "runtime_in_sec": 0.003218771333333333
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_19",
+            "ID": "084230b1-8cfe-4be7-9065-c8c2bd5863f1",
+            "T": 150,
+            "G": 30,
+            "J": 150,
+            "runtime_in_sec": 0.0024566196666666595
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_20",
+            "ID": "94489867-4828-4666-af24-c5154183f525",
+            "T": 250,
+            "G": 50,
+            "J": 250,
+            "runtime_in_sec": 0.007969918999999992
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_21",
+            "ID": "46cd6674-9e26-46d5-96fd-93e8ee8631e8",
+            "T": 250,
+            "G": 50,
+            "J": 250,
+            "runtime_in_sec": 0.004522977000000002
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_22",
+            "ID": "0fff99c4-52c7-4358-bbfa-0f1bdefc65f5",
+            "T": 250,
+            "G": 50,
+            "J": 250,
+            "runtime_in_sec": 0.0031988716666666583
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_23",
+            "ID": "10ae5c1e-b5f0-45fb-be34-9715ea404e3c",
+            "T": 250,
+            "G": 50,
+            "J": 250,
+            "runtime_in_sec": 0.003086785666666684
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_24",
+            "ID": "47462fd2-55ad-453a-ad26-6ce1a20fc1f7",
+            "T": 250,
+            "G": 50,
+            "J": 250,
+            "runtime_in_sec": 0.006429165999999986
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_25",
+            "ID": "959515ff-1cd6-4c72-9277-601f23b898df",
+            "T": 500,
+            "G": 100,
+            "J": 500,
+            "runtime_in_sec": 0.020824873333333382
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_26",
+            "ID": "6b110ec6-f610-46b1-9dd5-1cf2ffc4b9cb",
+            "T": 500,
+            "G": 100,
+            "J": 500,
+            "runtime_in_sec": 0.012015914666666738
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_27",
+            "ID": "466f9685-525c-4388-8bec-4b57629c53be",
+            "T": 500,
+            "G": 100,
+            "J": 500,
+            "runtime_in_sec": 0.025390963333333277
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_28",
+            "ID": "bdd1be9a-1512-44fb-bdeb-637efa861463",
+            "T": 500,
+            "G": 100,
+            "J": 500,
+            "runtime_in_sec": 0.018220886666666658
+        },
+        {
+            "Algorithm": "Earliest-released-first",
+            "Instance_index": "instance_29",
+            "ID": "2c7ff469-7916-4be0-82f0-ae97383d0fb3",
+            "T": 500,
+            "G": 100,
+            "J": 500,
+            "runtime_in_sec": 0.011393121333333367
+        }
+    ]
+}
