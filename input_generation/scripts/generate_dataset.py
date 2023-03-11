@@ -1,5 +1,4 @@
 import argparse
-import json
 import logging
 import os
 import random
@@ -11,15 +10,14 @@ from utils.file_writers import write_dataset_to_file
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
 
 # Parse script arguments
-parser = argparse.ArgumentParser(description="Program to generate data set with instances with changes in a specified "
-                                             "parameter")
+parser = argparse.ArgumentParser(description="Script for generating JSON files containing multiple problem instances.")
 
-parser.add_argument("--name", help="Specify a name for the dataset.", default="default_dataset_name")
-parser.add_argument("--T_range", help="list of timeslots separated with commas (e.g. 1,10,100)", default="25")
-parser.add_argument("--G_range", help="list of batch-sizes separated with commas (e.g. 1,10,100)", default="5")
-parser.add_argument("--J_range", help="list of jobs separated with commas (e.g. 1,10,100)", default="25")
+parser.add_argument("--name", help="Specify a name for the generated file.", default="default_dataset_name")
+parser.add_argument("--T_range", help="specify a list of timeslots separated with commas (e.g. 1,10,100)", default="25")
+parser.add_argument("--G_range", help="specify a list of batch-sizes separated with commas (e.g. 1,10,100)", default="5")
+parser.add_argument("--J_range", help="specify a list of jobs separated with commas (e.g. 1,10,100)", default="25")
 parser.add_argument("--P", help="parameter of interest: G, T or J", default="100")
-parser.add_argument("--N", help="number of instances to generate for each parameter", default=5)
+parser.add_argument("--N", help="specify a number of instances to generate for each parameter", default=5)
 
 args = parser.parse_args()
 

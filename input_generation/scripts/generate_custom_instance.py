@@ -1,5 +1,4 @@
 import argparse
-import json
 import logging
 import os
 
@@ -7,15 +6,16 @@ from problem_classes.problem_instances.custom_instance import CustomInstance
 from utils.file_writers import write_instance_to_file
 
 # Set log level
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)s:%(levelname)s:%(message)s")
 
 # Parse script arguments
-parser = argparse.ArgumentParser(description='A program to generate problem instance in a json file')
+parser = argparse.ArgumentParser(description="Script for generating custom problem instances and writing them to JSON "
+                                             "files under data/custom_instances/ ")
 
-parser.add_argument("--name", help="Give a name for your instance file", default="default_instance_name")
-parser.add_argument("--T", help="number of time slots", default="100")
-parser.add_argument("--G", help="number of time slots", default="100")
-parser.add_argument("--jobs", help="jobs in the form of comma separated string tuples (job_release: int, "
+parser.add_argument("--name", help="Specify a name for the problem instance file", default="default_instance_name")
+parser.add_argument("--T", help="Specify the number of time slots", default="100")
+parser.add_argument("--G", help="Specify the batch limit", default="100")
+parser.add_argument("--jobs", help="Specify jobs in the form of comma separated string tuples (job_release: int, "
                                    "job_deadline: int, job_processing: int),... ")
 args = parser.parse_args()
 

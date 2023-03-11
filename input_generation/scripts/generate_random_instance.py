@@ -9,12 +9,13 @@ from utils.file_writers import write_instance_to_file
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
 
 # Parse script arguments
-parser = argparse.ArgumentParser(description='A script to generate a random problem instance in a json file')
+parser = argparse.ArgumentParser(
+    description='Script to generate a random problem instance and write it to a json file.')
 
-parser.add_argument("--name", help="Provide a name for your instance file", default="default_instance_name")
-parser.add_argument("--T", help="number of time slots", default="100")
-parser.add_argument("--G", help="number of time slots", default="100")
-parser.add_argument("--J", help="number of jobs", default="100")
+parser.add_argument("--name", help="Specify a name for the file", default="default_instance_name")
+parser.add_argument("--T", help="specify the number of time slots", default="100")
+parser.add_argument("--G", help="specify the batch limit", default="100")
+parser.add_argument("--J", help="specify the number of jobs", default="100")
 args = parser.parse_args()
 
 
@@ -39,5 +40,6 @@ def generate_random_problem_instance():
         os.makedirs('data/random_instances')
 
     write_instance_to_file(new_problem_instance, args.name, f"data/random_instances/{args.name}.json")
+
 
 generate_random_problem_instance()

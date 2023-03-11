@@ -8,6 +8,9 @@ from utils.parsing import parse_problem_instance
 
 
 class Perturbator:
+    """
+    Class used for perturbing problem instances.
+    """
 
     def __init__(self, json_file: str):
         problem_instance = parse_problem_instance(json_file)
@@ -74,7 +77,7 @@ class Perturbator:
             "batch_augmentation_is_required": not new_instance.is_feasible(),
         }
         print(perturbation_stats)
-        # Write the perturbed instance to a file
+        # Write the perturbed instance to a JSON file
         write_perturbed_instance_to_file(new_instance,
                                          new_instance.instance_id,
                                          perturbation_stats,)

@@ -6,8 +6,7 @@ from problem_classes.scheduling.job import Job
 
 class SyntheticDataGenerator:
     """
-    SyntheticDataGenerator class containing static methods for generating input data following the Synthetic Data
-    Generator Approach.
+    SyntheticDataGenerator class containing static methods for generating input data.
     """
 
     @staticmethod
