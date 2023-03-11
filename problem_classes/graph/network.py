@@ -4,7 +4,7 @@ from problem_classes.graph.node import Node
 
 class Network:
     """
-    Simple class to represent a network. A Network holds information about the
+    Class to represent a network. A Network holds information about the
     nodes that are part of it, the arcs between nodes and the source and sink nodes of the
     Network.
 

@@ -1,7 +1,7 @@
-class RecoverySchedule:
+class Schedule:
     """
     Schedule class to assist with saving solutions from scheduling algorithms.
-    A schedule is infeasible if it does not satisfy the constraints of the Active Time problem.
+    A schedule is infeasible if it does not satisfy the constraints of ATSP.
     """
     def __init__(self, is_feasible: bool, batch_limit: int, n, m):
 

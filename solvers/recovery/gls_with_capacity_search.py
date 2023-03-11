@@ -3,7 +3,7 @@ import cplex
 
 from problem_classes.graph.generate_network import generate_network
 from problem_classes.problem_instances.parsed_instance import ParsedInstance
-from problem_classes.scheduling.recovery_schedule import RecoverySchedule
+from problem_classes.scheduling.recovery_schedule import Schedule
 
 
 def gls_with_capacity_search(perturbed_instance: ParsedInstance, gamma: int):
@@ -158,10 +158,10 @@ def gls_with_capacity_search(perturbed_instance: ParsedInstance, gamma: int):
                                                  last_feasible_bnd)
         else:
             # Solution is infeasible
-            return RecoverySchedule(False,
-                                    perturbed_instance.number_of_parallel_jobs,
-                                    perturbed_instance.number_of_jobs,
-                                    perturbed_instance.number_of_timeslots)
+            return Schedule(False,
+                            perturbed_instance.number_of_parallel_jobs,
+                            perturbed_instance.number_of_jobs,
+                            perturbed_instance.number_of_timeslots)
     # Construct initial solution using the last feasible solution.
     init_schedule = construct_cplex_solution(last_feasible_variables,
                                              last_feasible_solution,
@@ -212,10 +212,10 @@ def construct_cplex_solution(variable_names, values, batch_capacity, number_of_j
     :param values: assigned flow to each arc
     :return: Schedule object the obtained solution
     """
-    schedule = RecoverySchedule(True,
-                                batch_capacity,
-                                number_of_jobs,
-                                number_of_timeslots)
+    schedule = Schedule(True,
+                        batch_capacity,
+                        number_of_jobs,
+                        number_of_timeslots)
 
     for variable, value in zip(variable_names, values):
         arc_info = variable.split("#")

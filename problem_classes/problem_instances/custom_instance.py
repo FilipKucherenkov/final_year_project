@@ -7,7 +7,7 @@ from problem_classes.scheduling.time_horizon import TimeHorizon
 
 class CustomInstance:
     """
-    Simple class to represent a problem instance of the Active time scheduling problem. This class is used to generate
+    Class to represent a problem instance of the ATSP. This class is used to generate
     manual test cases to better study algorithm/model performance.
 
     Note: Getter methods are used to assist with feeding input to optimization models.

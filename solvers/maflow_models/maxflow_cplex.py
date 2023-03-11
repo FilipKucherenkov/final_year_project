@@ -1,7 +1,7 @@
 import cplex
 
 from problem_classes.graph.generate_network import generate_network
-from problem_classes.scheduling.schedule import Schedule
+from problem_classes.scheduling.schedule_alternative import Schedule
 
 
 def solve_max_flow(instance):

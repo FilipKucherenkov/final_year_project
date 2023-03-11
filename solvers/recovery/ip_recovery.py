@@ -1,7 +1,7 @@
 import pyomo.environ as pyo
 from pyomo.opt import SolverFactory
 
-from problem_classes.scheduling.recovery_schedule import RecoverySchedule
+from problem_classes.scheduling.recovery_schedule import Schedule
 
 
 def recover_schedule(perturbed_instance, nominal_solution, capacity_limit, augmented_capacity):
@@ -91,29 +91,25 @@ def recover_schedule(perturbed_instance, nominal_solution, capacity_limit, augme
 
     model.processing_time_assignment_rule = pyo.Constraint(model.jobs, rule=processing_time_assignment_rule)
 
-    solver = SolverFactory("gurobi")
+    solver = SolverFactory("cplex_direct")
     results = solver.solve(model)
     if results.solver.termination_condition == 'infeasible':
-        schedule = RecoverySchedule(False,
-                                    capacity_limit,
-                                    perturbed_instance.number_of_jobs,
-                                    perturbed_instance.number_of_timeslots)
+        schedule = Schedule(False,
+                            capacity_limit,
+                            perturbed_instance.number_of_jobs,
+                            perturbed_instance.number_of_timeslots)
         return schedule
 
     else:
-        schedule = RecoverySchedule(True,
-                                    capacity_limit,
-                                    perturbed_instance.number_of_jobs,
-                                    perturbed_instance.number_of_timeslots)
+        schedule = Schedule(True,
+                            capacity_limit,
+                            perturbed_instance.number_of_jobs,
+                            perturbed_instance.number_of_timeslots)
 
-        job_to_timeslot_mapping = []
         for j in model.jobs:
             for t in model.timeslots:
                 if model.x[t, j]() == 1:
                     # Schedule job j at timeslot t in the solution.
                     schedule.add_mapping(j, t)
-                    job_to_timeslot_mapping.append((f"Job_{j}", f"Slot_{t}"))
-
-        # return Schedule(True, job_to_timeslot_mapping, instance.number_of_parallel_jobs)
 
         return schedule

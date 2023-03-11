@@ -1,11 +1,7 @@
-from problem_classes.scheduling.job import Job
-from problem_classes.scheduling.timeslot import Timeslot
-
-
 class Schedule:
     """
     Schedule class to assist with saving solutions from scheduling algorithms.
-    A schedule is infeasible if it does not satisfy the constraints of the Active Time problem.
+    A schedule is infeasible if it does not satisfy the constraints of ATSP.
     """
 
     def __init__(self, is_feasible: bool, job_to_timeslot_mapping: list[(str, str)], batch_size: int):

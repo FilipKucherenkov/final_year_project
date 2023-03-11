@@ -6,8 +6,8 @@ from problem_classes.scheduling.time_horizon import TimeHorizon
 
 class ParsedInstance:
     """
-    Simple class to represent a problem instance of the Active time scheduling problem. This class is used when parsing
-    a problem data set.
+    Class to represent a problem instance of the ATSP. This class is used when parsing
+    problem instances from json files.
 
     Note: Getter methods are used to assist with feeding input to optimization models.
     """

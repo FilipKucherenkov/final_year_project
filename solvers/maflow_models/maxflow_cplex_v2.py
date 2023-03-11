@@ -1,10 +1,8 @@
 import cplex
-from problem_classes.scheduling.schedule import Schedule
+from problem_classes.scheduling.schedule_alternative import Schedule
 
 
 def solve_maxflow_cplex_v2(arcs, source_node, sink_node, job_processing_sum, batch_size):
-    # for arc in arcs:
-    #     print(arc.source_node.value, arc.terminal_node.value, arc.capacity)
     # Create cplex Model and specify properties
     model = cplex.Cplex()
     model.set_problem_name("Max Flow model")

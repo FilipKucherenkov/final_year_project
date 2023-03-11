@@ -2,16 +2,15 @@ import pyomo.environ as pyo
 from pyomo.opt import SolverFactory
 
 from problem_classes.problem_instances.parsed_instance import ParsedInstance
-from problem_classes.scheduling.recovery_schedule import RecoverySchedule
-from problem_classes.scheduling.schedule import Schedule
+from problem_classes.scheduling.recovery_schedule import Schedule
 
 
 def solve_active_time_ip(instance: ParsedInstance, solver_type: str):
     """
-    Create and solve Pyomo model for Integer programming formulation given by Chang et al. 2017
-    :param instance: Problem instance object
-    :param solver_type: specified solver to use (e.g. cplex-direct or gurobi)
-    :return:
+    Create and solve Pyomo model for IP formulation given by Chang et al. 2017
+    :param instance: Problem instance object.
+    :param solver_type: specified solver to use (e.g. cplex-direct)
+    :return: Schedule object containing the solution.
     """
 
     # Create Pyomo model
@@ -88,22 +87,25 @@ def solve_active_time_ip(instance: ParsedInstance, solver_type: str):
     # model.display()
 
     if results.solver.termination_condition == 'infeasible':
-        schedule = Schedule(False, [], instance.number_of_parallel_jobs)
+        schedule = Schedule(False,
+                            instance.number_of_parallel_jobs,
+                            instance.number_of_parallel_jobs,
+                            instance.number_of_timeslots)
         return schedule
 
     else:
-        schedule = RecoverySchedule(True,
-                                    instance.number_of_parallel_jobs,
-                                    instance.number_of_jobs,
-                                    instance.number_of_timeslots)
+        schedule = Schedule(True,
+                            instance.number_of_parallel_jobs,
+                            instance.number_of_jobs,
+                            instance.number_of_timeslots)
 
-        job_to_timeslot_mapping = []
+        # job_to_timeslot_mapping = []
         for j in model.jobs:
             for t in model.timeslots:
                 if model.x[t, j]() == 1:
                     # Schedule job j at timeslot t in the solution.
                     schedule.add_mapping(j, t)
-                    job_to_timeslot_mapping.append((f"Job_{j}", f"Slot_{t}"))
-
-        # return Schedule(True, job_to_timeslot_mapping, instance.number_of_parallel_jobs)
+                    # job_to_timeslot_mapping.append((f"Job_{j}", f"Slot_{t}"))
         return schedule
+        # return Schedule(True, job_to_timeslot_mapping, instance.number_of_parallel_jobs)
+

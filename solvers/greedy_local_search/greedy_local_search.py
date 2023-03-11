@@ -3,7 +3,7 @@ import copy
 from problem_classes.problem_instances.parsed_instance import ParsedInstance
 from solvers.maflow_models.maxflow_pyomo import solve_max_flow_model
 from problem_classes.graph.generate_network import generate_network
-from problem_classes.scheduling.schedule import Schedule
+from problem_classes.scheduling.schedule_alternative import Schedule
 
 
 def greedy_local_search(instance: ParsedInstance, solver_type: str):

@@ -3,7 +3,7 @@ import copy
 from problem_classes.problem_instances.parsed_instance import ParsedInstance
 from solvers.maflow_models.maxflow_cplex_v2 import solve_maxflow_cplex_v2
 from problem_classes.graph.generate_network import generate_network
-from problem_classes.scheduling.schedule import Schedule
+from problem_classes.scheduling.schedule_alternative import Schedule
 
 
 def greedy_local_search_with_cplex_v2(instance: ParsedInstance):

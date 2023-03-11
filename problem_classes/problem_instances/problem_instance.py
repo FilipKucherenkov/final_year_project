@@ -8,7 +8,7 @@ from problem_classes.scheduling.time_horizon import TimeHorizon
 
 class ProblemInstance:
     """
-    Simple class to represent a problem instance of the Active time scheduling problem. This class uses the static
+    Class to represent a problem instance of ATSP. This class uses the static
     methods from the SyntheticDataGenerator class to randomly generate jobs with their release times, deadlines and
     processing times. It also holds information about the length of the time horizon and the number of
     jobs G that can be scheduled at each timeslot.

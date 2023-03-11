@@ -3,14 +3,12 @@ from problem_classes.scheduling.job import Job
 
 class Timeslot:
     """
-    Simple class to represent each timeslot from our time horizon (e.g [0,1], [1,2]). Each
+    Class to represent each timeslot from our time horizon (e.g [0,1], [1,2]). Each
     timeslot has a start time, end time, capacity for number of jobs that can be scheduled
     within it and a list of jobs containing the scheduled jobs.
 
     Note: A timeslot is active (open) if it has at lest one scheduled job in it.
-
-    Note: The purpose of this class is to only assist with implementing the greedy_algorithms algorithms
-    Not the optimisation models.
+    Note: The purpose of this class is to only assist with implementing the greedy/heuristic methods.
     """
 
     def __init__(self, start_time: int, g: int):

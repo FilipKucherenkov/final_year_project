@@ -1,6 +1,6 @@
 class Job:
     """
-    Simple class to represent a Job. A job has a number (e.g. Job 1), processing time, release time and deadline.
+    Class to represent a Job. A job has a number (e.g. Job 1), processing time, release time and deadline.
     """
     number: int
     processing_time: int

@@ -7,7 +7,7 @@ from problem_classes.scheduling.timeslot import Timeslot
 
 def generate_network(time_slots: list[Timeslot], jobs: list[Job]) -> Network:
     """
-    Helper method to generate a flow network from a given time horizon and list of jobs.
+    Method for generating a flow network from a given time horizon and list of jobs.
     :param time_slots: list of timeslots part of our time horizon
     :param jobs: list of given jobs.
     :return: network representation of the jobs and the time_horizon.

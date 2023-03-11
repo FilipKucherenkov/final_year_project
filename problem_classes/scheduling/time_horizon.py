@@ -5,7 +5,7 @@ from problem_classes.scheduling.timeslot import Timeslot
 
 class TimeHorizon:
     """
-    Simple class to represent the time horizon in our problem instance. The time horizon contains a
+    Class to represent the time horizon in our problem instance. The time horizon contains a
     list of timeslots - time_slots and slot_capacity - number of jobs that can be scheduled in parallel
     within each timeslot.
     """
