@@ -4,10 +4,9 @@ import cplex
 from problem_classes.graph.generate_network import generate_network
 from problem_classes.problem_instances.parsed_instance import ParsedInstance
 from problem_classes.scheduling.recovery_schedule import RecoverySchedule
-from problem_classes.scheduling.schedule import Schedule
 
 
-def capacity_search(perturbed_instance: ParsedInstance, gamma: int):
+def gls_with_capacity_search(perturbed_instance: ParsedInstance, gamma: int):
     """
     Capacity Local Search (Greedy Local Search + Capacity Recovery)
     :param perturbed_instance: ParsedInstance object for the problem instance.

@@ -424,53 +424,91 @@ def rmse_gamma_displot_moderate_instance(method1, method2):
         if filename.endswith(".json") and filename in moderate_instances:
             files.append(file_path)
 
-    plot_producer = PlotProducer(files, "Moderate_instances_rmse_gamma_distribution", "perturbations", True)
-    # print(plot_producer.df)
-    # plot_producer.generate_strip_plot("gamma", "rmse_value", "Gamma", "RMSE")
-    plot_producer.generate_displot("RMSE", "RMSE", "gamma")
-
-    plot_producer = PlotProducer(files, "Moderate_instances_rmse_epsilon_distribution", "perturbations", True)
-    plot_producer.generate_displot("RMSE", "RMSE", "epsilon")
+    # plot_producer = PlotProducer(files, "Moderate_instances_rmse_gamma_distribution", "perturbations", True)
+    # # print(plot_producer.df)
+    # # plot_producer.generate_strip_plot("gamma", "rmse_value", "Gamma", "RMSE")
+    # plot_producer.generate_displot("RMSE", "RMSE", "gamma")
+    #
+    # plot_producer = PlotProducer(files, "Moderate_instances_rmse_epsilon_distribution", "perturbations", True)
+    # plot_producer.generate_displot("RMSE", "RMSE", "epsilon")
 
     # new_df = plot_producer.df[plot_producer.df["gamma"] == 5]
     # plot_producer.generate_swarm_plot("gamma", "rmse_value", "Gamma", "RMSE")
 
+    plot_producer1 = PlotProducer(files, "Moderate_instances_rmse_opt_eps_lineplot", "perturbations", True)
+    plot_producer1.generate_line_plot("epsilon", "rmse_opt", "Epsilon", "RMSE")
+
+    plot_producer2 = PlotProducer(files, "Moderate_instances_rmse_eps_lineplot", "perturbations", True)
+    plot_producer2.generate_line_plot("epsilon", "RMSE", "Epsilon", "RMSE")
+
+    plot_producer3 = PlotProducer(files, "Moderate_instances_rmse_opt_gamma_lineplot", "perturbations", True)
+    plot_producer3.generate_line_plot("gamma", "rmse_opt", "Gamma", "RMSE")
+
+    plot_producer4 = PlotProducer(files, "Moderate_instances_rmse_gamma_lineplot", "perturbations", True)
+    plot_producer4.generate_line_plot("gamma", "RMSE", "Gamma", "RMSE")
+
 #
-# def rmse_gamma_displot_large_instance(method1, method2):
-#     moderate_instances = [
-#         "results_0e3f7403-5ead-4c0e-8f6c-4dedf931d689.json",
-#         "results_1e07f2e9-1e56-4731-8f8b-cacc425ccbc3.json",
-#         "results_3be5eecc-6b84-4f5c-9534-fee77017e023.json",
-#         "results_04ed6b37-3724-4821-9730-d11a57708ba5.json",
-#         "results_5a979bf6-1670-4fc5-beb4-c2e35ce2363d.json",
-#         "results_93bd11be-79ca-4d81-9749-f9b3a80303d8.json",
-#         "results_27721db8-63df-4e11-beee-892eee7faa27.json",
-#         "results_bab7c328-ed55-4cde-91ca-2f3158771d39.json",
-#         "results_d2f10c62-85f4-4ef3-a063-2f17de8a82c8.json",
-#         "results_e67c7a57-4c94-4511-afd6-7cad90632ff4.json",
-#     ]
-#
-#     dir_path = f"data/results/perturbation/{method1}/"
-#     directory = os.fsencode(dir_path)
-#     files = []
-#     for file in os.listdir(directory):
-#         filename = os.fsdecode(file)
-#         file_path = f"data/results/perturbation/{method1}/{filename}"
-#
-#         if filename.endswith(".json") and filename in moderate_instances:
-#             files.append(file_path)
-#
-#     dir_path2 = f"data/results/perturbation/{method2}/"
-#     directory2 = os.fsencode(dir_path2)
-#     for file in os.listdir(directory2):
-#         filename = os.fsdecode(file)
-#         file_path = f"data/results/perturbation/{method2}/{filename}"
-#         if filename.endswith(".json") and filename in moderate_instances:
-#             files.append(file_path)
-#
-#     plot_producer = PlotProducer(files, "perturbations", f"{method1}_rmse_gamma", True)
-#     # print(plot_producer.df)
-#     # plot_producer.generate_strip_plot("gamma", "rmse_value", "Gamma", "RMSE")
-#     plot_producer.generate_displot("rmse_value" )
-#     # new_df = plot_producer.df[plot_producer.df["gamma"] == 5]
-#     # plot_producer.generate_swarm_plot("gamma", "rmse_value", "Gamma", "RMSE")
+def rmse_gamma_displot_large_instance(method1, method2):
+    large_instances = [
+        "results_0a751308-6ad9-459f-a61c-85aeec3e0a3b.json",
+        "results_2cf763fa-f99c-4332-90bb-803e13441785.json",
+        "results_3fe216a8-9d90-4d30-9d30-89a935e39692.json",
+        "results_4a7006d6-bf42-485f-b491-ed3fdade55f2.json",
+        "results_62d641e5-4818-427a-b9ed-a660a61b2f74.json",
+        "results_86aa9d57-d11a-4da6-bd6b-3bce300714e4.json",
+        "results_586b575a-a882-4512-a5ca-aa59771bff51.json",
+        "results_3726f6ca-e4fe-4017-8cce-44c3a15c1db9.json",
+        "results_b1c03081-14b3-43f9-ad53-dd54e9f6216a.json",
+        "results_f0870c8e-6fbd-43cb-8a91-a33a0724aca0.json"
+    ]
+
+    dir_path = f"data/results/perturbation/{method1}/"
+    directory = os.fsencode(dir_path)
+    files = []
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        file_path = f"data/results/perturbation/{method1}/{filename}"
+
+        if filename.endswith(".json") and filename in large_instances:
+            files.append(file_path)
+
+    dir_path2 = f"data/results/perturbation/{method2}/"
+    directory2 = os.fsencode(dir_path2)
+    for file in os.listdir(directory2):
+        filename = os.fsdecode(file)
+        file_path = f"data/results/perturbation/{method2}/{filename}"
+        if filename.endswith(".json") and filename in large_instances:
+            files.append(file_path)
+
+    plot_producer1 = PlotProducer(files, "Large_instances_rmse_opt_eps_lineplot", "perturbations", True)
+    plot_producer1.generate_line_plot("epsilon", "rmse_opt", "Epsilon", "RMSE")
+
+    plot_producer2 = PlotProducer(files, "Large_instances_rmse_eps_lineplot", "perturbations", True)
+    plot_producer2.generate_line_plot("epsilon", "RMSE", "Epsilon", "RMSE")
+
+    plot_producer3 = PlotProducer(files, "Large_instances_rmse_opt_gamma_lineplot", "perturbations", True)
+    plot_producer3.generate_line_plot("gamma", "rmse_opt", "Gamma", "RMSE")
+
+    plot_producer4 = PlotProducer(files, "Large_instances_rmse_gamma_lineplot", "perturbations", True)
+    plot_producer4.generate_line_plot("gamma", "RMSE", "Gamma", "RMSE")
+
+    # plot_producer = PlotProducer(files, "Large_instances_rmse_gamma_distribution", "perturbations", True)
+    # # print(plot_producer.df)
+    # # plot_producer.generate_strip_plot("gamma", "rmse_value", "Gamma", "RMSE")
+    # plot_producer.generate_displot("RMSE", "RMSE", "gamma")
+    #
+    # plot_producer = PlotProducer(files, "Large_instances_rmse_epsilon_distribution", "perturbations", True)
+    # plot_producer.generate_displot("RMSE", "RMSE", "epsilon")
+    #
+    # plot_producer = PlotProducer(files, "Large_instances_rmse_rr_epsilon_distribution", "perturbations", True)
+    # plot_producer.generate_displot("RMSE", "rmse_opt", "epsilon")
+    #
+    # plot_producer = PlotProducer(files, "Large_instances_rmse_rr_gamma_distribution", "perturbations", True)
+    # plot_producer.generate_displot("RMSE", "rmse_opt", "gamma")
+
+    # plot_producer = PlotProducer(files, "Large_instances_rmse_rr_gamma_scatter", "perturbations", True)
+    # plot_producer.generate_swarm_plot("rmse_opt", "gamma", "RMSE", "Gamma")
+
+
+    # new_df = plot_producer.df[plot_producer.df["gamma"] == 5]
+    # plot_producer.generate_swarm_plot("gamma", "rmse_value", "Gamma", "RMSE")

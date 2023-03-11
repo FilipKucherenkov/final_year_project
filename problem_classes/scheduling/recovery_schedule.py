@@ -1,13 +1,8 @@
-from problem_classes.scheduling.job import Job
-from problem_classes.scheduling.timeslot import Timeslot
-
-
 class RecoverySchedule:
     """
     Schedule class to assist with saving solutions from scheduling algorithms.
     A schedule is infeasible if it does not satisfy the constraints of the Active Time problem.
     """
-
     def __init__(self, is_feasible: bool, batch_limit: int, n, m):
 
         self.is_feasible: bool = is_feasible
@@ -41,16 +36,12 @@ class RecoverySchedule:
 
         batch_size = 0
         for timeslot, number_of_jobs in count.items():
-            print(count.items())
             if number_of_jobs >= batch_size:
                 batch_size = number_of_jobs
-        print(batch_size)
         return batch_size
 
     def add_mapping(self, job, timeslot):
         self.schedule[job][timeslot] = 1
-
-
 
     # Print extended information about solution
     # (e.g. at which timeslot was each job scheduled.
@@ -71,8 +62,3 @@ class RecoverySchedule:
                 if self.schedule[job][timeslot] == 1:
                     timeslots = timeslots + f"{timeslot} "
             print(f"Job: {job} Timeslots: {timeslots}")
-        # for placement in self.schedule:
-        #     print(placement)
-        # print(f"Bucket:")
-        # for placement in self.bucket:
-        #     print(placement)

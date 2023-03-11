@@ -5,7 +5,7 @@ import math
 import os
 
 from problem_classes.problem_instances.parsed_instance import ParsedInstance
-from recovery.ip_recovery import recover_schedule
+from solvers.recovery.ip_recovery import recover_schedule
 from solvers.solver_handler import solve_instance
 from utils.file_writers import write_results_to_file
 from utils.parsing import parse_problem_instance
@@ -62,12 +62,17 @@ def record_recovery():
                                                   "cplex_direct")
             optimal_perturbed_solution = solve_instance(nominal_instance, "Active-time-IP", "cplex_direct")
             if perturbed_instance.is_feasible():
-
+                batch_size = recovered_solution.calculate_batch_size()
+                if batch_size > recovered_solution.batch_limit:
+                    b_augmentation = batch_size - recovered_solution.batch_limit
+                else:
+                    b_augmentation = 0
                 new_stats = {
                     "perturbation_id": f"{perturbation_id}",
                     "Method": f"{args.method}",
                     "gamma": gamma,
                     "epsilon": epsilon,
+                    "batch_augmentation": b_augmentation,
                     "perturbed_opt_objective_value": optimal_perturbed_solution.calculate_active_time(),
                     "reovered_objective_value": recovered_solution.calculate_active_time(),
                     "rmse_value":

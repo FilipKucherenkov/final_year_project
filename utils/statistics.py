@@ -203,6 +203,38 @@ def calculate_runtime_stats(dataset_name: str, method):
     print(f"Maximum time taken in seconds: {max_runtime_on_set}")
 
 
+def print_nominal_instances_stats():
+    dir_path = f"data/nominal_instances/"
+    directory = os.fsencode(dir_path)
+    stats = {
+        "Large": 0,
+        "Moderate": 0,
+    }
+
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        file_path = f"data/nominal_instances/{filename}"
+
+        if filename.endswith(".json"):
+            with open(file_path) as json_file:
+                data = json.load(json_file)
+                instance = data["instance"]
+                p_sum = 0
+                for job in instance["jobs"]:
+                    p_sum = p_sum + job["processing_time"]
+                avg = p_sum / instance["number_of_jobs"]
+                if data["instance_name"] == "large":
+                    stats["Large"] = stats["Large"] + avg
+                else:
+                    stats["Moderate"] = stats["Moderate"] + avg
+    avg_large = stats["Large"] / 10
+    avg_moderate = stats["Moderate"] / 10
+    print(f"AVG processing time on large instances:{avg_large}")
+    print(f"AVG processing time on moderate instances:{avg_moderate}")
+
+def print_perturbation_stats():
+    pass
+
 def count_optimal_objectives(dataset_name: str, method: str):
     files = [
         f"data/results/objective/Active-time-IP/results_{dataset_name}.json",

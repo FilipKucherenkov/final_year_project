@@ -39,7 +39,7 @@ class PlotProducer:
         plt.clf()
         sns.color_palette("Spectral", as_cmap=True)
         sns.lineplot(x=f"{x}", y=f"{y}", hue="Method", data=self.df)
-        sns.scatterplot(x=f"{x}", y=f"{y}", data=self.df, hue="Method", legend=False)
+        # sns.scatterplot(x=f"{x}", y=f"{y}", data=self.df, hue="Method", legend=False)
         # if labels:
         #     plt.legend(title="Method", labels=labels)
         # else:
@@ -91,7 +91,7 @@ class PlotProducer:
 
     def generate_swarm_plot(self, x: str, y: str, x_label: str, y_label: str):
         plt.clf()
-        sns.swarmplot(data=self.df, x=f"{x}", y=f"{y}", s=5, hue="Method", alpha=0.5)
+        sns.swarmplot(data=self.df, x=f"{x}", y=f"{y}", s=2, hue="Method")
         sns.despine()
         plt.xlabel(f"{x_label}")
         plt.ylabel(f"{y_label}")
@@ -103,7 +103,7 @@ class PlotProducer:
 
     def generate_displot(self, x: str, x_label: str, col: str):
         plt.clf()
-        sns.displot(data=self.df, x=f"{x}", hue="Method", kind="kde", fill=True, col=col).set(xlim=0)
+        sns.displot(data=self.df, x=f"{x}", hue="Method", kind="kde", fill=True).set(xlim=0)
         plt.xlabel(x_label)
         plt.savefig(os.path.join(os.getcwd(),
                                  "data",
