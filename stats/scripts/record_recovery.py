@@ -1,11 +1,10 @@
 import argparse
 import json
 import logging
-import math
 import os
 
 from problem_classes.problem_instances.parsed_instance import ParsedInstance
-from solvers.recovery.ip_recovery import recover_schedule
+from solvers.recovery.two_stage_recovery import two_stage_recovery
 from solvers.solver_handler import solve_instance
 from utils.file_writers import write_results_to_file
 from utils.parsing import parse_problem_instance
@@ -14,14 +13,8 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(mes
 
 
 def record_recovery():
-    """
-        Script that records the objective value of a method on a nominal instance
-        and then computes the optimal solution on a set ot perturbed instances.
-        """
     # Parse script arguments
-    parser = argparse.ArgumentParser(description='Script that records performance')
-    parser.add_argument("--perturbed_id", help="Specify the ID of a nominal instance from the data/nominal_instance "
-                                                "directory.")
+    parser = argparse.ArgumentParser(description='Script that records performance of the recovery method.')
     parser.add_argument("--nominal_id", help="Specify the ID of a nominal instance from the data/nominal_instance "
                                              "directory.")
     parser.add_argument("--method", help="Specify method to be used for solving the nominal instance")
@@ -55,35 +48,32 @@ def record_recovery():
             gamma = data["gamma"]
             epsilon = data["epsilon"]
             perturbed_instance = ParsedInstance(data["instance"])
+            optimal_perturbed_solution = solve_instance(perturbed_instance, "Active-time-IP", "cplex_direct")
+            recovered_solution = two_stage_recovery(perturbed_instance, nominal_solution, gamma)
 
-            recovered_solution = recover_schedule(perturbed_instance,
-                                                  nominal_solution,
-                                                  nominal_instance,
-                                                  "cplex_direct")
-            optimal_perturbed_solution = solve_instance(nominal_instance, "Active-time-IP", "cplex_direct")
-            if perturbed_instance.is_feasible():
-                batch_size = recovered_solution.calculate_batch_size()
-                if batch_size > recovered_solution.batch_limit:
-                    b_augmentation = batch_size - recovered_solution.batch_limit
-                else:
-                    b_augmentation = 0
-                new_stats = {
-                    "perturbation_id": f"{perturbation_id}",
-                    "Method": f"{args.method}",
-                    "gamma": gamma,
-                    "epsilon": epsilon,
-                    "batch_augmentation": b_augmentation,
-                    "perturbed_opt_objective_value": optimal_perturbed_solution.calculate_active_time(),
-                    "reovered_objective_value": recovered_solution.calculate_active_time(),
-                    "rmse_value":
-                        math.sqrt((recovered_solution.calculate_active_time() - optimal_perturbed_solution.calculate_active_time()) ** 2)
-                }
-                recovery_stats["perturbation_results"] = recovery_stats["perturbation_results"] + [new_stats]
+            opt_perturbed = optimal_perturbed_solution.calculate_active_time() if optimal_perturbed_solution.calculate_active_time() != 0 else 1
+            batch_size = recovered_solution.calculate_batch_size()
+            if batch_size > recovered_solution.batch_limit:
+                b_augmentation = batch_size - recovered_solution.batch_limit
+            else:
+                b_augmentation = 0
+            new_stats = {
+                "perturbation_id": f"{perturbation_id}",
+                "Method": f"{args.method}",
+                "gamma": gamma,
+                "epsilon": epsilon,
+                "batch_augmentation": b_augmentation,
+                "perturbed_opt_objective_value": optimal_perturbed_solution.calculate_active_time(),
+                "reovered_objective_value": recovered_solution.calculate_active_time(),
+                "opt_ratio": recovered_solution.calculate_active_time() / opt_perturbed
+                    # math.sqrt((recovered_solution.calculate_active_time() - optimal_perturbed_solution.calculate_active_time()) ** 2)
+            }
+            recovery_stats["perturbation_results"] = recovery_stats["perturbation_results"] + [new_stats]
 
             continue
         else:
             logging.error(f"File is not in JSON format: {filename}")
             continue
-    write_results_to_file("recovery", args.method, args.nominal_id, recovery_stats)
+    write_results_to_file("recovery/objective", args.method, args.nominal_id, recovery_stats)
 
 record_recovery()

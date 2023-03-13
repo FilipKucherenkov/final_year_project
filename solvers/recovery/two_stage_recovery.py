@@ -15,13 +15,13 @@ def two_stage_recovery(perturbed_instance, nominal_solution, gamma):
     :return: Schedule object representing recovered solution.
     """
     batch_limit = perturbed_instance.number_of_parallel_jobs
-    if not perturbed_instance.is_feasible():
+    # if not perturbed_instance.is_feasible():
         # Type 2 Perturbation occurred - augment capacity.
-        batch_limit = capacity_search(perturbed_instance, gamma)
+    batch_limit = capacity_search(perturbed_instance,nominal_solution, gamma)
 
-        if batch_limit == -1:
-            logging.error("Instance is infeasible and can't be solved.")
-            return
+    if batch_limit == -1:
+        logging.error("Instance is infeasible and can't be solved.")
+        return
 
     logging.info(f"Attempting to recover schedule using IP model with binded decisions. ")
     # Recover using IP model with Binded Decisions

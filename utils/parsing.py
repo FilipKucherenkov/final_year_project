@@ -41,7 +41,7 @@ def parse_problem_instance(file_name):
 
     # Create a ParsedInstance object for each problem instance in the dataset.
     new_instance = ParsedInstance(data["instance"])
-    logging.info("Successfully parsed instance file: {}".format(data["instance_name"]))
+    # logging.info("Successfully parsed instance file: {}".format(data["instance_name"]))
     return new_instance
 
 

@@ -71,7 +71,7 @@ def recover_schedule(perturbed_instance, nominal_solution, capacity_limit, augme
     def objective_rule(model):
         return sum(model.y[t] for t in model.timeslots)
 
-    model.multi_objective = pyo.Objective(rule=objective_rule, sense=pyo.minimize)
+    model.objective = pyo.Objective(rule=objective_rule, sense=pyo.minimize)
 
     # Constraint: Ensure a unit of any job can be assigned to a timeslot only if slot is active (open)
     def job_assignment_rule(model, t, j):
@@ -93,6 +93,7 @@ def recover_schedule(perturbed_instance, nominal_solution, capacity_limit, augme
 
     solver = SolverFactory("cplex_direct")
     results = solver.solve(model)
+    # model.display()
     if results.solver.termination_condition == 'infeasible':
         schedule = Schedule(False,
                             capacity_limit,

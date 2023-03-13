@@ -3,7 +3,7 @@ import cplex
 
 from problem_classes.graph.generate_network import generate_network
 from problem_classes.problem_instances.parsed_instance import ParsedInstance
-from problem_classes.scheduling.schedule_alternative import Schedule
+from problem_classes.scheduling.recovery_schedule import Schedule
 
 
 def greedy_local_search_with_reopt(instance: ParsedInstance):
@@ -117,7 +117,10 @@ def greedy_local_search_with_reopt(instance: ParsedInstance):
 
         # Construct initial solution in a Schedule object
         init_schedule = construct_cplex_solution(model.variables.get_names(),
-                                                 model.solution.get_values(), instance.number_of_parallel_jobs)
+                                                 model.solution.get_values(),
+                                                 instance.number_of_parallel_jobs,
+                                                 instance.number_of_jobs,
+                                                 instance.number_of_timeslots)
 
         # Start the greedy local search by performing incremental changes to the model.
         for j, timeslot in enumerate(time_horizon.time_slots):
@@ -140,7 +143,10 @@ def greedy_local_search_with_reopt(instance: ParsedInstance):
                 # If solution is feasible and the maximum flow equals the summation of job processing times
                 # Update the initial solution with the better one.
                 init_schedule = construct_cplex_solution(model.variables.get_names(),
-                                                         model.solution.get_values(), instance.number_of_parallel_jobs)
+                                                         model.solution.get_values(),
+                                                         instance.number_of_parallel_jobs,
+                                                         instance.number_of_jobs,
+                                                         instance.number_of_timeslots)
 
             else:
                 # If solution is infeasible or does not satisfy the job summation constraint
@@ -153,10 +159,13 @@ def greedy_local_search_with_reopt(instance: ParsedInstance):
 
     else:
         # Solution is infeasible
-        return Schedule(False, [], instance.number_of_parallel_jobs)
+        return Schedule(False,
+                        instance.number_of_parallel_jobs,
+                        instance.number_of_jobs,
+                        instance.number_of_timeslots)
 
 
-def construct_cplex_solution(variable_names, values, batch_size):
+def construct_cplex_solution(variable_names, values, batch_capacity, number_of_jobs, number_of_timeslots):
     """
     Helper function to construct a Schedule object based
     on results obtained by CPLEX.
@@ -164,8 +173,11 @@ def construct_cplex_solution(variable_names, values, batch_size):
     :param values: assigned flow to each arc
     :return: Schedule object the obtained solution
     """
-    job_to_timeslot_mapping = []
-
+    # job_to_timeslot_mapping = []
+    schedule = Schedule(True,
+                        batch_capacity,
+                        number_of_jobs,
+                        number_of_timeslots)
     for variable, value in zip(variable_names, values):
         arc_info = variable.split("#")
 
@@ -174,6 +186,7 @@ def construct_cplex_solution(variable_names, values, batch_size):
         if source_node_info[0] == "j" and dest_node_info[0] == "t":
             if value == 1:  # we care only where the arc flow is 1
                 # Schedule job j at timeslot t
-                job_to_timeslot_mapping.append((f"Job_{source_node_info[1]}", f"Slot_{dest_node_info[1]}"))
-
-    return Schedule(True, job_to_timeslot_mapping, batch_size)
+                # job_to_timeslot_mapping.append((f"Job_{source_node_info[1]}", f"Slot_{dest_node_info[1]}"))
+                schedule.add_mapping(int(source_node_info[1]), int(dest_node_info[1]))
+    # return Schedule(True, job_to_timeslot_mapping, batch_size)
+    return schedule

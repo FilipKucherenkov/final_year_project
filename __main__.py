@@ -1,3 +1,4 @@
+from input_generation.perturbator import Perturbator
 from problem_classes.problem_instances.custom_instance import CustomInstance
 
 from solvers.recovery.two_stage_recovery import  two_stage_recovery
@@ -86,8 +87,10 @@ def main():
     # generate_all_plots()
 
     # # Perturb
-    # p = Perturbator("data/custom_instances/small_instance_1.json")
-    # p_initial = p.problem_instance
+    p1 = Perturbator("data/custom_instances/nominal_instance.json")
+    nominal = p1.problem_instance
+    p = Perturbator("data/custom_instances/perturbed_instance.json")
+    p_initial = p.problem_instance
     # # opt_shedule = solve_instance(p_initial, "Greedy-local-search: CPLEX Re-optimization", "gurobi")
     # # # opt_shedule.print_schedule_info()
     # p_instance = p.perturb_instance(20, 50)
@@ -127,9 +130,11 @@ def main():
     # compute_stats_and_produce_plots()
     # compute_stats_and_produce_plots()
 
-    s1 = solve_instance(p_i_1, "Active-time-IP", "gurobi")
-    s2 = two_stage_recovery(p_p_1, s1, 1)
+    s1 = solve_instance(nominal, "Active-time-IP", "cplex_direct")
+    s2 = two_stage_recovery(p_initial, s1, 100)
+    s3 = solve_instance(p_initial, "Active-time-IP", "cplex_direct")
     s2.print_schedule_info()
+    s3.print_schedule_info()
     # rmse_gamma_displot_moderate_instance("Active-time-IP", "Greedy-local-search: CPLEX Re-optimization")
     # rmse_gamma_scatter("Active-time-IP", "Greedy-local-search: CPLEX Re-optimization")
     # s = recover_from_perturbation("IP with fixed variables", p_p_1, p_i_1, 1, "cplex_direct")

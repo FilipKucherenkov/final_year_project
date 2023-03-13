@@ -3,9 +3,10 @@ import cplex
 
 from problem_classes.graph.generate_network import generate_network
 from problem_classes.problem_instances.parsed_instance import ParsedInstance
+from problem_classes.scheduling.recovery_schedule import Schedule
 
 
-def capacity_search(perturbed_instance: ParsedInstance, gamma: int):
+def capacity_search(perturbed_instance: ParsedInstance, nominal_solution: Schedule, gamma: int):
     """
     Capacity Search (Binary Search + Max-flow)
     :param perturbed_instance: ParsedInstance object for the problem instance.
@@ -44,7 +45,43 @@ def capacity_search(perturbed_instance: ParsedInstance, gamma: int):
 
     # Constraint: Ensure the flow through each arc is less than or equal to its capacity and greater or equal to 0.
     # (e.g) 0 (lower_bound) <= flow through each arc <= arc capacity (upper bound)
-    low_bnd = [0.0 for arc in network.arcs]
+    # (Note) On unit capacity arcs where we "fix" the flow from the predicted solution we set the lb to 1
+    low_bnd = []
+    processing_times = perturbed_instance.get_processing_times_map()
+    fixed_reductions = {}
+
+    for arc in network.arcs:
+
+        if "j" in arc.source_node.value and "t" in arc.terminal_node.value:
+
+            source_index = int(arc.source_node.value.split("_")[1])
+            dest_index = int(arc.terminal_node.value.split("_")[1])
+            row = nominal_solution.schedule[source_index]
+
+            if sum(row) <= processing_times[source_index]:
+                # Processing Time Augmentation
+                if nominal_solution.schedule[source_index][dest_index] == 1:
+                    low_bnd.append(1.0)
+                else:
+                    low_bnd.append(0.0)
+            else:
+                # Processing Time Reduction
+                if nominal_solution.schedule[source_index][dest_index] == 1:
+                    if source_index in fixed_reductions:
+                        if fixed_reductions[source_index] < processing_times[source_index]:
+                            low_bnd.append(1.0)
+                            fixed_reductions[source_index] = fixed_reductions[source_index] + 1
+                        else:
+                            low_bnd.append(0.0)
+                    else:
+                        low_bnd.append(1.0)
+                        fixed_reductions[source_index] = 1
+                else:
+                    low_bnd.append(0.0)
+        else:
+            low_bnd.append(0.0)
+
+    # low_bnd = [0.0 for arc in network.arcs]
     upr_bnd = [arc.capacity for arc in network.arcs]
 
     # Set sense for the objective
@@ -107,6 +144,7 @@ def capacity_search(perturbed_instance: ParsedInstance, gamma: int):
                                  senses=constraint_senses,
                                  rhs=rhs)
     # Solve the problem
+    model.write("prob.lp")
     model.solve()
     job_processing_sum = sum(job.processing_time for job in perturbed_instance.jobs)
 
@@ -114,9 +152,10 @@ def capacity_search(perturbed_instance: ParsedInstance, gamma: int):
     last_feasible_bnd = perturbed_instance.number_of_parallel_jobs
     # If solution is not feasible, augment capacity with gamma
     augmented_capacity = gamma + perturbed_instance.number_of_parallel_jobs
-    if model.solution.get_status() == 1:
 
+    if model.solution.get_status() == 3 or model.solution.get_objective_value() != job_processing_sum:
         sink_arcs = []
+
         # Change arc upper bound to gamma
         for arc in network.arcs:
             if arc.terminal_node == network.sink_node:
@@ -124,8 +163,11 @@ def capacity_search(perturbed_instance: ParsedInstance, gamma: int):
                 model.variables.set_upper_bounds([(f"{arc.source_node.value}#{arc.terminal_node.value}",
                                                    augmented_capacity)])
         # Solve again with augmented capacity
+        model.write("prob.lp")
         model.solve()
-        if model.solution.get_status() != "1" and model.solution.get_objective_value() == job_processing_sum:
+
+        job_processing_sum = sum(job.processing_time for job in perturbed_instance.jobs)
+        if model.solution.get_status() != 3 and model.solution.get_objective_value() == job_processing_sum:
 
             # ===== Binary Search for better capacity ====== #
             lower_bound = 0
@@ -151,8 +193,5 @@ def capacity_search(perturbed_instance: ParsedInstance, gamma: int):
             for arc in sink_arcs:
                 model.variables.set_upper_bounds(f"{arc.source_node.value}#{arc.terminal_node.value}",
                                                  last_feasible_bnd)
-        else:
-            # Solution is infeasible - capacity cannot be found
-            return -1
 
-        return last_feasible_bnd
+    return last_feasible_bnd
