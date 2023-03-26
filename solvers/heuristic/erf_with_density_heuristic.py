@@ -6,13 +6,9 @@ from problem_classes.scheduling.schedule_alternative import Schedule
 
 def erf_with_density_heuristic(instance: ParsedInstance):
     """
-    Simple algorithm based on Earliest-Released-First-Strategy that uses 2 heuristics
-
-    Heuristic 2: Before scheduling a job at its release time, check whether there is a more dense interval
-    within its window (a point where more jobs are scheduled). If yes, schedule the job unit at the current most dense
-    point. If no such point is available schedule it at its current release time. O(n^2)
-    :param instance: parsed problem instance.
-    :return: Schedule object containing the job to timeslot mappings.
+    Density Heuristic
+    :param instance: ParsedInstance object.
+    :return: Schedule object containing the solution.
     """
     job_to_timeslot_mapping = []
     density_map = {}  # stores interval densities
@@ -63,6 +59,10 @@ def erf_with_density_heuristic(instance: ParsedInstance):
 def _get_most_dense_interval_within_window(job, density_map, used_intervals):
     """
     Find the most dense unused interval within a job's window.
+    :param job: Job object whose window is going to be scanned.
+    :param density_map: Dictionary object containing the density of each time slot.
+    :param used_intervals: List object containing used time slots.
+    :return: int value corresponding to the most dense time slot.
     """
 
     curr_release_time = job.release_time

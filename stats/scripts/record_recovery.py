@@ -4,7 +4,7 @@ import logging
 import os
 
 from problem_classes.problem_instances.parsed_instance import ParsedInstance
-from solvers.recovery.two_stage_recovery import two_stage_recovery
+from solvers.recovery.ip_recovery_3 import ip_recovery3
 from solvers.solver_handler import solve_instance
 from utils.file_writers import write_results_to_file
 from utils.parsing import parse_problem_instance
@@ -18,6 +18,9 @@ def record_recovery():
     parser.add_argument("--nominal_id", help="Specify the ID of a nominal instance from the data/nominal_instance "
                                              "directory.")
     parser.add_argument("--method", help="Specify method to be used for solving the nominal instance")
+    parser.add_argument("--l1", help="Specify weight for first cost function")
+    parser.add_argument("--l2", help="Specify weight for second cost function")
+
     args = parser.parse_args()
 
     nominal_instance = parse_problem_instance(f"data/nominal_instances/{args.nominal_id}.json")
@@ -43,26 +46,34 @@ def record_recovery():
             # Parse data.
             data = json.load(f)
             f.close()
-
+            print(f"File: {filename}")
             perturbation_id = data["perturbed_id"]
             gamma = data["gamma"]
             epsilon = data["epsilon"]
             perturbed_instance = ParsedInstance(data["instance"])
             optimal_perturbed_solution = solve_instance(perturbed_instance, "Active-time-IP", "cplex_direct")
-            recovered_solution = two_stage_recovery(perturbed_instance, nominal_solution, gamma)
+
+            recovered_solution = ip_recovery3(perturbed_instance,
+                                              nominal_solution,
+                                              float(args.l1),
+                                              float(args.l2),
+                                              gamma)
 
             opt_perturbed = optimal_perturbed_solution.calculate_active_time() if optimal_perturbed_solution.calculate_active_time() != 0 else 1
             batch_size = recovered_solution.calculate_batch_size()
-            if batch_size > recovered_solution.batch_limit:
+            if batch_size > nominal_solution.batch_limit:
                 b_augmentation = batch_size - recovered_solution.batch_limit
             else:
                 b_augmentation = 0
             new_stats = {
                 "perturbation_id": f"{perturbation_id}",
                 "Method": f"{args.method}",
+                "lambda1": float(args.l1),
+                "lambda2": float(args.l2),
                 "gamma": gamma,
                 "epsilon": epsilon,
                 "batch_augmentation": b_augmentation,
+                "variables_changed": recovered_solution.variable_changes,
                 "perturbed_opt_objective_value": optimal_perturbed_solution.calculate_active_time(),
                 "reovered_objective_value": recovered_solution.calculate_active_time(),
                 "opt_ratio": recovered_solution.calculate_active_time() / opt_perturbed
@@ -74,6 +85,8 @@ def record_recovery():
         else:
             logging.error(f"File is not in JSON format: {filename}")
             continue
-    write_results_to_file("recovery/objective", args.method, args.nominal_id, recovery_stats)
+    write_results_to_file("recovery/objective/moderate_instances",
+                          f"recovery_method_lambdas({args.l1},{args.l2})",
+                          args.nominal_id, recovery_stats)
 
 record_recovery()

@@ -29,6 +29,7 @@ large_instances = [
     "results_f0870c8e-6fbd-43cb-8a91-a33a0724aca0.json"
 ]
 
+
 def print_rmse_stats_for_methods():
     # Calculate Root Mean Square Error (RMSE) value for results
     calculate_total_rmse("Active-time-IP", "moderate")
@@ -45,6 +46,8 @@ def print_rmse_stats_for_methods():
     calculate_rmse_for_different_epsilon("Greedy-local-search: CPLEX Re-optimization", "moderate")
     calculate_rmse_for_different_epsilon("Active-time-IP", "large")
     calculate_rmse_for_different_epsilon("Greedy-local-search: CPLEX Re-optimization", "large")
+
+
 def calculate_total_rmse(method, instance_type):
     """
     Calculate Root-Mean-Square-Error for a method to measure how close is
@@ -70,8 +73,8 @@ def calculate_total_rmse(method, instance_type):
             with open(file_path) as json_file:
                 data = json.load(json_file)
                 for result in data["perturbation_results"]:
-                    total_rmse = total_rmse + result["rmse_value"] # Used for Sensitivity
-                    total_opt_rmse = total_opt_rmse + result["rmse_opt"] # Used for RR
+                    total_rmse = total_rmse + result["rmse_value"]  # Used for Sensitivity
+                    total_opt_rmse = total_opt_rmse + result["rmse_opt"]  # Used for RR
                     number_of_results = number_of_results + 1
 
     print(f"Total RMSE on {instance_type} instances for: {method}")
@@ -85,10 +88,10 @@ def calculate_rmse_for_different_gamma(method, instance_type):
     dir_path = f"data/results/perturbation/{method}/"
     directory = os.fsencode(dir_path)
     gamma_count = {}
-    total_opt_rmse_sum = {} # RR
+    total_opt_rmse_sum = {}  # RR
     total_rmse_sum = {}
     rmse_results = []
-    opt_rmse_results = [] # RR
+    opt_rmse_results = []  # RR
 
     instances = []
     if instance_type == "moderate":
@@ -126,8 +129,8 @@ def calculate_rmse_for_different_gamma(method, instance_type):
             "opt_rmse": (opt_rmse_value / gamma_count[gamma])
         })
     print(f"RMSE Results on {instance_type} instances for: {method}")
-    print(rmse_results) # Sensitivity
-    print(opt_rmse_results) # RR
+    print(rmse_results)  # Sensitivity
+    print(opt_rmse_results)  # RR
     print("=============================================")
 
 
@@ -232,10 +235,8 @@ def print_nominal_instances_stats():
     print(f"AVG processing time on large instances:{avg_large}")
     print(f"AVG processing time on moderate instances:{avg_moderate}")
 
-def print_perturbation_stats():
-    pass
 
-def count_optimal_objectives(dataset_name: str, method: str):
+def count_optimal_objectives_for_dataset(dataset_name: str, method: str):
     files = [
         f"data/results/objective/Active-time-IP/results_{dataset_name}.json",
         f"data/results/objective/{method}/results_{dataset_name}.json"
@@ -289,3 +290,175 @@ def count_optimal_objectives(dataset_name: str, method: str):
     # print(f"ALG(J) < OPT(J): {better_than_optimal}")
     # print(f"OPT(J) < ALG(J) < 1.2: {total_close_to_opt}")
     # print(opt_stats)
+
+
+def count_objective_stats_for_gamma(stage_1_method, instance_type):
+    dir_path = f"data/results/recovery/objective/{stage_1_method}/"
+    directory = os.fsencode(dir_path)
+
+    gamma_results = {}
+    augm_results = {}
+    instances = []
+    if instance_type == "moderate":
+        instances = moderate_instances
+    else:
+        instances = large_instances
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        file_path = f"data/results/recovery/objective/{stage_1_method}/{filename}"
+        if filename.endswith(".json") and filename in instances:
+            with open(file_path) as json_file:
+                data = json.load(json_file)
+                for result in data["perturbation_results"]:
+                    gamma = result["gamma"]
+                    opt_ratio = result["opt_ratio"]
+                    augmentation = result["batch_augmentation"]
+
+                    if gamma not in gamma_results:
+                        augm_results[gamma] = [augmentation]
+                    else:
+                        augm_results[gamma] = augm_results[gamma] + [augmentation]
+
+                    if opt_ratio == -1:
+                        print(filename)
+                        continue
+                    if gamma not in gamma_results:
+                        gamma_results[gamma] = [opt_ratio]
+                    else:
+                        gamma_results[gamma] = gamma_results[gamma] + [opt_ratio]
+
+    gamma_stats = {}
+    for gamma, opt_ratios in gamma_results.items():
+        count = 0
+        for ratio in opt_ratios:
+            if ratio == 1:
+                count = count + 1
+        gamma_stats[gamma] = {
+            "Optimal solutions": f"{count}/{len(opt_ratios)}",
+            "Mean OPT": sum(opt_ratios) / len(opt_ratios),
+            "Max OPT": max(opt_ratios),
+            "Mean augmentation": sum(augm_results[gamma]) / len(augm_results[gamma]),
+            "Max augmentation": max(augm_results[gamma])
+        }
+
+    print("=====================================================")
+    print(f"Instance type: {instance_type}")
+    print(f"Parameter: Gamma")
+    print(f"Stage 1 Method: {stage_1_method}")
+    for g, stat in gamma_stats.items():
+        print(f"Gamma={g}: {stat}")
+    print("=====================================================")
+
+
+def count_objective_stats_for_eps(stage_1_method, instance_type):
+    dir_path = f"data/results/recovery/objective/{stage_1_method}/"
+    directory = os.fsencode(dir_path)
+
+    eps_results = {}
+    augm_results = {}
+    instances = []
+    if instance_type == "moderate":
+        instances = moderate_instances
+    else:
+        instances = large_instances
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        file_path = f"data/results/recovery/objective/{stage_1_method}/{filename}"
+        if filename.endswith(".json") and filename in instances:
+            with open(file_path) as json_file:
+                data = json.load(json_file)
+                for result in data["perturbation_results"]:
+                    eps = result["epsilon"]
+                    opt_ratio = result["opt_ratio"]
+                    augmentation = result["batch_augmentation"]
+
+                    if eps not in eps_results:
+                        augm_results[eps] = [augmentation]
+                    else:
+                        augm_results[eps] = augm_results[eps] + [augmentation]
+
+                    if opt_ratio == -1:
+                        print(filename)
+                        continue
+                    if eps not in eps_results:
+                        eps_results[eps] = [opt_ratio]
+                    else:
+                        eps_results[eps] = eps_results[eps] + [opt_ratio]
+
+    eps_stats = {}
+    for eps, opt_ratios in eps_results.items():
+        count = 0
+        for ratio in opt_ratios:
+            if ratio == 1:
+                count = count + 1
+        eps_stats[eps] = {
+            "Optimal Solutions": f"{count}/{len(opt_ratios)}",
+            "Mean OPT": sum(opt_ratios) / len(opt_ratios),
+            "Max OPT": max(opt_ratios),
+            "Mean augmentation": sum(augm_results[eps]) / len(augm_results[eps]),
+            "Max augmenation": max(augm_results[eps])
+        }
+
+    print("=====================================================")
+    print(f"Instance type: {instance_type}")
+    print(f"Parameter: Epsilon")
+    print(f"Stage 1 Method: {stage_1_method}")
+    for e, stat in eps_stats.items():
+        print(f"epsilon={e}: {stat}")
+    print("=====================================================")
+
+
+def print_all_recovery_stats():
+    print_recovery_stats(1, 1, "large_instances")
+    print_recovery_stats(0, 1, "large_instances")
+    print_recovery_stats(1, 0, "large_instances")
+    print_recovery_stats(0.1, 2, "large_instances")
+
+    print_recovery_stats(1, 1, "moderate_instances")
+    print_recovery_stats(0, 1, "moderate_instances")
+    print_recovery_stats(1, 0, "moderate_instances")
+    print_recovery_stats(0.5, 1, "moderate_instances")
+def print_recovery_stats(l1, l2, instance_type):
+    dir_path = f"data/results/recovery/objective/{instance_type}/recovery_method_lambdas({l1},{l2})"
+    directory = os.fsencode(dir_path)
+
+    mean_augmentation = 0
+    max_augmentation = 0
+
+    mean_variables_changed = 0
+    max_variables_changed = 0
+
+    mean_rec_ratio = 0
+    max_rec_ratio = 0
+
+    for file in os.listdir(directory):
+        filename = os.fsdecode(file)
+        file_path = f"data/results/recovery/objective/{instance_type}/recovery_method_lambdas({l1},{l2})/{filename}"
+        if filename.endswith(".json"):
+            with open(file_path) as json_file:
+                data = json.load(json_file)
+                for result in data["perturbation_results"]:
+                    augmentation = result["batch_augmentation"]
+                    variables_changed = result["variables_changed"]
+                    rec_ratio = result["opt_ratio"]
+
+                    mean_augmentation = mean_augmentation + augmentation
+                    mean_variables_changed = mean_variables_changed + variables_changed
+                    mean_rec_ratio = mean_rec_ratio + rec_ratio
+
+                    if augmentation >= max_augmentation:
+                        max_augmentation = augmentation
+                    if variables_changed >= max_variables_changed:
+                        max_variables_changed = variables_changed
+                    if rec_ratio >= max_rec_ratio:
+                        max_rec_ratio = rec_ratio
+
+    print("===========================")
+    print(f"Recovery stats for l1={l1}, l2={l2} on {instance_type}:")
+    print(f"Mean augmentation: {mean_augmentation / 150}")
+    print(f"Max augmentation: {max_augmentation}")
+    print(f"Mean variables changed: {mean_variables_changed / 150}")
+    print(f"Max variables changed: {max_variables_changed}")
+    print(f"Mean rec ratio: {mean_rec_ratio / 150}")
+    print(f"Max rec ratio: {max_rec_ratio}")
+    print("===========================")

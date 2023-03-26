@@ -9,9 +9,9 @@ from problem_classes.scheduling.recovery_schedule import Schedule
 def gls_with_capacity_search(perturbed_instance: ParsedInstance, gamma: int):
     """
     Capacity Local Search (Greedy Local Search + Capacity Recovery)
-    :param perturbed_instance: ParsedInstance object for the problem instance.
-    :param gamma: Upper bound on the number of jobs with uncertain processing times
-    :return: Schedule object containing the solution
+    :param perturbed_instance: ParsedInstance object representing the true scenario.
+    :param gamma: int value for specifying upper bound on perturbed jobs.
+    :return: Schedule object containing solution given augmented capacity.
     """
 
     # Note: Important to deep copy input to avoid modifying the problem instance.
@@ -208,9 +208,12 @@ def construct_cplex_solution(variable_names, values, batch_capacity, number_of_j
     """
     Helper function to construct a Schedule object based
     on results obtained from CPLEX.
-    :param variable_names: variable names for the arcs
-    :param values: assigned flow to each arc
-    :return: Schedule object the obtained solution
+    :param variable_names: variable names for the arcs.
+    :param values: assigned flow to each arc.
+    :param batch_capacity: the batch limit.
+    :param number_of_jobs: the number of jobs.
+    :param number_of_timeslots: the number of time slots.
+    :return: Schedule object containing the solution.
     """
     schedule = Schedule(True,
                         batch_capacity,

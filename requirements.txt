@@ -1,5 +1,4 @@
 cplex==22.1.0.0
-Django==3.2.4
 matplotlib==3.6.0
 numpy==1.20.1
 pandas==1.2.3

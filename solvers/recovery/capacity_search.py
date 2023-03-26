@@ -8,10 +8,11 @@ from problem_classes.scheduling.recovery_schedule import Schedule
 
 def capacity_search(perturbed_instance: ParsedInstance, nominal_solution: Schedule, gamma: int):
     """
-    Capacity Search (Binary Search + Max-flow)
-    :param perturbed_instance: ParsedInstance object for the problem instance.
-    :param gamma: Upper bound on the number of jobs with uncertain processing times
-    :return: Schedule object containing the solution
+    Capacity search method (Max-flow + binary search)
+    :param perturbed_instance: ParsedInstance object representing the true scenario.
+    :param nominal_solution: Schedule object representing the solution to nominal scenario.
+    :param gamma: int value for specifying upper bound on perturbed jobs.
+    :return: int value for the minimum required capacity.
     """
 
     # Note: Important to deep copy input to avoid modifying the problem instance.
@@ -45,43 +46,7 @@ def capacity_search(perturbed_instance: ParsedInstance, nominal_solution: Schedu
 
     # Constraint: Ensure the flow through each arc is less than or equal to its capacity and greater or equal to 0.
     # (e.g) 0 (lower_bound) <= flow through each arc <= arc capacity (upper bound)
-    # (Note) On unit capacity arcs where we "fix" the flow from the predicted solution we set the lb to 1
-    low_bnd = []
-    processing_times = perturbed_instance.get_processing_times_map()
-    fixed_reductions = {}
-
-    for arc in network.arcs:
-
-        if "j" in arc.source_node.value and "t" in arc.terminal_node.value:
-
-            source_index = int(arc.source_node.value.split("_")[1])
-            dest_index = int(arc.terminal_node.value.split("_")[1])
-            row = nominal_solution.schedule[source_index]
-
-            if sum(row) <= processing_times[source_index]:
-                # Processing Time Augmentation
-                if nominal_solution.schedule[source_index][dest_index] == 1:
-                    low_bnd.append(1.0)
-                else:
-                    low_bnd.append(0.0)
-            else:
-                # Processing Time Reduction
-                if nominal_solution.schedule[source_index][dest_index] == 1:
-                    if source_index in fixed_reductions:
-                        if fixed_reductions[source_index] < processing_times[source_index]:
-                            low_bnd.append(1.0)
-                            fixed_reductions[source_index] = fixed_reductions[source_index] + 1
-                        else:
-                            low_bnd.append(0.0)
-                    else:
-                        low_bnd.append(1.0)
-                        fixed_reductions[source_index] = 1
-                else:
-                    low_bnd.append(0.0)
-        else:
-            low_bnd.append(0.0)
-
-    # low_bnd = [0.0 for arc in network.arcs]
+    low_bnd = [0.0 for arc in network.arcs]
     upr_bnd = [arc.capacity for arc in network.arcs]
 
     # Set sense for the objective

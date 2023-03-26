@@ -3,12 +3,17 @@ class Schedule:
     Schedule class to assist with saving solutions from scheduling algorithms.
     A schedule is infeasible if it does not satisfy the constraints of ATSP.
     """
+
     def __init__(self, is_feasible: bool, batch_limit: int, n, m):
 
         self.is_feasible: bool = is_feasible
         # solution is represented with a matrix j x t
-        self.schedule = [[0 for i in range(0, m+1)] for j in range(0, n)]
+        self.schedule = [[0 for i in range(0, m + 1)] for j in range(0, n)]
         self.batch_limit = batch_limit
+        self.variable_changes = 0
+
+    def set_variables_changes(self, n):
+        self.variable_changes = n
 
     # Calculate the number of active slots in this schedule
     def calculate_active_time(self):
@@ -38,6 +43,8 @@ class Schedule:
         for timeslot, number_of_jobs in count.items():
             if number_of_jobs >= batch_size:
                 batch_size = number_of_jobs
+        print(self.batch_limit)
+        print(batch_size)
         return batch_size
 
     def add_mapping(self, job, timeslot):
@@ -52,7 +59,7 @@ class Schedule:
             print(f"Batch violation: {batch_size - self.batch_limit}")
         else:
             print(f"Batch violation: {0}")
-
+        print(f"Variables changed: {self.variable_changes}")
         print(f"Is schedule feasible? {'Yes' if self.is_feasible else 'No'}")
         print(f"Placements:")
         for job in range(0, len(self.schedule)):

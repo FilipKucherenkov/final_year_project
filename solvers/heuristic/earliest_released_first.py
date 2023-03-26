@@ -6,8 +6,8 @@ from problem_classes.scheduling.schedule_alternative import Schedule
 
 def earliest_released_first(instance: ParsedInstance):
     """
-    Schedule a job at its release time.
-    :param instance: parsed problem instance.
+    Schedule every job at its release time
+    :param instance: ParsedInstance object.
     :return: Schedule object containing the solution.
     """
     job_to_timeslot_mapping = []

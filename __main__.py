@@ -1,9 +1,10 @@
 from input_generation.perturbator import Perturbator
 from problem_classes.problem_instances.custom_instance import CustomInstance
+from solvers.recovery.ip_recovery_3 import ip_recovery3
 
-from solvers.recovery.two_stage_recovery import  two_stage_recovery
 from solvers.solver_handler import solve_instance
-from utils.statistics import print_rmse_stats_for_methods
+from utils.plot_functions import print_objective_performance_for_recovery
+from utils.statistics import print_all_recovery_stats
 
 
 def main():
@@ -34,7 +35,7 @@ def main():
     p_p_1 = CustomInstance(7, 2)
     p_p_1.add_job(0, 4, 6, 2)
     p_p_1.add_job(1, 0, 4, 4)
-    p_p_1.add_job(2, 0, 4, 4)
+    p_p_1.add_job(2, 0, 4, 1)
     p_p_1.add_job(3, 0, 2, 2)
 
     # p_i_1 = CustomInstance(7, 1)
@@ -110,12 +111,6 @@ def main():
 
     # schedule3.print_schedule_info()
 
-    # s = solve_instance(p_initial, "Active-time-IP", "cplex_direct")
-    # s.print_schedule_info()
-    # s1 = solve_instance(p_instance, "Active-time-IP", "cplex_direct")
-    # s1.print_schedule_info()
-    # p = recovery_method(p_instance, s, "cplex_direct")
-    # p.print_schedule_info()
 
     # s = solve_instance(instance_with_overlaps, "1", "gurobi")
     # s.print_schedule_info()
@@ -130,39 +125,59 @@ def main():
     # compute_stats_and_produce_plots()
     # compute_stats_and_produce_plots()
 
-    s1 = solve_instance(nominal, "Active-time-IP", "cplex_direct")
-    s2 = two_stage_recovery(p_initial, s1, 100)
-    s3 = solve_instance(p_initial, "Active-time-IP", "cplex_direct")
-    s2.print_schedule_info()
-    s3.print_schedule_info()
+    s1 = solve_instance(p_i_1, "Active-time-IP", "cplex_direct")
+    s1.print_schedule_info()
+    # s2 = ip_recovery3(p_p_1, s1, 0, 1, 1)
+    # print(s2.variable_changes)
+    # s2.print_schedule_info()
+    # s3 = solve_instance(p_initial, "Active-time-IP", "cplex_direct")
+    # s2.print_schedule_info()
+    # s1.print_schedule_info()
+    # s2 = two_stage_recovery(p_initial, s1, 100)
+    # s3 = solve_instance(p_initial, "Active-time-IP", "cplex_direct")
+    # s2.print_schedule_info()
+    # s3.print_schedule_info()
+    # generate_all_plots()
+    # s3.print_schedule_info()
     # rmse_gamma_displot_moderate_instance("Active-time-IP", "Greedy-local-search: CPLEX Re-optimization")
     # rmse_gamma_scatter("Active-time-IP", "Greedy-local-search: CPLEX Re-optimization")
-    # s = recover_from_perturbation("IP with fixed variables", p_p_1, p_i_1, 1, "cplex_direct")
-    # s = recover_schedule(p_p_1, None, None, "cplex_direct")
-    # s1 = solve_instance(p_p_1, "Earliest-released-first-with-density-heuristic", "gurobi")
-    # # s1 = solve_unbounded_ip(p_initial, "gurobi")
-    # # s.print_schedule_info()
-    # s1.print_schedule_info()
-    #
+
+
+    # t = timeit.Timer(lambda: test(p_initial,s1, nominal.number_of_parallel_jobs, nominal.number_of_parallel_jobs))
+    # times = t.repeat(3, 3)
+    # total_time_taken = min(times) / 3
+    # t2 = timeit.Timer(lambda:  solve_instance(p_initial, "Active-time-IP", "cplex_direct"))
+    # times2 = t2.repeat(3, 3)
+    # total_time_taken2 = min(times2) / 3
+
+    # print(total_time_taken)
+    # print(total_time_taken2)
+
+    # compute_stats_and_produce_plots()
     # compute_stats_and_produce_plots()
     # print_nominal_instances_stats()
+    #compute_stats_and_produce_plots()
 
-
+    print_all_recovery_stats()
 
 
 def compute_stats_and_produce_plots():
 
-    # Calculate Root Mean Square Error (RMSE) value for results
-    # opt_rmse: Compares solution produced on nominal instance compared to opt on perturbed. (Recoverable-Robustness)
+    # Calculate Root Mean Square Error (RMSE) value for results.
+    # opt_rmse: Compares solution produced on nominal instance compared to opt on perturbed. (Nominal Solution Quality)
     # rmse: Compares solution produced on nominal compared to solution on perturbed. (Sensitivity)
-    print_rmse_stats_for_methods()
-    #
+    # print_rmse_stats_for_methods()
+
+    # Prints performance of a specific method on dataset.
     # Available methods:
     # 1. Earliest-released-first
     # 2. Earliest-released-first-with-density-heuristic
     # 3. Maxflow-LP
     # 4. Greedy-local-search: CPLEX Re-optimization
     # print_objective_performance_on_all_datasets("Active-time-IP")
+
+    # Prints performance of IP Model and GLS Method combined with recovery method.
+    print_objective_performance_for_recovery()
 
 
 main()

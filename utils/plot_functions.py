@@ -3,7 +3,8 @@ import os
 import matplotlib.pyplot as plt
 
 from utils.plot_producer import PlotProducer
-from utils.statistics import count_optimal_objectives, calculate_runtime_stats
+from utils.statistics import count_optimal_objectives_for_dataset, calculate_runtime_stats, \
+    count_objective_stats_for_gamma, count_objective_stats_for_eps
 
 RESULTS_PATH = os.path.join(os.getcwd(), "stats", "algorithms", "runtime_analysis")
 
@@ -18,20 +19,34 @@ def print_objective_performance_on_all_datasets(method: str):
     # 3. Maxflow-LP
     # 4. Greedy-local-search: CPLEX Re-optimization
 
-    count_optimal_objectives("dataset_1", method)
+    count_optimal_objectives_for_dataset("dataset_1", method)
     calculate_runtime_stats("dataset_1", method)
-    count_optimal_objectives("dataset_2", method)
+    count_optimal_objectives_for_dataset("dataset_2", method)
     calculate_runtime_stats("dataset_2", method)
-    count_optimal_objectives("dataset_3", method)
+    count_optimal_objectives_for_dataset("dataset_3", method)
     calculate_runtime_stats("dataset_3", method)
-    count_optimal_objectives("dataset_4", method)
+    count_optimal_objectives_for_dataset("dataset_4", method)
     calculate_runtime_stats("dataset_4", method)
-    count_optimal_objectives("dataset_5", method)
+    count_optimal_objectives_for_dataset("dataset_5", method)
     calculate_runtime_stats("dataset_5", method)
-    count_optimal_objectives("dataset_6", method)
+    count_optimal_objectives_for_dataset("dataset_6", method)
     calculate_runtime_stats("dataset_6", method)
-    count_optimal_objectives("dataset_7", method)
+    count_optimal_objectives_for_dataset("dataset_7", method)
     calculate_runtime_stats("dataset_7", method)
+
+
+def print_objective_performance_for_recovery():
+    count_objective_stats_for_gamma("deterministic_methods_IP_ns", "moderate")
+    count_objective_stats_for_gamma("deterministic_methods_IP_ns", "large")
+    count_objective_stats_for_eps("deterministic_methods_IP_ns", "moderate")
+    count_objective_stats_for_eps("deterministic_methods_IP_ns", "large")
+
+    count_objective_stats_for_gamma("deterministic_methods_GLS_ns", "moderate")
+    count_objective_stats_for_gamma("deterministic_methods_GLS_ns", "large")
+    count_objective_stats_for_eps("deterministic_methods_GLS_ns", "moderate")
+    count_objective_stats_for_eps("deterministic_methods_GLS_ns", "large")
+
+
 
 
 def generate_all_plots():
@@ -133,7 +148,8 @@ def util_plot_1(file_name: str, dataset_name: str):
         "data/results/objective/Greedy-local-search: CPLEX "
         "Re-optimization/results_dataset_1.json",
         "data/results/objective/Active-time-IP/results_dataset_1.json",
-        "data/results/objective/Earliest-released-first-with-density-heuristic/results_dataset_1.json"
+        "data/results/objective/Earliest-released-first-with-density-heuristic/results_dataset_1.json",
+        "data/results/objective/Earliest-released-first/results_dataset_1.json"
     ]
 
     plot_producer = PlotProducer(files, file_name, dataset_name)
@@ -143,7 +159,8 @@ def util_plot_1(file_name: str, dataset_name: str):
 def objective_plot_1(file_name: str, method: str, dataset_name: str):
     files = [
         f"data/results/objective/{method}/results_{dataset_name}.json",
-        f"data/results/objective/Active-time-IP/results_{dataset_name}.json"
+        f"data/results/objective/Active-time-IP/results_{dataset_name}.json",
+        f"data/results/objective/Earliest-released-first/results_{dataset_name}.json"
     ]
     plot_producer = PlotProducer(files, file_name, dataset_name)
     plot_producer.generate_line_plot("T", "objective_value", "Number of time slots", "Objective value")
@@ -435,17 +452,19 @@ def rmse_gamma_displot_moderate_instance(method1, method2):
     # new_df = plot_producer.df[plot_producer.df["gamma"] == 5]
     # plot_producer.generate_swarm_plot("gamma", "rmse_value", "Gamma", "RMSE")
 
-    plot_producer1 = PlotProducer(files, "Moderate_instances_rmse_opt_eps_lineplot", "perturbations", True)
-    plot_producer1.generate_line_plot("epsilon", "rmse_opt", "Epsilon", "RMSE")
+    plot_producer1 = PlotProducer(files, "Moderate_instances_quality_of_ns_eps_lineplot", "perturbations", True)
+    plot_producer1.generate_line_plot("epsilon", "rmse_opt", "Degree of uncertainty",
+                                      "Deviation in objective value (RMSE)")
 
-    plot_producer2 = PlotProducer(files, "Moderate_instances_rmse_eps_lineplot", "perturbations", True)
-    plot_producer2.generate_line_plot("epsilon", "RMSE", "Epsilon", "RMSE")
+    plot_producer2 = PlotProducer(files, "Moderate_instances_sensitivity_eps_lineplot", "perturbations", True)
+    plot_producer2.generate_line_plot("epsilon", "RMSE", "Degree of uncertainty", "Deviation in objective value (RMSE)")
 
-    plot_producer3 = PlotProducer(files, "Moderate_instances_rmse_opt_gamma_lineplot", "perturbations", True)
-    plot_producer3.generate_line_plot("gamma", "rmse_opt", "Gamma", "RMSE")
+    plot_producer3 = PlotProducer(files, "Moderate_instances_quality_of_ns_gamma_lineplot", "perturbations", True)
+    plot_producer3.generate_line_plot("gamma", "rmse_opt", "Gamma", "Deviation in objective value (RMSE)")
 
-    plot_producer4 = PlotProducer(files, "Moderate_instances_rmse_gamma_lineplot", "perturbations", True)
-    plot_producer4.generate_line_plot("gamma", "RMSE", "Gamma", "RMSE")
+    plot_producer4 = PlotProducer(files, "Moderate_instances_sensitivity_gamma_lineplot", "perturbations", True)
+    plot_producer4.generate_line_plot("gamma", "RMSE", "Gamma", "Deviation in objective value (RMSE)")
+
 
 #
 def rmse_gamma_displot_large_instance(method1, method2):
@@ -480,17 +499,18 @@ def rmse_gamma_displot_large_instance(method1, method2):
         if filename.endswith(".json") and filename in large_instances:
             files.append(file_path)
 
-    plot_producer1 = PlotProducer(files, "Large_instances_rmse_opt_eps_lineplot", "perturbations", True)
-    plot_producer1.generate_line_plot("epsilon", "rmse_opt", "Epsilon", "RMSE")
+    plot_producer1 = PlotProducer(files, "Large_instances_quality_of_ns_eps_lineplot", "perturbations", True)
+    plot_producer1.generate_line_plot("epsilon", "rmse_opt", "Degree of uncertainty",
+                                      "Deviation in objective value (RMSE)")
 
-    plot_producer2 = PlotProducer(files, "Large_instances_rmse_eps_lineplot", "perturbations", True)
-    plot_producer2.generate_line_plot("epsilon", "RMSE", "Epsilon", "RMSE")
+    plot_producer2 = PlotProducer(files, "Large_instances_sensitivity_eps_lineplot", "perturbations", True)
+    plot_producer2.generate_line_plot("epsilon", "RMSE", "Degree of uncertainty", "Deviation in objective value (RMSE)")
 
-    plot_producer3 = PlotProducer(files, "Large_instances_rmse_opt_gamma_lineplot", "perturbations", True)
-    plot_producer3.generate_line_plot("gamma", "rmse_opt", "Gamma", "RMSE")
+    plot_producer3 = PlotProducer(files, "Large_instances_quality_of_ns_gamma_lineplot", "perturbations", True)
+    plot_producer3.generate_line_plot("gamma", "rmse_opt", "Gamma", "Deviation in objective value (RMSE)")
 
-    plot_producer4 = PlotProducer(files, "Large_instances_rmse_gamma_lineplot", "perturbations", True)
-    plot_producer4.generate_line_plot("gamma", "RMSE", "Gamma", "RMSE")
+    plot_producer4 = PlotProducer(files, "Large_instances_sensitivity_gamma_lineplot", "perturbations", True)
+    plot_producer4.generate_line_plot("gamma", "RMSE", "Gamma", "Deviation in objective value (RMSE)")
 
     # plot_producer = PlotProducer(files, "Large_instances_rmse_gamma_distribution", "perturbations", True)
     # # print(plot_producer.df)
@@ -508,7 +528,6 @@ def rmse_gamma_displot_large_instance(method1, method2):
 
     # plot_producer = PlotProducer(files, "Large_instances_rmse_rr_gamma_scatter", "perturbations", True)
     # plot_producer.generate_swarm_plot("rmse_opt", "gamma", "RMSE", "Gamma")
-
 
     # new_df = plot_producer.df[plot_producer.df["gamma"] == 5]
     # plot_producer.generate_swarm_plot("gamma", "rmse_value", "Gamma", "RMSE")

@@ -31,6 +31,12 @@ class PlotProducer:
             })
         else:
             self.df = construct_df_from_files(result_files, "perturbation_results")
+            self.df.rename(columns={"Algorithm": "Method"}, inplace=True)
+            self.df["Method"] = self.df["Method"].map({
+                "Active-time-IP": "Integer Programming Model",
+                "Greedy-local-search: CPLEX Re-optimization": "Greedy Local Search (CPLEX Re-Opt)",
+            })
+
             self.df = self.df.rename(columns={"rmse_value": "RMSE"})
         self.file_name = file_name
         self.dataset_name = dataset_name
