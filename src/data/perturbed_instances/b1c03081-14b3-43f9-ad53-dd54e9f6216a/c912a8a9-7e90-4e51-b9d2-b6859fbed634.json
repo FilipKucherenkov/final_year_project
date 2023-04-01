@@ -1,0 +1,616 @@
+{
+    "perturbed_id": "c912a8a9-7e90-4e51-b9d2-b6859fbed634",
+    "nominal_instance": "b1c03081-14b3-43f9-ad53-dd54e9f6216a",
+    "gamma": 20,
+    "epsilon": 0.25,
+    "number_of_perturbed_jobs": 9,
+    "number_of_job_augmentations": 3,
+    "number_of_jobs_decreases": 6,
+    "batch_augmentation_is_required": false,
+    "instance": {
+        "G": 20,
+        "T": 150,
+        "jobs": [
+            {
+                "number": 0,
+                "release_time": 41,
+                "deadline": 144,
+                "processing_time": 27
+            },
+            {
+                "number": 1,
+                "release_time": 100,
+                "deadline": 113,
+                "processing_time": 4
+            },
+            {
+                "number": 2,
+                "release_time": 76,
+                "deadline": 108,
+                "processing_time": 9
+            },
+            {
+                "number": 3,
+                "release_time": 37,
+                "deadline": 119,
+                "processing_time": 22
+            },
+            {
+                "number": 4,
+                "release_time": 65,
+                "deadline": 117,
+                "processing_time": 14
+            },
+            {
+                "number": 5,
+                "release_time": 57,
+                "deadline": 98,
+                "processing_time": 11
+            },
+            {
+                "number": 6,
+                "release_time": 129,
+                "deadline": 134,
+                "processing_time": 2
+            },
+            {
+                "number": 7,
+                "release_time": 5,
+                "deadline": 28,
+                "processing_time": 4
+            },
+            {
+                "number": 8,
+                "release_time": 54,
+                "deadline": 100,
+                "processing_time": 10
+            },
+            {
+                "number": 9,
+                "release_time": 97,
+                "deadline": 136,
+                "processing_time": 11
+            },
+            {
+                "number": 10,
+                "release_time": 11,
+                "deadline": 94,
+                "processing_time": 22
+            },
+            {
+                "number": 11,
+                "release_time": 1,
+                "deadline": 78,
+                "processing_time": 20
+            },
+            {
+                "number": 12,
+                "release_time": 24,
+                "deadline": 75,
+                "processing_time": 14
+            },
+            {
+                "number": 13,
+                "release_time": 64,
+                "deadline": 134,
+                "processing_time": 19
+            },
+            {
+                "number": 14,
+                "release_time": 56,
+                "deadline": 121,
+                "processing_time": 17
+            },
+            {
+                "number": 15,
+                "release_time": 79,
+                "deadline": 82,
+                "processing_time": 1
+            },
+            {
+                "number": 16,
+                "release_time": 44,
+                "deadline": 59,
+                "processing_time": 4
+            },
+            {
+                "number": 17,
+                "release_time": 56,
+                "deadline": 87,
+                "processing_time": 9
+            },
+            {
+                "number": 18,
+                "release_time": 18,
+                "deadline": 40,
+                "processing_time": 6
+            },
+            {
+                "number": 19,
+                "release_time": 129,
+                "deadline": 131,
+                "processing_time": 1
+            },
+            {
+                "number": 20,
+                "release_time": 94,
+                "deadline": 141,
+                "processing_time": 13
+            },
+            {
+                "number": 21,
+                "release_time": 35,
+                "deadline": 108,
+                "processing_time": 19
+            },
+            {
+                "number": 22,
+                "release_time": 20,
+                "deadline": 102,
+                "processing_time": 22
+            },
+            {
+                "number": 23,
+                "release_time": 88,
+                "deadline": 127,
+                "processing_time": 11
+            },
+            {
+                "number": 24,
+                "release_time": 4,
+                "deadline": 63,
+                "processing_time": 16
+            },
+            {
+                "number": 25,
+                "release_time": 56,
+                "deadline": 122,
+                "processing_time": 18
+            },
+            {
+                "number": 26,
+                "release_time": 55,
+                "deadline": 63,
+                "processing_time": 3
+            },
+            {
+                "number": 27,
+                "release_time": 55,
+                "deadline": 84,
+                "processing_time": 8
+            },
+            {
+                "number": 28,
+                "release_time": 131,
+                "deadline": 142,
+                "processing_time": 3
+            },
+            {
+                "number": 29,
+                "release_time": 91,
+                "deadline": 134,
+                "processing_time": 12
+            },
+            {
+                "number": 30,
+                "release_time": 132,
+                "deadline": 147,
+                "processing_time": 4
+            },
+            {
+                "number": 31,
+                "release_time": 52,
+                "deadline": 71,
+                "processing_time": 5
+            },
+            {
+                "number": 32,
+                "release_time": 20,
+                "deadline": 84,
+                "processing_time": 17
+            },
+            {
+                "number": 33,
+                "release_time": 92,
+                "deadline": 125,
+                "processing_time": 7
+            },
+            {
+                "number": 34,
+                "release_time": 11,
+                "deadline": 63,
+                "processing_time": 13
+            },
+            {
+                "number": 35,
+                "release_time": 135,
+                "deadline": 146,
+                "processing_time": 3
+            },
+            {
+                "number": 36,
+                "release_time": 36,
+                "deadline": 119,
+                "processing_time": 22
+            },
+            {
+                "number": 37,
+                "release_time": 65,
+                "deadline": 110,
+                "processing_time": 12
+            },
+            {
+                "number": 38,
+                "release_time": 73,
+                "deadline": 81,
+                "processing_time": 3
+            },
+            {
+                "number": 39,
+                "release_time": 113,
+                "deadline": 148,
+                "processing_time": 10
+            },
+            {
+                "number": 40,
+                "release_time": 97,
+                "deadline": 110,
+                "processing_time": 4
+            },
+            {
+                "number": 41,
+                "release_time": 37,
+                "deadline": 59,
+                "processing_time": 6
+            },
+            {
+                "number": 42,
+                "release_time": 19,
+                "deadline": 107,
+                "processing_time": 23
+            },
+            {
+                "number": 43,
+                "release_time": 96,
+                "deadline": 141,
+                "processing_time": 12
+            },
+            {
+                "number": 44,
+                "release_time": 13,
+                "deadline": 95,
+                "processing_time": 22
+            },
+            {
+                "number": 45,
+                "release_time": 39,
+                "deadline": 94,
+                "processing_time": 15
+            },
+            {
+                "number": 46,
+                "release_time": 44,
+                "deadline": 45,
+                "processing_time": 1
+            },
+            {
+                "number": 47,
+                "release_time": 95,
+                "deadline": 103,
+                "processing_time": 3
+            },
+            {
+                "number": 48,
+                "release_time": 57,
+                "deadline": 144,
+                "processing_time": 23
+            },
+            {
+                "number": 49,
+                "release_time": 70,
+                "deadline": 107,
+                "processing_time": 10
+            },
+            {
+                "number": 50,
+                "release_time": 127,
+                "deadline": 143,
+                "processing_time": 5
+            },
+            {
+                "number": 51,
+                "release_time": 128,
+                "deadline": 129,
+                "processing_time": 1
+            },
+            {
+                "number": 52,
+                "release_time": 133,
+                "deadline": 139,
+                "processing_time": 2
+            },
+            {
+                "number": 53,
+                "release_time": 90,
+                "deadline": 121,
+                "processing_time": 9
+            },
+            {
+                "number": 54,
+                "release_time": 110,
+                "deadline": 115,
+                "processing_time": 2
+            },
+            {
+                "number": 55,
+                "release_time": 81,
+                "deadline": 136,
+                "processing_time": 14
+            },
+            {
+                "number": 56,
+                "release_time": 43,
+                "deadline": 50,
+                "processing_time": 2
+            },
+            {
+                "number": 57,
+                "release_time": 104,
+                "deadline": 117,
+                "processing_time": 4
+            },
+            {
+                "number": 58,
+                "release_time": 97,
+                "deadline": 123,
+                "processing_time": 7
+            },
+            {
+                "number": 59,
+                "release_time": 120,
+                "deadline": 128,
+                "processing_time": 3
+            },
+            {
+                "number": 60,
+                "release_time": 59,
+                "deadline": 131,
+                "processing_time": 19
+            },
+            {
+                "number": 61,
+                "release_time": 45,
+                "deadline": 54,
+                "processing_time": 3
+            },
+            {
+                "number": 62,
+                "release_time": 114,
+                "deadline": 129,
+                "processing_time": 4
+            },
+            {
+                "number": 63,
+                "release_time": 98,
+                "deadline": 114,
+                "processing_time": 5
+            },
+            {
+                "number": 64,
+                "release_time": 9,
+                "deadline": 118,
+                "processing_time": 29
+            },
+            {
+                "number": 65,
+                "release_time": 88,
+                "deadline": 136,
+                "processing_time": 13
+            },
+            {
+                "number": 66,
+                "release_time": 108,
+                "deadline": 144,
+                "processing_time": 11
+            },
+            {
+                "number": 67,
+                "release_time": 99,
+                "deadline": 110,
+                "processing_time": 3
+            },
+            {
+                "number": 68,
+                "release_time": 29,
+                "deadline": 48,
+                "processing_time": 5
+            },
+            {
+                "number": 69,
+                "release_time": 104,
+                "deadline": 129,
+                "processing_time": 7
+            },
+            {
+                "number": 70,
+                "release_time": 23,
+                "deadline": 129,
+                "processing_time": 28
+            },
+            {
+                "number": 71,
+                "release_time": 19,
+                "deadline": 97,
+                "processing_time": 21
+            },
+            {
+                "number": 72,
+                "release_time": 104,
+                "deadline": 125,
+                "processing_time": 6
+            },
+            {
+                "number": 73,
+                "release_time": 55,
+                "deadline": 102,
+                "processing_time": 13
+            },
+            {
+                "number": 74,
+                "release_time": 59,
+                "deadline": 82,
+                "processing_time": 6
+            },
+            {
+                "number": 75,
+                "release_time": 37,
+                "deadline": 119,
+                "processing_time": 22
+            },
+            {
+                "number": 76,
+                "release_time": 76,
+                "deadline": 91,
+                "processing_time": 4
+            },
+            {
+                "number": 77,
+                "release_time": 81,
+                "deadline": 93,
+                "processing_time": 4
+            },
+            {
+                "number": 78,
+                "release_time": 25,
+                "deadline": 131,
+                "processing_time": 28
+            },
+            {
+                "number": 79,
+                "release_time": 60,
+                "deadline": 141,
+                "processing_time": 21
+            },
+            {
+                "number": 80,
+                "release_time": 60,
+                "deadline": 74,
+                "processing_time": 4
+            },
+            {
+                "number": 81,
+                "release_time": 16,
+                "deadline": 67,
+                "processing_time": 14
+            },
+            {
+                "number": 82,
+                "release_time": 13,
+                "deadline": 118,
+                "processing_time": 34
+            },
+            {
+                "number": 83,
+                "release_time": 32,
+                "deadline": 114,
+                "processing_time": 22
+            },
+            {
+                "number": 84,
+                "release_time": 56,
+                "deadline": 73,
+                "processing_time": 5
+            },
+            {
+                "number": 85,
+                "release_time": 114,
+                "deadline": 143,
+                "processing_time": 8
+            },
+            {
+                "number": 86,
+                "release_time": 92,
+                "deadline": 121,
+                "processing_time": 8
+            },
+            {
+                "number": 87,
+                "release_time": 34,
+                "deadline": 63,
+                "processing_time": 7
+            },
+            {
+                "number": 88,
+                "release_time": 72,
+                "deadline": 149,
+                "processing_time": 20
+            },
+            {
+                "number": 89,
+                "release_time": 62,
+                "deadline": 103,
+                "processing_time": 11
+            },
+            {
+                "number": 90,
+                "release_time": 41,
+                "deadline": 56,
+                "processing_time": 4
+            },
+            {
+                "number": 91,
+                "release_time": 26,
+                "deadline": 100,
+                "processing_time": 20
+            },
+            {
+                "number": 92,
+                "release_time": 14,
+                "deadline": 99,
+                "processing_time": 23
+            },
+            {
+                "number": 93,
+                "release_time": 94,
+                "deadline": 132,
+                "processing_time": 10
+            },
+            {
+                "number": 94,
+                "release_time": 131,
+                "deadline": 135,
+                "processing_time": 2
+            },
+            {
+                "number": 95,
+                "release_time": 27,
+                "deadline": 61,
+                "processing_time": 9
+            },
+            {
+                "number": 96,
+                "release_time": 23,
+                "deadline": 28,
+                "processing_time": 2
+            },
+            {
+                "number": 97,
+                "release_time": 55,
+                "deadline": 110,
+                "processing_time": 15
+            },
+            {
+                "number": 98,
+                "release_time": 4,
+                "deadline": 50,
+                "processing_time": 12
+            },
+            {
+                "number": 99,
+                "release_time": 6,
+                "deadline": 120,
+                "processing_time": 35
+            }
+        ]
+    }
+}

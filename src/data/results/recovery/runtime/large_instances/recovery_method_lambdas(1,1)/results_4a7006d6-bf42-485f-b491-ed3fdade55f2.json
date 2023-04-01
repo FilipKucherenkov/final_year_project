@@ -1,0 +1,66 @@
+{
+    "nominal_instance": "4a7006d6-bf42-485f-b491-ed3fdade55f2",
+    "nominal_objective": 119,
+    "perturbation_results": [
+        {
+            "deterministic_model": 1.0866216773333335,
+            "recovery_model": 1.379164056333333
+        },
+        {
+            "deterministic_model": 1.128044426,
+            "recovery_model": 1.4034457676666652
+        },
+        {
+            "deterministic_model": 1.1691847266666666,
+            "recovery_model": 1.4159182369999972
+        },
+        {
+            "deterministic_model": 1.138578770666669,
+            "recovery_model": 1.5403974366666706
+        },
+        {
+            "deterministic_model": 1.0663565046666672,
+            "recovery_model": 1.4072577300000024
+        },
+        {
+            "deterministic_model": 1.008615627333332,
+            "recovery_model": 1.406189465333341
+        },
+        {
+            "deterministic_model": 1.3398477423333286,
+            "recovery_model": 1.4253917943333363
+        },
+        {
+            "deterministic_model": 1.2193898310000009,
+            "recovery_model": 1.3707381496666737
+        },
+        {
+            "deterministic_model": 1.158082706999996,
+            "recovery_model": 1.440320132333331
+        },
+        {
+            "deterministic_model": 1.2719882396666737,
+            "recovery_model": 1.4131418343333355
+        },
+        {
+            "deterministic_model": 1.11107571300001,
+            "recovery_model": 1.380785608666675
+        },
+        {
+            "deterministic_model": 1.1646244066666516,
+            "recovery_model": 1.380192453666666
+        },
+        {
+            "deterministic_model": 1.3774124063333488,
+            "recovery_model": 1.4389970093333393
+        },
+        {
+            "deterministic_model": 1.2022369326666649,
+            "recovery_model": 1.3208173976666633
+        },
+        {
+            "deterministic_model": 1.1746767253333321,
+            "recovery_model": 1.3853413503333438
+        }
+    ]
+}

@@ -1,0 +1,66 @@
+{
+    "nominal_instance": "e67c7a57-4c94-4511-afd6-7cad90632ff4",
+    "nominal_objective": 9,
+    "perturbation_results": [
+        {
+            "deterministic_model": 0.20338523600000005,
+            "recovery_model": 0.20880545400000003
+        },
+        {
+            "deterministic_model": 0.171961223666667,
+            "recovery_model": 0.2096288599999999
+        },
+        {
+            "deterministic_model": 0.2207571933333329,
+            "recovery_model": 0.20915539533333316
+        },
+        {
+            "deterministic_model": 0.22117605400000015,
+            "recovery_model": 0.2099629459999998
+        },
+        {
+            "deterministic_model": 0.16949990933333345,
+            "recovery_model": 0.21330357466666663
+        },
+        {
+            "deterministic_model": 0.169563464333334,
+            "recovery_model": 0.20958766199999937
+        },
+        {
+            "deterministic_model": 0.17108018233333291,
+            "recovery_model": 0.2100559269999991
+        },
+        {
+            "deterministic_model": 0.2302678836666665,
+            "recovery_model": 0.2104416459999996
+        },
+        {
+            "deterministic_model": 0.25432890100000094,
+            "recovery_model": 0.20985787533333422
+        },
+        {
+            "deterministic_model": 0.1712795276666673,
+            "recovery_model": 0.2097672466666675
+        },
+        {
+            "deterministic_model": 0.17055659066666587,
+            "recovery_model": 0.20981517633333388
+        },
+        {
+            "deterministic_model": 0.21448794133333138,
+            "recovery_model": 0.2135491896666674
+        },
+        {
+            "deterministic_model": 0.1670109653333327,
+            "recovery_model": 0.20966303933333327
+        },
+        {
+            "deterministic_model": 0.1694500269999987,
+            "recovery_model": 0.20924832966666665
+        },
+        {
+            "deterministic_model": 0.1716891556666648,
+            "recovery_model": 0.21152003900000219
+        }
+    ]
+}

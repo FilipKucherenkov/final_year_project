@@ -1,0 +1,35 @@
+{
+    "instance_name": "test_1",
+    "instance": {
+        "instance_id": "4164611a-51da-45eb-83d0-cb4fdd5a2d1d",
+        "number_of_jobs": 4,
+        "G": 50,
+        "T": 100,
+        "jobs": [
+            {
+                "number": 0,
+                "release_time": 0,
+                "deadline": 7,
+                "processing_time": 5
+            },
+            {
+                "number": 1,
+                "release_time": 0,
+                "deadline": 3,
+                "processing_time": 1
+            },
+            {
+                "number": 2,
+                "release_time": 5,
+                "deadline": 10,
+                "processing_time": 3
+            },
+            {
+                "number": 3,
+                "release_time": 10,
+                "deadline": 24,
+                "processing_time": 10
+            }
+        ]
+    }
+}

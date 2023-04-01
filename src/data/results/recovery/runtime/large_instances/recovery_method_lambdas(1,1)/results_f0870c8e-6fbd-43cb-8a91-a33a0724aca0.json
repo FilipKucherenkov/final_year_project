@@ -1,0 +1,66 @@
+{
+    "nominal_instance": "f0870c8e-6fbd-43cb-8a91-a33a0724aca0",
+    "nominal_objective": 19,
+    "perturbation_results": [
+        {
+            "deterministic_model": 1.3738359653333336,
+            "recovery_model": 0.8376542716666667
+        },
+        {
+            "deterministic_model": 1.3614232626666667,
+            "recovery_model": 0.8762541206666666
+        },
+        {
+            "deterministic_model": 0.7156806236666663,
+            "recovery_model": 0.838769404333334
+        },
+        {
+            "deterministic_model": 0.9631644606666706,
+            "recovery_model": 0.8390996329999988
+        },
+        {
+            "deterministic_model": 0.9859720870000027,
+            "recovery_model": 0.837673171000001
+        },
+        {
+            "deterministic_model": 0.7309413029999993,
+            "recovery_model": 0.8373020356666672
+        },
+        {
+            "deterministic_model": 0.7962358693333348,
+            "recovery_model": 0.8403265599999988
+        },
+        {
+            "deterministic_model": 0.9924340719999994,
+            "recovery_model": 0.8413939539999925
+        },
+        {
+            "deterministic_model": 1.032720573000006,
+            "recovery_model": 0.8372668490000024
+        },
+        {
+            "deterministic_model": 1.1133807273333314,
+            "recovery_model": 0.8417549023333303
+        },
+        {
+            "deterministic_model": 0.7285106350000016,
+            "recovery_model": 0.8491569319999996
+        },
+        {
+            "deterministic_model": 1.284166022666663,
+            "recovery_model": 0.8382060313333378
+        },
+        {
+            "deterministic_model": 1.4330947913333318,
+            "recovery_model": 0.8486424516666679
+        },
+        {
+            "deterministic_model": 1.1890127293333421,
+            "recovery_model": 0.842571170333334
+        },
+        {
+            "deterministic_model": 1.3229410583333372,
+            "recovery_model": 0.8814638349999958
+        }
+    ]
+}

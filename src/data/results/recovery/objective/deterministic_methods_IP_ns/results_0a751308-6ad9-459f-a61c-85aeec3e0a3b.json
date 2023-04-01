@@ -1,0 +1,171 @@
+{
+    "nominal_instance": "0a751308-6ad9-459f-a61c-85aeec3e0a3b",
+    "nominal_objective": 36,
+    "perturbation_results": [
+        {
+            "perturbation_id": "3527822d-5899-431d-b954-1e3a608e0892",
+            "Method": "Active-time-IP",
+            "gamma": 100,
+            "epsilon": 0.75,
+            "batch_augmentation": 0,
+            "variables_changed": 215.0,
+            "perturbed_opt_objective_value": 34,
+            "reovered_objective_value": 64,
+            "opt_ratio": 1.8823529411764706
+        },
+        {
+            "perturbation_id": "fff2b963-04d2-4f44-94f6-254b675a6bb1",
+            "Method": "Active-time-IP",
+            "gamma": 20,
+            "epsilon": 0.25,
+            "batch_augmentation": 0,
+            "variables_changed": 18.0,
+            "perturbed_opt_objective_value": 37,
+            "reovered_objective_value": 41,
+            "opt_ratio": 1.1081081081081081
+        },
+        {
+            "perturbation_id": "31bc6fa5-a3e2-4481-b968-e6a1fd4ae9ba",
+            "Method": "Active-time-IP",
+            "gamma": 40,
+            "epsilon": 0.25,
+            "batch_augmentation": 0,
+            "variables_changed": 33.0,
+            "perturbed_opt_objective_value": 35,
+            "reovered_objective_value": 42,
+            "opt_ratio": 1.2
+        },
+        {
+            "perturbation_id": "c491bc9a-a15e-4e3a-b7be-eaa34f7f095f",
+            "Method": "Active-time-IP",
+            "gamma": 60,
+            "epsilon": 0.75,
+            "batch_augmentation": 0,
+            "variables_changed": 119.0,
+            "perturbed_opt_objective_value": 38,
+            "reovered_objective_value": 70,
+            "opt_ratio": 1.8421052631578947
+        },
+        {
+            "perturbation_id": "75cbdf4b-4522-4438-8510-f38b24a31b0c",
+            "Method": "Active-time-IP",
+            "gamma": 60,
+            "epsilon": 0.25,
+            "batch_augmentation": 0,
+            "variables_changed": 55.0,
+            "perturbed_opt_objective_value": 33,
+            "reovered_objective_value": 36,
+            "opt_ratio": 1.0909090909090908
+        },
+        {
+            "perturbation_id": "6971c002-5fe5-436e-8f1c-cef081e3bbe8",
+            "Method": "Active-time-IP",
+            "gamma": 80,
+            "epsilon": 0.5,
+            "batch_augmentation": 0,
+            "variables_changed": 109.0,
+            "perturbed_opt_objective_value": 33,
+            "reovered_objective_value": 57,
+            "opt_ratio": 1.7272727272727273
+        },
+        {
+            "perturbation_id": "be5510c4-337b-49e7-9839-531c487b3fe9",
+            "Method": "Active-time-IP",
+            "gamma": 20,
+            "epsilon": 0.5,
+            "batch_augmentation": 0,
+            "variables_changed": 44.0,
+            "perturbed_opt_objective_value": 34,
+            "reovered_objective_value": 46,
+            "opt_ratio": 1.3529411764705883
+        },
+        {
+            "perturbation_id": "e4af7d8d-5ea9-4d1b-af82-2898b0dac0c2",
+            "Method": "Active-time-IP",
+            "gamma": 100,
+            "epsilon": 0.5,
+            "batch_augmentation": 0,
+            "variables_changed": 127.0,
+            "perturbed_opt_objective_value": 34,
+            "reovered_objective_value": 62,
+            "opt_ratio": 1.8235294117647058
+        },
+        {
+            "perturbation_id": "506840bb-2f80-4d70-ae06-5e4c6b9f8ec1",
+            "Method": "Active-time-IP",
+            "gamma": 40,
+            "epsilon": 0.75,
+            "batch_augmentation": 0,
+            "variables_changed": 97.0,
+            "perturbed_opt_objective_value": 40,
+            "reovered_objective_value": 69,
+            "opt_ratio": 1.725
+        },
+        {
+            "perturbation_id": "4b225816-d4bb-48e5-8953-961f91167452",
+            "Method": "Active-time-IP",
+            "gamma": 100,
+            "epsilon": 0.25,
+            "batch_augmentation": 0,
+            "variables_changed": 79.0,
+            "perturbed_opt_objective_value": 35,
+            "reovered_objective_value": 36,
+            "opt_ratio": 1.0285714285714285
+        },
+        {
+            "perturbation_id": "1b4e01f9-99cf-4907-b52c-6e10edc12069",
+            "Method": "Active-time-IP",
+            "gamma": 80,
+            "epsilon": 0.25,
+            "batch_augmentation": 0,
+            "variables_changed": 60.0,
+            "perturbed_opt_objective_value": 35,
+            "reovered_objective_value": 36,
+            "opt_ratio": 1.0285714285714285
+        },
+        {
+            "perturbation_id": "11aa6214-eb8a-4d83-bee8-26726afa85c0",
+            "Method": "Active-time-IP",
+            "gamma": 60,
+            "epsilon": 0.5,
+            "batch_augmentation": 0,
+            "variables_changed": 89.0,
+            "perturbed_opt_objective_value": 35,
+            "reovered_objective_value": 54,
+            "opt_ratio": 1.542857142857143
+        },
+        {
+            "perturbation_id": "a7375a43-9370-44cd-962f-d67677f9bf6b",
+            "Method": "Active-time-IP",
+            "gamma": 20,
+            "epsilon": 0.75,
+            "batch_augmentation": 0,
+            "variables_changed": 40.0,
+            "perturbed_opt_objective_value": 36,
+            "reovered_objective_value": 45,
+            "opt_ratio": 1.25
+        },
+        {
+            "perturbation_id": "07054d6d-465f-4697-877b-721b0e1cfbf9",
+            "Method": "Active-time-IP",
+            "gamma": 80,
+            "epsilon": 0.75,
+            "batch_augmentation": 0,
+            "variables_changed": 144.0,
+            "perturbed_opt_objective_value": 32,
+            "reovered_objective_value": 36,
+            "opt_ratio": 1.125
+        },
+        {
+            "perturbation_id": "32da88b4-1eb5-4ec6-a6b8-740ad52975f2",
+            "Method": "Active-time-IP",
+            "gamma": 40,
+            "epsilon": 0.5,
+            "batch_augmentation": 0,
+            "variables_changed": 54.0,
+            "perturbed_opt_objective_value": 35,
+            "reovered_objective_value": 48,
+            "opt_ratio": 1.3714285714285714
+        }
+    ]
+}

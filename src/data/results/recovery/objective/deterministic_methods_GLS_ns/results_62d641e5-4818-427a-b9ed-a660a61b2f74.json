@@ -1,0 +1,171 @@
+{
+    "nominal_instance": "62d641e5-4818-427a-b9ed-a660a61b2f74",
+    "nominal_objective": 80,
+    "perturbation_results": [
+        {
+            "perturbation_id": "971f364c-8c7f-44b5-8bab-fc6446b9265b",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 80,
+            "epsilon": 0.25,
+            "batch_augmentation": 0,
+            "variables_changed": 107.0,
+            "perturbed_opt_objective_value": 75,
+            "reovered_objective_value": 87,
+            "opt_ratio": 1.16
+        },
+        {
+            "perturbation_id": "d2cb7afa-c436-4770-b825-47b90a8ee2d9",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 40,
+            "epsilon": 0.25,
+            "batch_augmentation": 0,
+            "variables_changed": 66.0,
+            "perturbed_opt_objective_value": 77,
+            "reovered_objective_value": 91,
+            "opt_ratio": 1.1818181818181819
+        },
+        {
+            "perturbation_id": "769bbfc6-67aa-47dd-929a-747eacb2ec6c",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 20,
+            "epsilon": 0.25,
+            "batch_augmentation": 0,
+            "variables_changed": 54.0,
+            "perturbed_opt_objective_value": 77,
+            "reovered_objective_value": 90,
+            "opt_ratio": 1.1688311688311688
+        },
+        {
+            "perturbation_id": "4ecbc162-3976-45c4-8fe6-aa5e97ff67df",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 60,
+            "epsilon": 0.25,
+            "batch_augmentation": 0,
+            "variables_changed": 112.0,
+            "perturbed_opt_objective_value": 77,
+            "reovered_objective_value": 96,
+            "opt_ratio": 1.2467532467532467
+        },
+        {
+            "perturbation_id": "93ad629f-8100-40b8-a8f8-c7b6b928d0ee",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 40,
+            "epsilon": 0.5,
+            "batch_augmentation": 1,
+            "variables_changed": 112.0,
+            "perturbed_opt_objective_value": 78,
+            "reovered_objective_value": 91,
+            "opt_ratio": 1.1666666666666667
+        },
+        {
+            "perturbation_id": "0905b551-e59b-4042-b3c3-20a6eb65e510",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 40,
+            "epsilon": 0.75,
+            "batch_augmentation": 0,
+            "variables_changed": 161.0,
+            "perturbed_opt_objective_value": 74,
+            "reovered_objective_value": 93,
+            "opt_ratio": 1.2567567567567568
+        },
+        {
+            "perturbation_id": "f1462d55-e894-45f2-b1ee-c5effa082281",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 60,
+            "epsilon": 0.5,
+            "batch_augmentation": 1,
+            "variables_changed": 218.0,
+            "perturbed_opt_objective_value": 79,
+            "reovered_objective_value": 93,
+            "opt_ratio": 1.1772151898734178
+        },
+        {
+            "perturbation_id": "f0f5edb3-944d-4276-8d95-36628f89a9e3",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 80,
+            "epsilon": 0.5,
+            "batch_augmentation": 0,
+            "variables_changed": 279.0,
+            "perturbed_opt_objective_value": 78,
+            "reovered_objective_value": 89,
+            "opt_ratio": 1.141025641025641
+        },
+        {
+            "perturbation_id": "78712bcc-2deb-4c0c-aeca-abdc7bc3c71e",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 20,
+            "epsilon": 0.5,
+            "batch_augmentation": 1,
+            "variables_changed": 70.0,
+            "perturbed_opt_objective_value": 76,
+            "reovered_objective_value": 80,
+            "opt_ratio": 1.0526315789473684
+        },
+        {
+            "perturbation_id": "a7f511a7-71ab-42ff-a7e1-df145546a806",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 20,
+            "epsilon": 0.75,
+            "batch_augmentation": 0,
+            "variables_changed": 181.0,
+            "perturbed_opt_objective_value": 73,
+            "reovered_objective_value": 89,
+            "opt_ratio": 1.2191780821917808
+        },
+        {
+            "perturbation_id": "d6a726b1-699c-402f-b659-b3d5af67d6f2",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 100,
+            "epsilon": 0.75,
+            "batch_augmentation": 1,
+            "variables_changed": 411.0,
+            "perturbed_opt_objective_value": 78,
+            "reovered_objective_value": 93,
+            "opt_ratio": 1.1923076923076923
+        },
+        {
+            "perturbation_id": "be5e55f4-5be8-495b-a0eb-48500fdeab21",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 100,
+            "epsilon": 0.5,
+            "batch_augmentation": 1,
+            "variables_changed": 281.0,
+            "perturbed_opt_objective_value": 80,
+            "reovered_objective_value": 89,
+            "opt_ratio": 1.1125
+        },
+        {
+            "perturbation_id": "dd6fd9e2-536f-4e32-9d5a-32ba7e78875f",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 60,
+            "epsilon": 0.75,
+            "batch_augmentation": 1,
+            "variables_changed": 282.0,
+            "perturbed_opt_objective_value": 83,
+            "reovered_objective_value": 98,
+            "opt_ratio": 1.180722891566265
+        },
+        {
+            "perturbation_id": "4dd4ab0c-b30d-4cda-a97a-2f13424d726a",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 100,
+            "epsilon": 0.25,
+            "batch_augmentation": 0,
+            "variables_changed": 153.0,
+            "perturbed_opt_objective_value": 74,
+            "reovered_objective_value": 89,
+            "opt_ratio": 1.2027027027027026
+        },
+        {
+            "perturbation_id": "09c38c88-2679-4a89-9fe4-ff9f7e747b11",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 80,
+            "epsilon": 0.75,
+            "batch_augmentation": 2,
+            "variables_changed": 333.0,
+            "perturbed_opt_objective_value": 81,
+            "reovered_objective_value": 93,
+            "opt_ratio": 1.1481481481481481
+        }
+    ]
+}

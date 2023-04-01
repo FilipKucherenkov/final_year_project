@@ -1,0 +1,66 @@
+{
+    "nominal_instance": "e67c7a57-4c94-4511-afd6-7cad90632ff4",
+    "nominal_objective": 9,
+    "perturbation_results": [
+        {
+            "deterministic_model": 0.20420381266666654,
+            "recovery_model": 0.2091139786666667
+        },
+        {
+            "deterministic_model": 0.17210918599999983,
+            "recovery_model": 0.20953196633333318
+        },
+        {
+            "deterministic_model": 0.2207320139999999,
+            "recovery_model": 0.2096398363333337
+        },
+        {
+            "deterministic_model": 0.23462521733333355,
+            "recovery_model": 0.20992132066666672
+        },
+        {
+            "deterministic_model": 0.1705087996666658,
+            "recovery_model": 0.21780152533333327
+        },
+        {
+            "deterministic_model": 0.1765086476666665,
+            "recovery_model": 0.2104687186666657
+        },
+        {
+            "deterministic_model": 0.17130258266666706,
+            "recovery_model": 0.21491803966666723
+        },
+        {
+            "deterministic_model": 0.2282851276666662,
+            "recovery_model": 0.20986719266666753
+        },
+        {
+            "deterministic_model": 0.25280441799999903,
+            "recovery_model": 0.21007146733333334
+        },
+        {
+            "deterministic_model": 0.17047136433333301,
+            "recovery_model": 0.20939767066666568
+        },
+        {
+            "deterministic_model": 0.17129166833333187,
+            "recovery_model": 0.2100462889999998
+        },
+        {
+            "deterministic_model": 0.21241810299999977,
+            "recovery_model": 0.2108468663333317
+        },
+        {
+            "deterministic_model": 0.16624207733333426,
+            "recovery_model": 0.21001769566666675
+        },
+        {
+            "deterministic_model": 0.17101329700000178,
+            "recovery_model": 0.20925518866666692
+        },
+        {
+            "deterministic_model": 0.17145687899999965,
+            "recovery_model": 0.21105898899999906
+        }
+    ]
+}

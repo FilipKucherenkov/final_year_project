@@ -1,0 +1,276 @@
+{
+    "algorithm": "Active-time-IP",
+    "data_set_name": "dataset_1",
+    "instance_results": [
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_0",
+            "ID": "08df82b7-fe65-4e0d-bd2c-a64b5ca202f5",
+            "T": 25,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.1745369964
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_1",
+            "ID": "daa660f2-7418-467f-9904-dc308445b0b8",
+            "T": 25,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.15940844080000005
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_2",
+            "ID": "5c27abcf-1008-478d-bef4-8e40cba9bd52",
+            "T": 25,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.1876246794
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_3",
+            "ID": "7d6192fb-bafa-4df5-804a-85bbe3a738e0",
+            "T": 25,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.17118385919999995
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_4",
+            "ID": "484096fb-a6c5-484e-a110-0ad7ac78ee87",
+            "T": 25,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.162194779
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_5",
+            "ID": "3459a091-3e9c-4697-a371-6d72bb42e22f",
+            "T": 50,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.39457238540000006
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_6",
+            "ID": "785343da-5dbd-4e29-a7c1-887f3593f1bd",
+            "T": 50,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.3715924557999998
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_7",
+            "ID": "0572b710-912a-4c11-b054-4a78db33570b",
+            "T": 50,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.5273226589999993
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_8",
+            "ID": "6f982716-9918-4c41-b0a3-cd847beaacf5",
+            "T": 50,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.3811722404000008
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_9",
+            "ID": "62aae402-6a0d-46d3-b9d0-571621c999b4",
+            "T": 50,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.36366824039999984
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_10",
+            "ID": "62d641e5-4818-427a-b9ed-a660a61b2f74",
+            "T": 100,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.8510841247999992
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_11",
+            "ID": "0a751308-6ad9-459f-a61c-85aeec3e0a3b",
+            "T": 100,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 1.050103097600001
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_12",
+            "ID": "3fe216a8-9d90-4d30-9d30-89a935e39692",
+            "T": 100,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.7996600244000035
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_13",
+            "ID": "2cf763fa-f99c-4332-90bb-803e13441785",
+            "T": 100,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 0.6774487195999995
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_14",
+            "ID": "f0870c8e-6fbd-43cb-8a91-a33a0724aca0",
+            "T": 100,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 1.9189296032000016
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_15",
+            "ID": "586b575a-a882-4512-a5ca-aa59771bff51",
+            "T": 150,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 1.0692293733999976
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_16",
+            "ID": "b1c03081-14b3-43f9-ad53-dd54e9f6216a",
+            "T": 150,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 1.6001226184000075
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_17",
+            "ID": "4a7006d6-bf42-485f-b491-ed3fdade55f2",
+            "T": 150,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 1.0400494385999992
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_18",
+            "ID": "86aa9d57-d11a-4da6-bd6b-3bce300714e4",
+            "T": 150,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 1.7142703972000048
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_19",
+            "ID": "3726f6ca-e4fe-4017-8cce-44c3a15c1db9",
+            "T": 150,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 2.0215644802000043
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_20",
+            "ID": "60c3f3f7-4f79-4b33-9949-28a02405acb4",
+            "T": 250,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 3.1404535678000003
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_21",
+            "ID": "55ef81fb-b0dc-4983-9313-870049101e55",
+            "T": 250,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 1.8782826630000045
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_22",
+            "ID": "f63cf917-d5ed-43ac-97b9-86b6f3d96d51",
+            "T": 250,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 2.805028213399987
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_23",
+            "ID": "d11be348-f614-4109-9124-184e059c5c6a",
+            "T": 250,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 6.333880955199993
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_24",
+            "ID": "9ae86561-89d6-4fcf-8f8f-0250fc4a6469",
+            "T": 250,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 2.7310154181999904
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_25",
+            "ID": "1929d987-9f51-4955-a65e-68914c8b15cc",
+            "T": 500,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 8.1073694188
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_26",
+            "ID": "05e37f19-bddb-43c3-8799-3ac74314e595",
+            "T": 500,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 7.582410881600026
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_27",
+            "ID": "0cf23860-4680-4b0d-94a0-bd8d4a6659ec",
+            "T": 500,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 11.356328316799999
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_28",
+            "ID": "d6e15df2-5ac9-4849-8d4b-d5347c918e8f",
+            "T": 500,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 3.912872009800003
+        },
+        {
+            "Algorithm": "Active-time-IP",
+            "Instance_index": "instance_29",
+            "ID": "26b0654c-faac-421c-8b5d-2bb004a1be63",
+            "T": 500,
+            "G": 20,
+            "J": 100,
+            "runtime_in_sec": 10.706320496599982
+        }
+    ]
+}

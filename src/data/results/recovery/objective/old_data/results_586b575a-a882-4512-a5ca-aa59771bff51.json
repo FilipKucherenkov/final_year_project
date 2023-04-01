@@ -1,0 +1,156 @@
+{
+    "nominal_instance": "586b575a-a882-4512-a5ca-aa59771bff51",
+    "nominal_objective": 109,
+    "perturbation_results": [
+        {
+            "perturbation_id": "e46d3fa8-a32a-40a6-bdd5-27373c4c3ddc",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 60,
+            "epsilon": 0.25,
+            "batch_augmentation": 0,
+            "perturbed_opt_objective_value": 107,
+            "reovered_objective_value": 115,
+            "opt_ratio": 1.074766355140187
+        },
+        {
+            "perturbation_id": "4e88651b-ff81-466d-ad0f-a5283413aba8",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 80,
+            "epsilon": 0.5,
+            "batch_augmentation": 1,
+            "perturbed_opt_objective_value": 109,
+            "reovered_objective_value": 118,
+            "opt_ratio": 1.0825688073394495
+        },
+        {
+            "perturbation_id": "d1caba6f-d44a-4d42-b3f0-03663f2dca04",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 100,
+            "epsilon": 0.75,
+            "batch_augmentation": 1,
+            "perturbed_opt_objective_value": 117,
+            "reovered_objective_value": 125,
+            "opt_ratio": 1.0683760683760684
+        },
+        {
+            "perturbation_id": "17217057-3281-494a-9686-48b6468f581d",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 20,
+            "epsilon": 0.75,
+            "batch_augmentation": 0,
+            "perturbed_opt_objective_value": 107,
+            "reovered_objective_value": 120,
+            "opt_ratio": 1.1214953271028036
+        },
+        {
+            "perturbation_id": "8880c35e-c68d-479c-b516-13811db2f263",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 20,
+            "epsilon": 0.25,
+            "batch_augmentation": 1,
+            "perturbed_opt_objective_value": 105,
+            "reovered_objective_value": 109,
+            "opt_ratio": 1.0380952380952382
+        },
+        {
+            "perturbation_id": "608e5ac9-b6dc-4927-8d68-1c6057db086b",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 60,
+            "epsilon": 0.5,
+            "batch_augmentation": 0,
+            "perturbed_opt_objective_value": 105,
+            "reovered_objective_value": 111,
+            "opt_ratio": 1.0571428571428572
+        },
+        {
+            "perturbation_id": "126e4242-2569-408b-b0f3-d606b24fafc4",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 80,
+            "epsilon": 0.25,
+            "batch_augmentation": 0,
+            "perturbed_opt_objective_value": 104,
+            "reovered_objective_value": 120,
+            "opt_ratio": 1.1538461538461537
+        },
+        {
+            "perturbation_id": "f81a8e9f-94d0-4588-a0fd-95464465e203",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 100,
+            "epsilon": 0.25,
+            "batch_augmentation": 0,
+            "perturbed_opt_objective_value": 102,
+            "reovered_objective_value": 109,
+            "opt_ratio": 1.0686274509803921
+        },
+        {
+            "perturbation_id": "234b277d-86b2-4d32-b109-a3f35f672f00",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 80,
+            "epsilon": 0.75,
+            "batch_augmentation": 0,
+            "perturbed_opt_objective_value": 111,
+            "reovered_objective_value": 140,
+            "opt_ratio": 1.2612612612612613
+        },
+        {
+            "perturbation_id": "65165ea3-ac47-42f9-bd78-89eafabd3285",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 60,
+            "epsilon": 0.75,
+            "batch_augmentation": 2,
+            "perturbed_opt_objective_value": 147,
+            "reovered_objective_value": 145,
+            "opt_ratio": 0.9863945578231292
+        },
+        {
+            "perturbation_id": "6e3daef1-495f-43a5-b0f2-5052eaba92dc",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 100,
+            "epsilon": 0.5,
+            "batch_augmentation": 1,
+            "perturbed_opt_objective_value": 121,
+            "reovered_objective_value": 138,
+            "opt_ratio": 1.140495867768595
+        },
+        {
+            "perturbation_id": "eed47990-ad63-4baa-b763-aca6c6c6efa1",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 20,
+            "epsilon": 0.5,
+            "batch_augmentation": 1,
+            "perturbed_opt_objective_value": 111,
+            "reovered_objective_value": 123,
+            "opt_ratio": 1.1081081081081081
+        },
+        {
+            "perturbation_id": "557005fa-7f45-45e8-9923-aaea9b968328",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 40,
+            "epsilon": 0.5,
+            "batch_augmentation": 1,
+            "perturbed_opt_objective_value": 110,
+            "reovered_objective_value": 131,
+            "opt_ratio": 1.190909090909091
+        },
+        {
+            "perturbation_id": "6722669e-c25f-429f-a808-7dffebbc0f07",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 40,
+            "epsilon": 0.75,
+            "batch_augmentation": 1,
+            "perturbed_opt_objective_value": 109,
+            "reovered_objective_value": 113,
+            "opt_ratio": 1.036697247706422
+        },
+        {
+            "perturbation_id": "052d3de0-019e-49ef-9242-6f71c2388017",
+            "Method": "Greedy-local-search: CPLEX Re-optimization",
+            "gamma": 40,
+            "epsilon": 0.25,
+            "batch_augmentation": 0,
+            "perturbed_opt_objective_value": 104,
+            "reovered_objective_value": 114,
+            "opt_ratio": 1.0961538461538463
+        }
+    ]
+}
