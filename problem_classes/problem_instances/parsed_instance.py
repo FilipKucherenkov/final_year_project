@@ -33,7 +33,7 @@ class ParsedInstance:
     def is_feasible(self):
         network = generate_network(self.time_horizon.time_slots, self.jobs)
         total_sum = sum(job.processing_time for job in self.jobs)
-        schedule = solve_max_flow_model(network, total_sum, "gurobi", self.number_of_parallel_jobs)
+        schedule = solve_max_flow_model(network, total_sum, "cplex_direct", self.number_of_parallel_jobs)
         return schedule.is_feasible
 
     # Return a list containing the start times of each timeslot (e.g 0,1,2...)

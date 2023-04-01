@@ -157,7 +157,7 @@ def main():
     # print_nominal_instances_stats()
     #compute_stats_and_produce_plots()
 
-    # print_all_recovery_stats()
+    print_all_recovery_stats()
 
 
 def compute_stats_and_produce_plots():

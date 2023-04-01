@@ -23,6 +23,8 @@ def generate_random_problem_instance():
     """
     Generate a random problem instance inside a json file that can be then used by solvers given
     a provided set of command-line arguments.
+    example command:
+    python3 -m input_generation.scripts.generate_random_instance --name "user_guide_example_2" --T 100 --G 5 --J 20
     """
     number_of_timeslots = int(args.T)
     number_of_parallel_jobs = int(args.G)

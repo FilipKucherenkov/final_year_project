@@ -1,4 +1,5 @@
 import copy
+import logging
 import math
 import random
 import uuid
@@ -31,8 +32,7 @@ class Perturbator:
         number_of_perturbations = gamma
         number_of_augmentations = 0
         number_of_decreases = 0
-
-        print(f"Gamma: {gamma}, #Perturbs: {number_of_perturbations}")
+        logging.info(f"User selected Gamma={gamma} and epsilon={epsilon}")
         # Perturb gamma jobs
         for i in range(0, gamma):
             # Choose a random job to perturb it from the instance
@@ -43,7 +43,6 @@ class Perturbator:
             d = target_job.deadline
             r = target_job.release_time
             # epsilon = random.uniform((p-1) / p, (d-r-1-2*p)/p)
-            print(f"Epsilon: {epsilon}")
             new_p = math.floor(random.uniform((1 - epsilon) * p, (1 + epsilon) * p))
 
             # Ensure processing stays within bounds
@@ -54,17 +53,17 @@ class Perturbator:
 
             if new_p > p:
                 # Job augmentation
+                logging.info(f"Perturbing job: {target_job.number}, duration changed from {p} to {new_p} [Augmentation]")
                 number_of_augmentations = number_of_augmentations + 1
             elif new_p < p:
                 # Job decrease
+                logging.info(f"Perturbing job: {target_job.number}, duration changed from {p} to {new_p} [Reduction]")
                 number_of_decreases = number_of_decreases + 1
             else:
                 # Nothing happens
+                logging.info(f"Perturbing job: {target_job.number}, duration changed from {p} to {new_p} [No effect]")
                 number_of_perturbations = number_of_perturbations - 1
-
             target_job.processing_time = new_p
-            print(f"Perturbing job: {target_job.number}")
-            print(f"Perturbation: from {p} to {target_job.processing_time}")
 
         # All required stats
         perturbation_stats = {
@@ -76,7 +75,6 @@ class Perturbator:
             "number_of_jobs_decreases": number_of_decreases,
             "batch_augmentation_is_required": not new_instance.is_feasible(),
         }
-        print(perturbation_stats)
         # Write the perturbed instance to a JSON file
         write_perturbed_instance_to_file(new_instance,
                                          new_instance.instance_id,
