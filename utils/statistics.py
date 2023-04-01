@@ -409,15 +409,15 @@ def count_objective_stats_for_eps(stage_1_method, instance_type):
 
 
 def print_all_recovery_stats():
-    print_recovery_stats(1, 1, "large_instances")
-    print_recovery_stats(0, 1, "large_instances")
-    print_recovery_stats(1, 0, "large_instances")
-    print_recovery_stats(0.1, 2, "large_instances")
-
     print_recovery_stats(1, 1, "moderate_instances")
     print_recovery_stats(0, 1, "moderate_instances")
     print_recovery_stats(1, 0, "moderate_instances")
     print_recovery_stats(0.5, 1, "moderate_instances")
+
+    print_recovery_stats(1, 1, "large_instances")
+    print_recovery_stats(0, 1, "large_instances")
+    print_recovery_stats(1, 0, "large_instances")
+    print_recovery_stats(0.1, 2, "large_instances")
 def print_recovery_stats(l1, l2, instance_type):
     dir_path = f"data/results/recovery/objective/{instance_type}/recovery_method_lambdas({l1},{l2})"
     directory = os.fsencode(dir_path)
@@ -428,8 +428,9 @@ def print_recovery_stats(l1, l2, instance_type):
     mean_variables_changed = 0
     max_variables_changed = 0
 
-    mean_rec_ratio = 0
-    max_rec_ratio = 0
+    mean_active_time = 0
+    max_active_time = 0
+    number_of_instances = 150
 
     for file in os.listdir(directory):
         filename = os.fsdecode(file)
@@ -440,25 +441,26 @@ def print_recovery_stats(l1, l2, instance_type):
                 for result in data["perturbation_results"]:
                     augmentation = result["batch_augmentation"]
                     variables_changed = result["variables_changed"]
-                    rec_ratio = result["opt_ratio"]
+                    active_time = result["reovered_objective_value"]
 
                     mean_augmentation = mean_augmentation + augmentation
                     mean_variables_changed = mean_variables_changed + variables_changed
-                    mean_rec_ratio = mean_rec_ratio + rec_ratio
+                    mean_active_time = mean_active_time + active_time
 
                     if augmentation >= max_augmentation:
                         max_augmentation = augmentation
                     if variables_changed >= max_variables_changed:
                         max_variables_changed = variables_changed
-                    if rec_ratio >= max_rec_ratio:
-                        max_rec_ratio = rec_ratio
+                    if active_time >= max_active_time:
+                        max_active_time = active_time
 
     print("===========================")
+
     print(f"Recovery stats for l1={l1}, l2={l2} on {instance_type}:")
-    print(f"Mean augmentation: {mean_augmentation / 150}")
+    print(f"Mean augmentation: {mean_augmentation / number_of_instances}")
     print(f"Max augmentation: {max_augmentation}")
-    print(f"Mean variables changed: {mean_variables_changed / 150}")
+    print(f"Mean variables changed: {mean_variables_changed / number_of_instances}")
     print(f"Max variables changed: {max_variables_changed}")
-    print(f"Mean rec ratio: {mean_rec_ratio / 150}")
-    print(f"Max rec ratio: {max_rec_ratio}")
+    print(f"Mean active time: {mean_active_time / number_of_instances}")
+    print(f"Max active time: {max_active_time}")
     print("===========================")

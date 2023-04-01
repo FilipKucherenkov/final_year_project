@@ -127,13 +127,12 @@ def main():
 
     s1 = solve_instance(p_i_1, "Active-time-IP", "cplex_direct")
     s1.print_schedule_info()
-    # s2 = ip_recovery3(p_p_1, s1, 0, 1, 1)
-    # print(s2.variable_changes)
-    # s2.print_schedule_info()
+    s2 = ip_recovery3(p_p_1, s1, 0, 1, 1)
+    print(s2.variable_changes)
+    s2.print_schedule_info()
     # s3 = solve_instance(p_initial, "Active-time-IP", "cplex_direct")
     # s2.print_schedule_info()
     # s1.print_schedule_info()
-    # s2 = two_stage_recovery(p_initial, s1, 100)
     # s3 = solve_instance(p_initial, "Active-time-IP", "cplex_direct")
     # s2.print_schedule_info()
     # s3.print_schedule_info()
@@ -158,7 +157,7 @@ def main():
     # print_nominal_instances_stats()
     #compute_stats_and_produce_plots()
 
-    print_all_recovery_stats()
+    # print_all_recovery_stats()
 
 
 def compute_stats_and_produce_plots():

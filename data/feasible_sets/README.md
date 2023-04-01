@@ -1,4 +1,4 @@
-# Data sets for the Active time problem (Guide)
+# Data sets for the Active Time Scheduling Problem (Guide)
 ####  Note: The included json files contain multiple problem instances that are grouped based on changes in the parameters. This file contains information about the various data sets that are included. 
 
 ### 1. Data set contains 30 random problem instances with changes in the time horizon (5 instances per change): `dataset_1.json`
