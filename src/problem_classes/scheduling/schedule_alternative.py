@@ -46,9 +46,25 @@ class Schedule:
 
     # Print extended information about solution
     # (e.g. at which timeslot was each job scheduled.
+    # Note: The formatting step comes from handling discrepancies in the way we store the mappings between the first
+    # wrapper (this) and the wrapper we used for the recovery model.
     def print_schedule_info(self):
         print(f"Total active time: {self.calculate_active_time()}")
         print(f"Batch utilization: {self.calculate_batch_utilization_ratio()}%")
         print(f"Is schedule feasible? {'Yes' if self.is_feasible else 'No'}")
+
+        format_mapper = {}
         for placement in self.schedule:
-            print(placement)
+            job = placement[0]
+            timeslot = placement[1]
+            if job not in format_mapper:
+                format_mapper[job] = [timeslot]
+            else:
+                format_mapper[job] = format_mapper[job] + [timeslot]
+
+        for job, timeslots in format_mapper.items():
+            timeslot_str = ""
+            for timeslot in timeslots:
+                timeslot_index = timeslot.split("_")[1]
+                timeslot_str = timeslot_str + f"{timeslot_index} "
+            print(f"{job} Timeslots: {timeslot_str}")

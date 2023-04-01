@@ -9,11 +9,8 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(mes
 
 
 def solve_problem_instance():
-    """
-    Solve an problem instance from a json file.
-    """
     # Parse script arguments
-    parser = argparse.ArgumentParser(description='Script that solves the active-time problem')
+    parser = argparse.ArgumentParser(description="Script that solves a problem instance using the deterministic methods")
 
     parser.add_argument("--algorithm", help="Specify solver", default="Active-time-IP")
     parser.add_argument("--file", help="Provide the path to a json file containing the problem instance")
@@ -40,3 +37,4 @@ def solve_problem_instance():
 
 
 solve_problem_instance()
+

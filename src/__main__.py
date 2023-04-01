@@ -1,6 +1,8 @@
 from input_generation.perturbator import Perturbator
+from problem_classes.graph.generate_network import generate_network
 from problem_classes.problem_instances.custom_instance import CustomInstance
 from solvers.recovery.ip_recovery_3 import ip_recovery3
+from solvers.recovery_handler import recover_schedule
 
 from solvers.solver_handler import solve_instance
 from utils.plot_functions import print_objective_performance_for_recovery, print_objective_performance_on_all_datasets
@@ -8,160 +10,78 @@ from utils.statistics import print_all_recovery_stats, print_rmse_stats_for_meth
 
 
 def main():
-    # solve_active_time_ip(instance22)
-    # instance1.print_instance_info()
-    # network = generate_network(instance1.time_horizon.time_slots, instance1.jobs)
-    # network.print_network_info()
-    instance = CustomInstance(12, 1)
+    # Small custom example
+    instance = CustomInstance(12, 3)
     instance.add_job(0, 0, 2, 2)
     instance.add_job(1, 0, 4, 3)
-    instance.add_job(2, 0, 2, 2)
-    # instance.add_job(2, 1, 6, 1)
-    # instance.add_job(3, 4, 10, 4)
-    # instance.add_job(4, 5, 9, 3)
-    # instance.add_job(5, 0, 4, 4)
+    instance.add_job(2, 1, 6, 1)
+    instance.add_job(3, 4, 10, 4)
+    instance.add_job(4, 5, 9, 3)
+    instance.add_job(5, 0, 4, 4)
 
-    instance_with_overlaps = CustomInstance(12, 10)
-    instance_with_overlaps.add_job(0, 0, 2, 2)
-    instance_with_overlaps.add_job(1, 1, 3, 2)
-    instance_with_overlaps.add_job(2, 4, 10, 2)
+    # Generate the custom instance's corresponding flow network and print properties
+    # network = generate_network(instance.time_horizon.time_slots, instance.jobs)
+    # network.print_network_info()
 
-    p_i_1 = CustomInstance(7, 2)
-    p_i_1.add_job(0, 4, 6, 2)
-    p_i_1.add_job(1, 0, 4, 4)
-    p_i_1.add_job(2, 0, 4, 2)
-    p_i_1.add_job(3, 0, 2, 2)
+    # Solve custom instance using deterministic IP Model and print schedule.
+    # schedule1 = solve_instance(instance, "Active-time-IP", "cplex_direct")
+    # schedule1.print_schedule_info()
 
-    p_p_1 = CustomInstance(7, 2)
-    p_p_1.add_job(0, 4, 6, 2)
-    p_p_1.add_job(1, 0, 4, 4)
-    p_p_1.add_job(2, 0, 4, 1)
-    p_p_1.add_job(3, 0, 2, 2)
-
-    # p_i_1 = CustomInstance(7, 1)
-    # p_i_1.add_job(0, 0, 4, 1)
-    # p_i_1.add_job(1, 0, 4, 1)
-    # p_i_1.add_job(2, 0, 4, 1)
-    # p_i_1.add_job(3, 0, 2, 1)
-    #
-    # p_p_1 = CustomInstance(7, 1)
-    # p_p_1.add_job(0, 0, 4, 1)
-    # p_p_1.add_job(1, 0, 4, 1)
-    # p_p_1.add_job(2, 0, 6, 3)
-    # p_p_1.add_job(3, 0, 2, 1)
-
-    # instance = CustomInstance(12, 2)
-    # instance.add_job(0, 0, 3, 2)
-    # instance.add_job(0, 0, 3, 3)
-
-    # instance2 = CustomInstance(6, 12, 10)
-    # instance2.add_job(0, 0, 2, 2)
-    # instance2.add_job(1, 0, 4, 2)
-    # instance2.add_job(2, 0, 4, 4)
-    # instance3 = CustomInstance(12, 3)
-    #
-    # instance3.add_job(0, 0, 2, 2)
-    # instance3.add_job(1, 0, 2, 2)
-    # instance3.add_job(2, 0, 4, 2)
-    # instance3.add_job(3, 0, 6, 4)
-    # instance3.add_job(4, 0, 6, 4)
-    # instance3.add_job(5, 0, 12, 2)
-    #
-    # for job in instance3.jobs: print(job.processing_time)
-    #
-    # #
-    # schedule = solve_instance(instance3, "Earliest-released-first", "gurobi")
-    # schedule.print_schedule_info()
-    #
-    #
-    # # Greedy computes 3
-    # test_network()
-
-    # schedule = solve_maxflow_cplex_with_reopt(instance)
-    # schedule = solve_instance(instance, "Earliest-released-first-with-density-heuristic", "gurobi")
-    # schedule2 = solve_instance(instance_2, "Active-time-IP", "gurobi")
-
-    # schedule.print_schedule_info()
+    # Solve custom instance using GLS with Pyomo model.
+    # schedule2 = solve_instance(instance, "Greedy-local-search: Pyomo", "cplex_direct")
     # schedule2.print_schedule_info()
-    # schedule = solve_instance(instance, "1", "gurobi")
-    # schedule.print_schedule_info()
-    # generate_all_plots()
 
-    # # Perturb
-    p1 = Perturbator("data/custom_instances/nominal_instance.json")
-    nominal = p1.problem_instance
-    p = Perturbator("data/custom_instances/perturbed_instance.json")
-    p_initial = p.problem_instance
-    # # opt_shedule = solve_instance(p_initial, "Greedy-local-search: CPLEX Re-optimization", "gurobi")
-    # # # opt_shedule.print_schedule_info()
-    # p_instance = p.perturb_instance(20, 50)
-    # s_i = solve_instance(p_i_1, "Active-time-IP", "gurobi")
-    # s_i.print_schedule_info()
-    # s_p = solve_instance(p_instance, "Active-time-IP", "gurobi")
-    # s_p.print_schedule_info()
-    # s_i1 = solve_instance(p_i_1, "Active-time-IP", "gurobi")
-    # s_i1.print_schedule_info()
-    # s_r = recover_schedule(p_p_1, s_i, "gurobi")
-    # s_r.print_schedule_info()
-
-    # schedule2.print_schedule_info()
-    # adversary_jobs = recover_with_back_filling(solve_instance(p_initial, "Active-time-IP", "gurobi"), p_instance)
-    # for j in adversary_jobs:
-    #     print(f"Job: {j.number}, p: {j.processing_time}")
-
+    # Solve custom instance using GLS with CPLEX model (V1).
+    # schedule3 = solve_instance(instance, "Greedy-local-search: CPLEX (V1)", "cplex_direct")
     # schedule3.print_schedule_info()
 
-
-    # s = solve_instance(instance_with_overlaps, "1", "gurobi")
-    # s.print_schedule_info()
-    # schedule4 = solve_instance(p_initial, "Active-time-IP", "gurobi")
-    # # # # schedule3.print_schedule_info()
+    # Solve custom instance using GLS with CPLEX model (V2).
+    # schedule4 = solve_instance(instance, "Greedy-local-search: CPLEX (V2)", "cplex_direct")
     # schedule4.print_schedule_info()
 
-    # rmse_gamma_displot_large_instance("Active-time-IP", "Greedy-local-search: CPLEX Re-optimization")
-    # rmse_gamma_displot_moderate_instance("Active-time-IP", "Greedy-local-search: CPLEX Re-optimization")
-    # s = capacity_search(p_instance, 20)
-    # s.print_schedule_info()
-    # compute_stats_and_produce_plots()
-    # compute_stats_and_produce_plots()
+    # Solve custom instance using GLS with Re-Opt.
+    # schedule5 = solve_instance(instance, "Greedy-local-search: CPLEX Re-optimization", "cplex_direct")
+    # schedule5.print_schedule_info()
 
-    s1 = solve_instance(p_i_1, "Active-time-IP", "cplex_direct")
-    s1.print_schedule_info()
-    s2 = ip_recovery3(p_p_1, s1, 0, 1, 1)
-    print(s2.variable_changes)
-    s2.print_schedule_info()
-    # s3 = solve_instance(p_initial, "Active-time-IP", "cplex_direct")
-    # s2.print_schedule_info()
-    # s1.print_schedule_info()
-    # s3 = solve_instance(p_initial, "Active-time-IP", "cplex_direct")
-    # s2.print_schedule_info()
-    # s3.print_schedule_info()
-    # generate_all_plots()
-    # s3.print_schedule_info()
+    # Solve custom instance using ERF.
+    # schedule6 = solve_instance(instance, "Earliest-released-first", "cplex_direct")
+    # schedule6.print_schedule_info()
+
+    # Solve custom instance using Density Heuristic.
+    # schedule7 = solve_instance(instance, "Earliest-released-first-with-density-heuristic", "cplex_direct")
+    # schedule7.print_schedule_info()
+
+    # Same instance from Figure 4.1 in Chapter 4.
+    nominal_instance = CustomInstance(7, 2)
+    nominal_instance.add_job(0, 4, 6, 2)
+    nominal_instance.add_job(1, 0, 4, 4)
+    nominal_instance.add_job(2, 0, 4, 1)
+    nominal_instance.add_job(3, 0, 2, 2)
+
+    # Job 2 changes its processing time from 1 to 4 in the true scenario.
+    perturbed_instance = CustomInstance(7, 2)
+    perturbed_instance.add_job(0, 4, 6, 2)
+    perturbed_instance.add_job(1, 0, 4, 4)
+    perturbed_instance.add_job(2, 0, 4, 4)
+    perturbed_instance.add_job(3, 0, 2, 2)
+
+    # Recover schedule (Note this example is tight and the choice of weights does not make difference)
+    # On the other hand, it illustrates the effectiveness of the Capacity Search Method.
+    recovered_solution = recover_schedule(nominal_instance, perturbed_instance, 1, 1, 1)
+    recovered_solution.print_schedule_info()
+
     # rmse_gamma_displot_moderate_instance("Active-time-IP", "Greedy-local-search: CPLEX Re-optimization")
     # rmse_gamma_scatter("Active-time-IP", "Greedy-local-search: CPLEX Re-optimization")
-
-
-    # t = timeit.Timer(lambda: test(p_initial,s1, nominal.number_of_parallel_jobs, nominal.number_of_parallel_jobs))
-    # times = t.repeat(3, 3)
-    # total_time_taken = min(times) / 3
-    # t2 = timeit.Timer(lambda:  solve_instance(p_initial, "Active-time-IP", "cplex_direct"))
-    # times2 = t2.repeat(3, 3)
-    # total_time_taken2 = min(times2) / 3
-
-    # print(total_time_taken)
-    # print(total_time_taken2)
 
     # compute_stats_and_produce_plots()
     # compute_stats_and_produce_plots()
     # print_nominal_instances_stats()
-    compute_stats_and_produce_plots()
-
-    print_all_recovery_stats()
+    # compute_stats_and_produce_plots()
+    #
+    # print_all_recovery_stats()
 
 
 def compute_stats_and_produce_plots():
-
     # Calculate Root Mean Square Error (RMSE) value for results.
     # opt_rmse: Compares solution produced on nominal instance compared to opt on perturbed. (Nominal Solution Quality)
     # rmse: Compares solution produced on nominal compared to solution on perturbed. (Sensitivity)
@@ -177,5 +97,6 @@ def compute_stats_and_produce_plots():
 
     # Prints performance of IP Model and GLS Method combined with recovery method.
     print_objective_performance_for_recovery()
+
 
 main()

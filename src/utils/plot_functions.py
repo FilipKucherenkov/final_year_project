@@ -2,9 +2,9 @@ import logging
 import os
 import matplotlib.pyplot as plt
 
-from src.utils.plot_producer import PlotProducer
-from src.utils.statistics import count_optimal_objectives_for_dataset, calculate_runtime_stats, \
-    count_objective_stats_for_gamma, count_objective_stats_for_eps
+from utils.plot_producer import PlotProducer
+from utils.statistics import count_optimal_objectives_for_dataset, calculate_runtime_stats, \
+    count_objective_stats_for_eps, count_objective_stats_for_gamma
 
 RESULTS_PATH = os.path.join(os.getcwd(), "stats", "algorithms", "runtime_analysis")
 
@@ -512,22 +512,3 @@ def rmse_gamma_displot_large_instance(method1, method2):
     plot_producer4 = PlotProducer(files, "Large_instances_sensitivity_gamma_lineplot", "perturbations", True)
     plot_producer4.generate_line_plot("gamma", "RMSE", "Gamma", "Deviation in objective value (RMSE)")
 
-    # plot_producer = PlotProducer(files, "Large_instances_rmse_gamma_distribution", "perturbations", True)
-    # # print(plot_producer.df)
-    # # plot_producer.generate_strip_plot("gamma", "rmse_value", "Gamma", "RMSE")
-    # plot_producer.generate_displot("RMSE", "RMSE", "gamma")
-    #
-    # plot_producer = PlotProducer(files, "Large_instances_rmse_epsilon_distribution", "perturbations", True)
-    # plot_producer.generate_displot("RMSE", "RMSE", "epsilon")
-    #
-    # plot_producer = PlotProducer(files, "Large_instances_rmse_rr_epsilon_distribution", "perturbations", True)
-    # plot_producer.generate_displot("RMSE", "rmse_opt", "epsilon")
-    #
-    # plot_producer = PlotProducer(files, "Large_instances_rmse_rr_gamma_distribution", "perturbations", True)
-    # plot_producer.generate_displot("RMSE", "rmse_opt", "gamma")
-
-    # plot_producer = PlotProducer(files, "Large_instances_rmse_rr_gamma_scatter", "perturbations", True)
-    # plot_producer.generate_swarm_plot("rmse_opt", "gamma", "RMSE", "Gamma")
-
-    # new_df = plot_producer.df[plot_producer.df["gamma"] == 5]
-    # plot_producer.generate_swarm_plot("gamma", "rmse_value", "Gamma", "RMSE")

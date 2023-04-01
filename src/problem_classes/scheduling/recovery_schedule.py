@@ -43,8 +43,6 @@ class Schedule:
         for timeslot, number_of_jobs in count.items():
             if number_of_jobs >= batch_size:
                 batch_size = number_of_jobs
-        print(self.batch_limit)
-        print(batch_size)
         return batch_size
 
     def add_mapping(self, job, timeslot):
