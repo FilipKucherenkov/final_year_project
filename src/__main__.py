@@ -3,8 +3,8 @@ from problem_classes.problem_instances.custom_instance import CustomInstance
 from solvers.recovery.ip_recovery_3 import ip_recovery3
 
 from solvers.solver_handler import solve_instance
-from utils.plot_functions import print_objective_performance_for_recovery
-from utils.statistics import print_all_recovery_stats
+from utils.plot_functions import print_objective_performance_for_recovery, print_objective_performance_on_all_datasets
+from utils.statistics import print_all_recovery_stats, print_rmse_stats_for_methods
 
 
 def main():
@@ -155,7 +155,7 @@ def main():
     # compute_stats_and_produce_plots()
     # compute_stats_and_produce_plots()
     # print_nominal_instances_stats()
-    #compute_stats_and_produce_plots()
+    compute_stats_and_produce_plots()
 
     print_all_recovery_stats()
 
@@ -177,6 +177,5 @@ def compute_stats_and_produce_plots():
 
     # Prints performance of IP Model and GLS Method combined with recovery method.
     print_objective_performance_for_recovery()
-
 
 main()

@@ -2,8 +2,8 @@ import logging
 import os
 import matplotlib.pyplot as plt
 
-from utils.plot_producer import PlotProducer
-from utils.statistics import count_optimal_objectives_for_dataset, calculate_runtime_stats, \
+from src.utils.plot_producer import PlotProducer
+from src.utils.statistics import count_optimal_objectives_for_dataset, calculate_runtime_stats, \
     count_objective_stats_for_gamma, count_objective_stats_for_eps
 
 RESULTS_PATH = os.path.join(os.getcwd(), "stats", "algorithms", "runtime_analysis")

@@ -8,8 +8,6 @@ from utils.parsing import parse_problem_instance
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
 
 
-# TODO: Can extend this to optionally write the schedule to a file provided a command-line flag.
-
 def solve_problem_instance():
     """
     Solve an problem instance from a json file.

@@ -1,8 +1,0 @@
-{
-    "dataset_name": "dataset_3",
-    "Number-of-instances": 25,
-    "Average-job-processing-time": 7.3376,
-    "Average-number-of-jobs-per-instance": 25.0,
-    "Average-batch-size-per-instance": 5.0,
-    "Average-number-of-timeslots-per-instance": 75.0
-}
