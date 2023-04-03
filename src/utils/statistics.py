@@ -252,11 +252,15 @@ def count_optimal_objectives_for_dataset(dataset_name: str, method: str):
         df = pd.DataFrame.from_dict(pd.json_normalize(data["instance_results"]))
 
     opt_stats = []
+    mean_active_time = 0  # used only for IP model
+    max_active_time = 0  # used only for IP model
     for index, row in opt_df.iterrows():
         computed_value = df.loc[df['Instance_index'].eq(row['Instance_index']), 'objective_value'].iat[0]
         batch_util = df.loc[df['Instance_index'].eq(row['Instance_index']), 'batch_utilization'].iat[0]
         opt_value = row['objective_value']
-
+        mean_active_time = mean_active_time + computed_value
+        if computed_value >= max_active_time:
+            max_active_time = computed_value
         opt_stats.append({
             "Instance": row["Instance_index"],
             "OPT": computed_value / opt_value,
@@ -279,13 +283,15 @@ def count_optimal_objectives_for_dataset(dataset_name: str, method: str):
 
     print(f"===================================================================")
     print(f"Dataset: {dataset_name}")
-    print(f"Method: {method}")
-    print(f"Number of optimal solutions: {int(total_optimal_solutions)}/{len(opt_stats)}")
-    print(f"Number of solutions below optimal: {better_than_optimal}/{len(opt_stats)}")
-    print(f"MEAN ALG(J) / OPT(J): {mean_opt_ratio}")
-    print(f"MAX ALG(J) / OPT(J): {max_opt_ratio}")
-    print(f"MEAN UTIL: {mean_batch_util}")
-    print(f"MAX UTIL: {max_batch_util}")
+    # print(f"Method: {method}")
+    # print(f"Number of optimal solutions: {int(total_optimal_solutions)}/{len(opt_stats)}")
+    # print(f"Number of solutions below optimal: {better_than_optimal}/{len(opt_stats)}")
+    # print(f"MEAN ALG(J) / OPT(J): {mean_opt_ratio}")
+    # print(f"MAX ALG(J) / OPT(J): {max_opt_ratio}")
+    # print(f"MEAN UTIL: {mean_batch_util}")
+    # print(f"MAX UTIL: {max_batch_util}")
+    print(f"MEAN ACTIVE TIME: {mean_active_time / len(opt_stats)}") # used only for IP model
+    print(f"MAX ACTIVE TIME: {max_active_time}") # used only for IP model
     #
     # print(f"ALG(J) < OPT(J): {better_than_optimal}")
     # print(f"OPT(J) < ALG(J) < 1.2: {total_close_to_opt}")
@@ -418,6 +424,8 @@ def print_all_recovery_stats():
     print_recovery_stats(0, 1, "large_instances")
     print_recovery_stats(1, 0, "large_instances")
     print_recovery_stats(0.1, 2, "large_instances")
+
+
 def print_recovery_stats(l1, l2, instance_type):
     dir_path = f"data/results/recovery/objective/{instance_type}/recovery_method_lambdas({l1},{l2})"
     directory = os.fsencode(dir_path)

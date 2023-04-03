@@ -5,7 +5,8 @@ from solvers.recovery.ip_recovery_3 import ip_recovery3
 from solvers.recovery_handler import recover_schedule
 
 from solvers.solver_handler import solve_instance
-from utils.plot_functions import print_objective_performance_for_recovery, print_objective_performance_on_all_datasets
+from utils.plot_functions import print_objective_performance_for_recovery, print_objective_performance_on_all_datasets, \
+    generate_all_plots, print_runtime_comparison_stats_gls_impl
 from utils.statistics import print_all_recovery_stats, print_rmse_stats_for_methods
 
 
@@ -67,8 +68,8 @@ def main():
 
     # Recover schedule (Note this example is tight and the choice of weights does not make difference)
     # On the other hand, it illustrates the effectiveness of the Capacity Search Method.
-    recovered_solution = recover_schedule(nominal_instance, perturbed_instance, 1, 1, 1)
-    recovered_solution.print_schedule_info()
+    # recovered_solution = recover_schedule(nominal_instance, perturbed_instance, 1, 1, 1)
+    # recovered_solution.print_schedule_info()
 
     # rmse_gamma_displot_moderate_instance("Active-time-IP", "Greedy-local-search: CPLEX Re-optimization")
     # rmse_gamma_scatter("Active-time-IP", "Greedy-local-search: CPLEX Re-optimization")
@@ -79,6 +80,7 @@ def main():
     # compute_stats_and_produce_plots()
     #
     # print_all_recovery_stats()
+    compute_stats_and_produce_plots()
 
 
 def compute_stats_and_produce_plots():
@@ -96,7 +98,13 @@ def compute_stats_and_produce_plots():
     # print_objective_performance_on_all_datasets("Active-time-IP")
 
     # Prints performance of IP Model and GLS Method combined with recovery method.
-    print_objective_performance_for_recovery()
+    # print_objective_performance_for_recovery()
+
+    # Generates plots for the deterministic methods on the benchmark datasets.
+    # generate_all_plots()
+
+    # Prints performance stats for difference GLS implementations.
+    print_runtime_comparison_stats_gls_impl()
 
 
 main()

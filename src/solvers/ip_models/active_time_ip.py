@@ -12,7 +12,6 @@ def solve_active_time_ip(instance: ParsedInstance, solver_type: str):
     :param solver_type: specified solver to use (e.g. cplex-direct)
     :return: Schedule object containing the solution.
     """
-
     # Create Pyomo model
     model = pyo.ConcreteModel()
     model.name = "IP model for Active Time Scheduling problem"

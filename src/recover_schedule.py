@@ -5,6 +5,7 @@ import logging
 from solvers.recovery.ip_recovery_3 import ip_recovery3
 from solvers.solver_handler import solve_instance
 from utils.parsing import parse_problem_instance
+from utils.performance_monitors import record_execution_time_of_recovery_on_instance
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s:%(levelname)s:%(message)s')
 
@@ -24,6 +25,7 @@ def recover_schedule():
                         help="Specify an upper bound on the number of perturbed jobs.")
     parser.add_argument("--planning_method", help="Specify method for stage 1.", default="Active-time-IP")
     parser.add_argument("--solver_type", help="Choose optimization solver to be utilized", default="cplex_direct")
+    parser.add_argument("--runtime_monitor", help="Specify whether to track performance", default=False)
     args = parser.parse_args()
 
     logging.info('Validating provided arguments...')
@@ -35,6 +37,7 @@ def recover_schedule():
     if not os.path.exists(args.perturbed_instance) or not os.path.isfile(args.perturbed_instance):
         logging.error(f"Please specify correct path to a nominal instance file: {args.perturbed_instance}")
         return
+
 
     # Attempt to parse nominal instance
     nominal_instance = parse_problem_instance(args.nominal_instance)
@@ -57,9 +60,21 @@ def recover_schedule():
                                       nominal_solution,
                                       float(args.v1),
                                       float(args.v2),
-                                      float(args.gamma))
+                                      int(args.gamma))
 
     recovered_solution.print_schedule_info()
+
+    if bool(args.runtime_monitor):
+        record_execution_time_of_recovery_on_instance(nominal_instance,
+                                                      perturbed_instance,
+                                                      args.planning_method,
+                                                      "cplex_direct",
+                                                      float(args.v1),
+                                                      float(args.v2),
+                                                      int(args.gamma))
+        logging.info(f"Expected active time: {nominal_solution.calculate_active_time()}")
+        logging.info(f"Recovered active time: {recovered_solution.calculate_active_time()}")
+        logging.info(f"Number of changes: {recovered_solution.variable_changes}")
 
 
 recover_schedule()

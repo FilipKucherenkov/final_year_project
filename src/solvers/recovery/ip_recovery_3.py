@@ -17,7 +17,6 @@ def ip_recovery3(perturbed_instance, nominal_solution, v1, v2, gamma):
     """
     # Use capacity search to compute whether augmentation is necessary.
     computed_augmentation = capacity_search(perturbed_instance, nominal_solution, gamma)
-
     # Create Pyomo model
     model = pyo.ConcreteModel()
     model.name = "IP Recovery Model"
@@ -107,5 +106,4 @@ def ip_recovery3(perturbed_instance, nominal_solution, v1, v2, gamma):
         schedule.set_variables_changes(
             sum(sum((model.x[t, j]() - nominal_solution.schedule[j][t]) ** 2 for t in model.timeslots) for j in model.jobs)
         )
-        print(f"Active time: {schedule.calculate_active_time()}")
         return schedule

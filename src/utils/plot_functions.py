@@ -34,6 +34,11 @@ def print_objective_performance_on_all_datasets(method: str):
     count_optimal_objectives_for_dataset("dataset_7", method)
     calculate_runtime_stats("dataset_7", method)
 
+def print_runtime_comparison_stats_gls_impl():
+    calculate_runtime_stats("dataset_3", "Greedy-local-search: Pyomo")
+    calculate_runtime_stats("dataset_3", "Greedy-local-search: CPLEX (V1)")
+    calculate_runtime_stats("dataset_3", "Greedy-local-search: CPLEX (V2)")
+    calculate_runtime_stats("dataset_3", "Greedy-local-search: CPLEX Re-optimization")
 
 def print_objective_performance_for_recovery():
     count_objective_stats_for_gamma("deterministic_methods_IP_ns", "moderate")
@@ -45,7 +50,6 @@ def print_objective_performance_for_recovery():
     count_objective_stats_for_gamma("deterministic_methods_GLS_ns", "large")
     count_objective_stats_for_eps("deterministic_methods_GLS_ns", "moderate")
     count_objective_stats_for_eps("deterministic_methods_GLS_ns", "large")
-
 
 
 
@@ -276,11 +280,11 @@ def runtime_plot_5(file_name: str, dataset_name: str):
         "data/results/runtime/Greedy-local-search: CPLEX "
         "Re-optimization/results_dataset_5.json",
         "data/results/runtime/Active-time-IP/results_dataset_5.json",
-        "data/results/runtime/Earliest-released-first-with-density-heuristic/results_dataset_5.json",
-        "data/results/runtime/Earliest-released-first/results_dataset_5.json",
+        # "data/results/runtime/Earliest-released-first-with-density-heuristic/results_dataset_5.json",
+        # "data/results/runtime/Earliest-released-first/results_dataset_5.json",
     ]
     plot_producer = PlotProducer(files, file_name, dataset_name)
-    plot_producer.generate_line_plot("G", "runtime_in_sec", "Batch size", "Running time in seconds")
+    plot_producer.generate_line_plot("G", "runtime_in_sec", "Capacity limit", "Running time in seconds")
 
 
 def objective_plot_5(file_name: str, method: str, dataset_name: str):
