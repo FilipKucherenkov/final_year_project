@@ -1,6 +1,6 @@
 # Algorithms and Optimization models for Active Time Scheduling (Getting Started).
 
-### Generating A Problem Instance (Guide)
+### 1. Generating A Problem Instance (Guide)
 To facilitate the generation of problem instances, we provide the following three separate scripts under `input_generation/scripts`:
 - `generate_custom_instance.py`: Generates custom problem instances suitable for test- ing small-scale problems.
 - `generate_random_instance.py`: Generates random problem instances suitable for ana- lyzing larger-scale problems.
