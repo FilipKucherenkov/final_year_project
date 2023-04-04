@@ -1,6 +1,12 @@
 # Algorithms and Optimization models for Active Time Scheduling (Getting Started).
+### 1. Tools and Technologies
+Our project primarily utilizes Python, which offers a rich set of libraries and tools for optimization modelling and data analysis. To implement our models, we leverage Pyomo~\cite{pyomo}, a Python-based optimization modelling language that allows flexible translation of algebraic notations to code. Pyomo offers a robust way to develop linear and integer programming models. It has the advantage over other modelling languages, such as GAMS or AMPL, as its modelling objects are embedded within Python, providing access to a rich set of supporting libraries. Additionally, Pyomo can utilize commercial optimization solvers such as CPLEX and Gurobi~\cite{cplex, gurobi}, which are available under free academic licensing to solve implemented models.
 
-### 1. Generating A Problem Instance (Guide)
+On the other hand, it should be noted that Pyomo may have certain limitations, including performance and supported functionalities. As a result, using a solver's core API directly can be more efficient in many situations, as it provides additional functionalities to the user. For instance, we utilize CPLEX's core Python API to implement Algorithm~\ref{alg:gls-reopt}, taking advantage of its "modify and re-optimize" feature to mitigate the impact of multiple max-flow computations. This method allows us to make incremental changes to the model and re-optimize the solution without solving the entire model again.
+
+To manipulate and analyze the solver results, we use pandas[~\cite{pandas}](https://pandas.pydata.org/docs/), an open-source library for data manipulation and analysis. For visualizing the results, we utilize Seaborn~\cite{seaborn}, which is built on top of Matplotlib~\cite{matplotlib} - another popular open-source Python library used for data visualization. Seaborn offers additional visualization capabilities that simplify the creation of complex visualizations.
+
+### 3. Generating A Problem Instance (Guide)
 To facilitate the generation of problem instances, we provide the following three separate scripts under `input_generation/scripts`:
 - `generate_custom_instance.py`: Generates custom problem instances suitable for test- ing small-scale problems.
 - `generate_random_instance.py`: Generates random problem instances suitable for ana- lyzing larger-scale problems.
