@@ -1,4 +1,4 @@
-# Algorithms and Optimization models for Active Time Scheduling (Getting Started).
+# Algorithms and Optimization models for Active Time Scheduling (Getting Started)
 ### 1. Tools and Technologies
 Our project primarily utilizes Python, which offers a rich set of libraries and tools for optimization modelling and data analysis. To implement our models, we leverage [Pyomo](https://pyomo.readthedocs.io/en/stable/), a Python-based optimization modelling language that allows flexible translation of algebraic notations to code. Pyomo offers a robust way to develop linear and integer programming models. It has the advantage over other modelling languages, such as GAMS or AMPL, as its modelling objects are embedded within Python, providing access to a rich set of supporting libraries. Additionally, Pyomo can utilize commercial optimization solvers such as [CPLEX](https://www.ibm.com/docs/en/icos/12.8.0.0?topic=cplex-users-manual) and [Gurobi](https://www.gurobi.com/documentation/10.0/refman/index.html), which are available under free academic licensing to solve implemented models.
 
