@@ -1,19 +1,11 @@
 # Algorithms and Optimization models for Active Time Scheduling (Getting Started).
 
-### Input Generation (Guide)
-#### 1. How to generate a custom problem instance:
-For generating custom problem instances use the `generate_custom_instance.py` script from the `input_generation` package. The script requires 3 arguments:
- - **name:** Specify a name for the generate instance
- - **T:** Specify the number of timeslots in the problem instance.
- - **G:** Specify the number of jobs that can be scheduled in parallel (capacity limit).
- - **jobs:** Specify the different properties of each job as a string of comma-separated values: `"job_release-job_deadline-job_processing, ..."`
- - Example command:
-```commandline
-python3 -m input_generation.scripts.generate_custom_instance --name "test" --T 100 --G 50 --jobs "0-7-5, 0-3-1"
-```
-#### 2. How to generate a random problem instance:
-#### 3. How to generate a dataset containing random problem instances:
-#### 4. How to generate a perturbed problem instance:
+### Generating A Problem Instance (Guide)
+To facilitate the generation of problem instances, we provide the following three separate scripts under `input_generation/scripts`:
+• generate_custom_instance.py: Generates custom problem instances suitable for test- ing small-scale problems.
+• generate_random_instance.py: Generates random problem instances suitable for ana- lyzing larger-scale problems.
+• generate_dataset: Generates datasets suitable for analyzing a larger number of problem instances of varying sizes.
+For detailed instructions on how to use these scripts, please refer to the README.md file located in the src directory. Please note that the script for generating datasets may not be user- friendly and could require manual adjustments for specific parameters to generate datasets with diverse problem instances, as we did.
 
 
 ### Solving problem instances
