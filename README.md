@@ -8,10 +8,10 @@ To manipulate and analyze the solver results, we use [Pandas](https://pandas.pyd
 
 ### 2. File Structure
 - `data/` directory contains the `.json` files that store the results of our evaluation, such as plots, statistics, and numerical results.
-- `input_generation` directory contains scripts and functionality related to synthetic data generation and perturbations.
-- `problem_classes` directory contains the Python classes we used to assist with data representation.
-- `solvers` directory contains all the methods we implemented, including the IP Recovery model, Capacity Search method, and the integration between GLS and Capacity Search.
-- `stats` and `utils` directories contain helper functions and classes that we used as part of our analysis and implementation.
+- `input_generation/` directory contains scripts and functionality related to synthetic data generation and perturbations.
+- `problem_classes/` directory contains the Python classes we used to assist with data representation.
+- `solvers/` directory contains all the methods we implemented, including the IP Recovery model, Capacity Search method, and the integration between GLS and Capacity Search.
+- `stats/` and `utils/` directories contain helper functions and classes that we used as part of our analysis and implementation.
 \end{itemize}
 
 ### 3. Generating A Problem Instance (Guide)
