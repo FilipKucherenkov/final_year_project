@@ -1,6 +1,9 @@
 ## Optimization models for computing the Maximum-flow of a network.
+### Resources: 
 #### **Textbook:** *Operations Research: Applications and Algorithms, (2004), p.414-459*
 #### **Author:** *Wayne L. Winston*
+#### **Lecture slides:** [*Stanford University — CS261: Optimization*](https://theory.stanford.edu/~trevisan/cs261/lecture15.pdf)
+#### **Author:** *Luca Trevisan*
 
 Folder contains several optimization models that are used by the Greedy Local search algorithm and for checking instance feasibility when generating input sets for analysis. Those include:
 - `maxflow_pyomo.py`: Method for generating and solving a Pyomo Optimization model for computing Maximum flow of a network. 
