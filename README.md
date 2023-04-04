@@ -56,7 +56,7 @@ python3 -m solve_problem_instance --file "data/custom_instances/test.json" --alg
 ```
 <img width="1385" alt="Screen Shot 2023-04-01 at 17 29 24" src="https://user-images.githubusercontent.com/72323426/229880246-75cbf4c7-e6f7-4f98-bbce-b6604eab7ce0.png">
 
-### Recovering Schedule From Disturbances
+### 5. Recovering Schedule From Disturbances
 For demonstration purposes, we provide the `recover_schedule.py` script, which utilizes both the `solver_handler.py` and `recovery_handler.py` modules. This script first solves the specified nominal scenario using the deterministic IP model, then uses the solution to solve the true scenario using the recovery IP model with provided weights for the two cost functions and an upper bound on the number of perturbed jobs. or further information enable the `--help` (or `-h`) flag. 
 
 Example command for recovering a schedule:
@@ -66,13 +66,13 @@ python3 -m recover_schedule --nominal_instance data/nominal_instances/runtime_te
 <img width="1636" alt="Screen Shot 2023-04-01 at 19 38 43" src="https://user-images.githubusercontent.com/72323426/229880108-7abf54f4-a2e4-4286-acdc-c76058cc2e1c.png">
 
 
-### Performance monitoring
+### 6. Performance monitoring
 Scripts for monitoring performance are provided under `stats/scripts/` directory. The folder contains an additional `README.md` file with further instructions. We provide scripts to measure the following metrics.
 - `record_solver_performance.py`: used for measuring performance of the deterministic methods (runtime, objective value):
 - `record_objective_deviation.py`: used for measuring deviation in the obtained objective value from deterministic methods before and after uncertainty realisation.
 - `record_recovery.py`: used for measuring performance (objective, runtime) of the recovery model on perturbed instances and comparing it with the deterministic IP Model.
 
-### Additional Information:
+### 7. Additional Information:
 The `utils/` folder contains helper functions we used throughout the project:
 - `utils/file_writers.py`: contains helper functions for writing results to files.
 - `utils/parsing.py`: contains helper functions used for parsing files to python objects.
