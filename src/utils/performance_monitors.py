@@ -27,6 +27,16 @@ def record_execution_time_of_recovery_on_instance(nominal_instance: ParsedInstan
                                                   v1: float,
                                                   v2: float,
                                                   gamma: int):
+    """
+    Record recovery method's runtime performance.
+    :param nominal_instance: ParsedInstance object corresponding to the nominal scenario
+    :param deterministic_method: Method to be used for solving the nominal instance
+    :param solver_type: type of solver (e.g. gurobi or cplex-direct)
+    :param v1: float value for weight for cost function 1.
+    :param v2: float value for weight for cost function 2.
+    :param gamma: int value for upper bound on the number of perturbed jobs.
+    :return:the total time taken to obtain a result.
+    """
     nominal_solution = solve_instance(nominal_instance, deterministic_method, solver_type)
     t2 = timeit.Timer(lambda: ip_recovery3(perturbed_instance, nominal_solution, v1, v2, gamma))
     times2 = t2.repeat(3, 3)

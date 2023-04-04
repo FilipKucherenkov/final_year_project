@@ -5,7 +5,6 @@ from solvers.recovery.ip_recovery_3 import ip_recovery3
 from solvers.recovery_handler import recover_schedule
 
 from solvers.solver_handler import solve_instance
-from stats.scripts.record_recovery import record_recovery_runtime
 from utils.plot_functions import print_objective_performance_under_uncertainty, \
     print_objective_performance_on_all_datasets, \
     generate_all_plots, print_runtime_comparison_stats_gls_impl
@@ -74,8 +73,6 @@ def main():
     # recovered_solution.print_schedule_info()
 
     # Prints most of the stats we have calculated except those analyzed by sampling.
-    # compute_stats_and_produce_plots()
-    # record_recovery_runtime()
     compute_stats_and_produce_plots()
 
 

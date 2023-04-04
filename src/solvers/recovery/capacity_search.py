@@ -109,7 +109,7 @@ def capacity_search(perturbed_instance: ParsedInstance, nominal_solution: Schedu
                                  senses=constraint_senses,
                                  rhs=rhs)
     # Solve the problem
-    model.write("prob.lp")
+    # model.write("prob.lp")
     model.solve()
     job_processing_sum = sum(job.processing_time for job in perturbed_instance.jobs)
 

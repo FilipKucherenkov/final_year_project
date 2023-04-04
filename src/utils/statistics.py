@@ -3,6 +3,7 @@ import os
 
 import pandas as pd
 
+# List of moderate nominal instances which have been perturbed.
 moderate_instances = [
     "results_0e3f7403-5ead-4c0e-8f6c-4dedf931d689.json",
     "results_1e07f2e9-1e56-4731-8f8b-cacc425ccbc3.json",
@@ -16,6 +17,7 @@ moderate_instances = [
     "results_e67c7a57-4c94-4511-afd6-7cad90632ff4.json",
 ]
 
+# List of large nominal instances which have been perturbed.
 large_instances = [
     "results_0a751308-6ad9-459f-a61c-85aeec3e0a3b.json",
     "results_2cf763fa-f99c-4332-90bb-803e13441785.json",
@@ -47,14 +49,8 @@ def print_rmse_stats_for_methods():
     calculate_rmse_for_different_epsilon("Active-time-IP", "large")
     calculate_rmse_for_different_epsilon("Greedy-local-search: CPLEX Re-optimization", "large")
 
-
+# Measure deviation in object under disturbances
 def calculate_total_rmse(method, instance_type):
-    """
-    Calculate Root-Mean-Square-Error for a method to measure how close is
-    the objective value of a nominal instance to the optimal objective value on all perturbed
-    instances.
-    :param method: str specifying the method for analysis.
-    """
     dir_path = f"data/results/perturbation/{method}/"
     directory = os.fsencode(dir_path)
     total_opt_rmse = 0
@@ -83,7 +79,7 @@ def calculate_total_rmse(method, instance_type):
     print(f"RR: {total_opt_rmse / number_of_results}")
     print("=============================================")
 
-
+# Measure deviation in object under disturbances with respect to changes in gamma.
 def calculate_rmse_for_different_gamma(method, instance_type):
     dir_path = f"data/results/perturbation/{method}/"
     directory = os.fsencode(dir_path)
@@ -133,7 +129,7 @@ def calculate_rmse_for_different_gamma(method, instance_type):
     print(opt_rmse_results)  # RR
     print("=============================================")
 
-
+# Measure deviation in object under disturbances with respect to changes in epsilon.
 def calculate_rmse_for_different_epsilon(method, instance_type):
     dir_path = f"data/results/perturbation/{method}/"
     directory = os.fsencode(dir_path)
@@ -182,7 +178,7 @@ def calculate_rmse_for_different_epsilon(method, instance_type):
     print(opt_rmse_results)
     print("=============================================")
 
-
+# Calculate mean and max runtime of a method from results.
 def calculate_runtime_stats(dataset_name: str, method):
     file = f"data/results/runtime/{method}/results_{dataset_name}.json"
     data = None
@@ -205,7 +201,7 @@ def calculate_runtime_stats(dataset_name: str, method):
     print(f"Average time taken in seconds: {average_runtime_on_set}")
     print(f"Maximum time taken in seconds: {max_runtime_on_set}")
 
-
+# Calculate stats for chosen nominal instances.
 def print_nominal_instances_stats():
     dir_path = f"data/nominal_instances/"
     directory = os.fsencode(dir_path)
@@ -235,7 +231,7 @@ def print_nominal_instances_stats():
     print(f"AVG processing time on large instances:{avg_large}")
     print(f"AVG processing time on moderate instances:{avg_moderate}")
 
-
+# Calculate stats for objective of a method from the results on a specific dataset.
 def count_optimal_objectives_for_dataset(dataset_name: str, method: str):
     files = [
         f"data/results/objective/Active-time-IP/results_{dataset_name}.json",
@@ -283,13 +279,13 @@ def count_optimal_objectives_for_dataset(dataset_name: str, method: str):
 
     print(f"===================================================================")
     print(f"Dataset: {dataset_name}")
-    # print(f"Method: {method}")
-    # print(f"Number of optimal solutions: {int(total_optimal_solutions)}/{len(opt_stats)}")
-    # print(f"Number of solutions below optimal: {better_than_optimal}/{len(opt_stats)}")
-    # print(f"MEAN ALG(J) / OPT(J): {mean_opt_ratio}")
-    # print(f"MAX ALG(J) / OPT(J): {max_opt_ratio}")
-    # print(f"MEAN UTIL: {mean_batch_util}")
-    # print(f"MAX UTIL: {max_batch_util}")
+    print(f"Method: {method}")
+    print(f"Number of optimal solutions: {int(total_optimal_solutions)}/{len(opt_stats)}")
+    print(f"Number of solutions below optimal: {better_than_optimal}/{len(opt_stats)}")
+    print(f"MEAN ALG(J) / OPT(J): {mean_opt_ratio}")
+    print(f"MAX ALG(J) / OPT(J): {max_opt_ratio}")
+    print(f"MEAN UTIL: {mean_batch_util}")
+    print(f"MAX UTIL: {max_batch_util}")
     print(f"MEAN ACTIVE TIME: {mean_active_time / len(opt_stats)}") # used only for IP model
     print(f"MAX ACTIVE TIME: {max_active_time}") # used only for IP model
     #
@@ -297,7 +293,7 @@ def count_optimal_objectives_for_dataset(dataset_name: str, method: str):
     # print(f"OPT(J) < ALG(J) < 1.2: {total_close_to_opt}")
     # print(opt_stats)
 
-
+# Calculate stats for deterministic methods under disturbances with respect to gamma
 def count_objective_stats_for_gamma(stage_1_method, instance_type):
     dir_path = f"data/results/recovery/objective/{stage_1_method}/"
     directory = os.fsencode(dir_path)
@@ -355,7 +351,7 @@ def count_objective_stats_for_gamma(stage_1_method, instance_type):
         print(f"Gamma={g}: {stat}")
     print("=====================================================")
 
-
+# Calculate stats for deterministic methods under disturbances with respect to epsilon
 def count_objective_stats_for_eps(stage_1_method, instance_type):
     dir_path = f"data/results/recovery/objective/{stage_1_method}/"
     directory = os.fsencode(dir_path)
@@ -425,7 +421,7 @@ def print_all_recovery_stats():
     print_recovery_stats(1, 0, "large_instances")
     print_recovery_stats(0.1, 2, "large_instances")
 
-
+# Calculate stats for the recovery model + Capacity search from results.
 def print_recovery_stats(l1, l2, instance_type):
     dir_path = f"data/results/recovery/objective/{instance_type}/recovery_method_lambdas({l1},{l2})"
     directory = os.fsencode(dir_path)
@@ -489,12 +485,12 @@ def print_recovery_stats(l1, l2, instance_type):
     print("===========================")
 
     print(f"Recovery stats for l1={l1}, l2={l2} on {instance_type}:")
-    # print(f"Mean augmentation: {mean_augmentation / number_of_instances}")
-    # print(f"Max augmentation: {max_augmentation}")
-    # print(f"Mean variables changed: {mean_variables_changed / number_of_instances}")
-    # print(f"Max variables changed: {max_variables_changed}")
-    # print(f"Mean active time: {mean_active_time / number_of_instances}")
-    # print(f"Max active time: {max_active_time}")
+    print(f"Mean augmentation: {mean_augmentation / number_of_instances}")
+    print(f"Max augmentation: {max_augmentation}")
+    print(f"Mean variables changed: {mean_variables_changed / number_of_instances}")
+    print(f"Max variables changed: {max_variables_changed}")
+    print(f"Mean active time: {mean_active_time / number_of_instances}")
+    print(f"Max active time: {max_active_time}")
     print(f"Mean runtime recovery model: {mean_runtime_recovery_model / number_of_instances}")
     print(f"Mean runtime deterministic model: {mean_runtime_deterministic_model / number_of_instances}")
     print(f"Max runtime recovery model: {max_runtime_recovery_model}")
