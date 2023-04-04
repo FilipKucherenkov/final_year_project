@@ -3,64 +3,64 @@
     "nominal_objective": 9,
     "perturbation_results": [
         {
-            "deterministic_model": 0.20420381266666654,
-            "recovery_model": 0.2091139786666667
+            "deterministic_model": 0.20480084200001633,
+            "recovery_model": 0.21371972833333075
         },
         {
-            "deterministic_model": 0.17210918599999983,
-            "recovery_model": 0.20953196633333318
+            "deterministic_model": 0.17294321466666437,
+            "recovery_model": 0.21358056600001873
         },
         {
-            "deterministic_model": 0.2207320139999999,
-            "recovery_model": 0.2096398363333337
+            "deterministic_model": 0.22342310966663112,
+            "recovery_model": 0.2128453669999999
         },
         {
-            "deterministic_model": 0.23462521733333355,
-            "recovery_model": 0.20992132066666672
+            "deterministic_model": 0.22502067800000228,
+            "recovery_model": 0.2145490503333273
         },
         {
-            "deterministic_model": 0.1705087996666658,
-            "recovery_model": 0.21780152533333327
+            "deterministic_model": 0.17342999733333878,
+            "recovery_model": 0.21848278933331736
         },
         {
-            "deterministic_model": 0.1765086476666665,
-            "recovery_model": 0.2104687186666657
+            "deterministic_model": 0.17393528133334257,
+            "recovery_model": 0.21463499033332786
         },
         {
-            "deterministic_model": 0.17130258266666706,
-            "recovery_model": 0.21491803966666723
+            "deterministic_model": 0.174077570999998,
+            "recovery_model": 0.21430123666668047
         },
         {
-            "deterministic_model": 0.2282851276666662,
-            "recovery_model": 0.20986719266666753
+            "deterministic_model": 0.23071758166664344,
+            "recovery_model": 0.21483530000000428
         },
         {
-            "deterministic_model": 0.25280441799999903,
-            "recovery_model": 0.21007146733333334
+            "deterministic_model": 0.2561376860000261,
+            "recovery_model": 0.21501096366667602
         },
         {
-            "deterministic_model": 0.17047136433333301,
-            "recovery_model": 0.20939767066666568
+            "deterministic_model": 0.17368936633333001,
+            "recovery_model": 0.21577259633333293
         },
         {
-            "deterministic_model": 0.17129166833333187,
-            "recovery_model": 0.2100462889999998
+            "deterministic_model": 0.17381363133332192,
+            "recovery_model": 0.2145809773333364
         },
         {
-            "deterministic_model": 0.21241810299999977,
-            "recovery_model": 0.2108468663333317
+            "deterministic_model": 0.21710724433334386,
+            "recovery_model": 0.21402344300001155
         },
         {
-            "deterministic_model": 0.16624207733333426,
-            "recovery_model": 0.21001769566666675
+            "deterministic_model": 0.171455837666637,
+            "recovery_model": 0.21527033600000323
         },
         {
-            "deterministic_model": 0.17101329700000178,
-            "recovery_model": 0.20925518866666692
+            "deterministic_model": 0.1730314940000047,
+            "recovery_model": 0.21321033766666156
         },
         {
-            "deterministic_model": 0.17145687899999965,
-            "recovery_model": 0.21105898899999906
+            "deterministic_model": 0.17695346233332052,
+            "recovery_model": 0.21547723233334182
         }
     ]
 }

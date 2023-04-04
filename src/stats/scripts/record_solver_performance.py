@@ -1,5 +1,4 @@
 import argparse
-import json
 import logging
 import os
 from solvers.solver_handler import solve_instance

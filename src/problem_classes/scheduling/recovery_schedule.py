@@ -1,7 +1,9 @@
 class Schedule:
     """
-    Schedule class to assist with saving solutions from scheduling algorithms.
-    A schedule is infeasible if it does not satisfy the constraints of ATSP.
+    Schedule class which stores solution for ATSP. For solvers it acts as a wrapper
+    to the results obtained from them.
+
+    Note: This wrapper is the extended which has been used mainly for the recovery.
     """
 
     def __init__(self, is_feasible: bool, batch_limit: int, n, m):

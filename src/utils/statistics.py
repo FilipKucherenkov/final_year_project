@@ -462,13 +462,41 @@ def print_recovery_stats(l1, l2, instance_type):
                     if active_time >= max_active_time:
                         max_active_time = active_time
 
+    dir_path_runtime = f"data/results/recovery/runtime/{instance_type}/recovery_method_lambdas({l1},{l2})"
+    directory_runtime = os.fsencode(dir_path_runtime)
+    mean_runtime_deterministic_model = 0
+    max_runtime_deterministic_model = 0
+    mean_runtime_recovery_model = 0
+    max_runtime_recovery_model = 0
+    for file in os.listdir(directory_runtime):
+        filename = os.fsdecode(file)
+        file_path = f"data/results/recovery/runtime/{instance_type}/recovery_method_lambdas({l1},{l2})/{filename}"
+        if filename.endswith(".json"):
+            with open(file_path) as json_file:
+                data = json.load(json_file)
+                for result in data["perturbation_results"]:
+                    deterministic_runtime = result["deterministic_model"]
+                    recovery_runtime = result["recovery_model"]
+
+                    mean_runtime_deterministic_model = mean_runtime_deterministic_model + deterministic_runtime
+                    mean_runtime_recovery_model = mean_runtime_recovery_model + recovery_runtime
+
+                    if max_runtime_deterministic_model <= deterministic_runtime:
+                        max_runtime_deterministic_model = deterministic_runtime
+                    if max_runtime_recovery_model <= recovery_runtime:
+                        max_runtime_recovery_model = recovery_runtime
+
     print("===========================")
 
     print(f"Recovery stats for l1={l1}, l2={l2} on {instance_type}:")
-    print(f"Mean augmentation: {mean_augmentation / number_of_instances}")
-    print(f"Max augmentation: {max_augmentation}")
-    print(f"Mean variables changed: {mean_variables_changed / number_of_instances}")
-    print(f"Max variables changed: {max_variables_changed}")
-    print(f"Mean active time: {mean_active_time / number_of_instances}")
-    print(f"Max active time: {max_active_time}")
+    # print(f"Mean augmentation: {mean_augmentation / number_of_instances}")
+    # print(f"Max augmentation: {max_augmentation}")
+    # print(f"Mean variables changed: {mean_variables_changed / number_of_instances}")
+    # print(f"Max variables changed: {max_variables_changed}")
+    # print(f"Mean active time: {mean_active_time / number_of_instances}")
+    # print(f"Max active time: {max_active_time}")
+    print(f"Mean runtime recovery model: {mean_runtime_recovery_model / number_of_instances}")
+    print(f"Mean runtime deterministic model: {mean_runtime_deterministic_model / number_of_instances}")
+    print(f"Max runtime recovery model: {max_runtime_recovery_model}")
+    print(f"Max runtime deterministic model: {max_runtime_deterministic_model}")
     print("===========================")

@@ -1,5 +1,3 @@
-import math
-
 from problem_classes.scheduling.timeslot import Timeslot
 
 

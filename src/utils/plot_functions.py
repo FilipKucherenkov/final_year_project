@@ -34,13 +34,15 @@ def print_objective_performance_on_all_datasets(method: str):
     count_optimal_objectives_for_dataset("dataset_7", method)
     calculate_runtime_stats("dataset_7", method)
 
+
 def print_runtime_comparison_stats_gls_impl():
     calculate_runtime_stats("dataset_3", "Greedy-local-search: Pyomo")
     calculate_runtime_stats("dataset_3", "Greedy-local-search: CPLEX (V1)")
     calculate_runtime_stats("dataset_3", "Greedy-local-search: CPLEX (V2)")
     calculate_runtime_stats("dataset_3", "Greedy-local-search: CPLEX Re-optimization")
 
-def print_objective_performance_for_recovery():
+
+def print_objective_performance_under_uncertainty():
     count_objective_stats_for_gamma("deterministic_methods_IP_ns", "moderate")
     count_objective_stats_for_gamma("deterministic_methods_IP_ns", "large")
     count_objective_stats_for_eps("deterministic_methods_IP_ns", "moderate")
@@ -50,7 +52,6 @@ def print_objective_performance_for_recovery():
     count_objective_stats_for_gamma("deterministic_methods_GLS_ns", "large")
     count_objective_stats_for_eps("deterministic_methods_GLS_ns", "moderate")
     count_objective_stats_for_eps("deterministic_methods_GLS_ns", "large")
-
 
 
 def generate_all_plots():
@@ -515,4 +516,3 @@ def rmse_gamma_displot_large_instance(method1, method2):
 
     plot_producer4 = PlotProducer(files, "Large_instances_sensitivity_gamma_lineplot", "perturbations", True)
     plot_producer4.generate_line_plot("gamma", "RMSE", "Gamma", "Deviation in objective value (RMSE)")
-

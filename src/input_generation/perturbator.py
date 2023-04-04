@@ -10,9 +10,8 @@ from utils.parsing import parse_problem_instance
 
 class Perturbator:
     """
-    Class used for perturbing problem instances.
+    Class to assist with introducing disturbances to problem instances.
     """
-
     def __init__(self, json_file: str):
         problem_instance = parse_problem_instance(json_file)
         self.problem_instance = problem_instance

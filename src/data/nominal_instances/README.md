@@ -1,7 +1,7 @@
 # Nominal instances (Guide)
 #### Note: Folder contains some of the nominal instances we used as part of our analysis. Specifically, we used the Perturbator to introduce disturbances. The corresponding perturbed instances are stored under `data/perturbed_instances/` in separate folders where each folder corresponds to a different nominal instances.  
 
-
+#### Below are some of the sampling results on the runtime_test instances. 
 #### runtime_test.json Gamma = 25, epsilon 0.75, v1 = 1, v2 = 1
 - Recovery model: 0.06112134033333335 secs
 - Expected active time: 15
@@ -193,20 +193,44 @@
 -------------------------------------------------------------------------
 
 #### runtime_test_5.json Gamma = 250, epsilon 0.75, v1 = 1, v2 = 1
-2023-04-02 23:29:58,377:INFO:Deterministic model: 5.753649492666663 secs
-2023-04-02 23:29:58,377:INFO:Recovery model: 6.292057436666663 secs
+- Deterministic model: 6.380634170666667 secs
+- Recovery model: 7.50753760533333 secs
+- Expected active time: 29
+- Recovered active time: 42
+- Number of changes: 455.0
 
 #### runtime_test_5.json Gamma = 150, epsilon 0.75, v1 = 0, v2 = 1
-2023-04-02 23:49:41,555:INFO:Deterministic model: 5.101130504666666 secs
-2023-04-02 23:49:41,555:INFO:Recovery model: 6.718358687000001 secs
+- Deterministic model: 6.7776995606666715 secs
+- Recovery model: 7.727972084333335 secs
+- Expected active time: 29
+- Recovered active time: 40
+- Number of changes: 2417.0
+
 
 #### runtime_test_5.json Gamma = 150, epsilon 0.75, v1 = 1, v2 = 0
-2023-04-02 23:34:39,975:INFO:Deterministic model: 5.770935393666671 secs
-2023-04-02 23:34:39,975:INFO:Recovery model: 5.965921825333339 secs
+- Deterministic model: 6.555505749666669 secs
+- Recovery model: 6.460119664333329 secs
+- Expected active time: 29
+- Recovered active time: 130
+- Number of changes: 455.0
 
-#### runtime_test_5.json Gamma = 150, epsilon 0.75, v1 = 0.1, v2 = 2
-2023-04-02 23:55:28,059:INFO:Deterministic model: 5.002375481333341 secs
-2023-04-02 23:55:28,059:INFO:Recovery model: 5.940519441333332 secs
+
+#### runtime_test_5.json Gamma = 150, epsilon 0.75, v1 = 0.5, v2 = 1 [No effect after v2=1]
+- Deterministic model: 4.807420483333327 secs
+- Recovery model: 5.962489488333328 secs
+- Expected active time: 29
+- Recovered active time: 42
+- Number of changes: 455.0
+
+
+### runtime_test_5.json Gamma = 150, epsilon 0.75, v1 = 0.5, v2 = 100
+- Deterministic model: 6.495035730333332 secs
+- Recovery model: 7.803986177333338 secs
+- Expected active time: 29
+- Recovered active time: 40
+- Number of changes: 591.0
+
+
 
 
 
