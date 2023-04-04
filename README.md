@@ -4,7 +4,15 @@ Our project primarily utilizes Python, which offers a rich set of libraries and 
 
 On the other hand, it should be noted that Pyomo may have certain limitations, including performance and supported functionalities. As a result, using a solver's core API directly can be more efficient in many situations, as it provides additional functionalities to the user. For instance, we utilize CPLEX's core [Python API](https://home.engineering.iastate.edu/~jdm/ee458/CPLEX-UsersManual2015.pdf) to implement the Greedy Local Search with re-opt, taking advantage of its ["modify and re-optimize"](https://www.ibm.com/docs/en/icos/12.9.0?topic=tutorial-modifying-re-optimizing) feature to mitigate the impact of multiple max-flow computations. This method allows us to make incremental changes to the model and re-optimize the solution without solving the entire model again.
 
-To manipulate and analyze the solver results, we use [pandas](https://pandas.pydata.org/docs/), an open-source library for data manipulation and analysis. For visualizing the results, we utilize [seaborn](https://seaborn.pydata.org), which is built on top of [Matplotlib](https://matplotlib.org) - another popular open-source Python library used for data visualization. Seaborn offers additional visualization capabilities that simplify the creation of complex visualizations.
+To manipulate and analyze the solver results, we use [Pandas](https://pandas.pydata.org/docs/), an open-source library for data manipulation and analysis. For visualizing the results, we utilize [Seaborn](https://seaborn.pydata.org), which is built on top of [Matplotlib](https://matplotlib.org) - another popular open-source Python library used for data visualization. Seaborn offers additional visualization capabilities that simplify the creation of complex visualizations.
+
+### 2. File Structure
+- `data/` directory contains the `.json` files that store the results of our evaluation, such as plots, statistics, and numerical results.
+- `input_generation` directory contains scripts and functionality related to synthetic data generation and perturbations.
+- `problem_classes` directory contains the Python classes we used to assist with data representation.
+- `solvers` directory contains all the methods we implemented, including the IP Recovery model, Capacity Search method, and the integration between GLS and Capacity Search.
+- `stats` and `utils` directories contain helper functions and classes that we used as part of our analysis and implementation.
+\end{itemize}
 
 ### 3. Generating A Problem Instance (Guide)
 To facilitate the generation of problem instances, we provide the following three separate scripts under `input_generation/scripts`:
