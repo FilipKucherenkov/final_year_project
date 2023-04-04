@@ -17,10 +17,13 @@ python3 -m input_generation.scripts.generate_custom_instance --name "user_guide_
 python3 -m input_generation.scripts.generate_random_instance --name "user_guide_example_2" --T 100 --G 2 --J 10
 
 ```
-
+- Generate datasets with feasible instances. (Please note that the script for generating datasets may not be user-friendly and could require manual adjustments for specific parameters to generate datasets with diverse problem instances, as we did.)
+```
+python3 -m input_generation.scripts.generate_dataset --T_range "25, 50, 100, 150, 250, 500" --P "T" --name "test"
+```
 
 The scripts additionally provide more information with the -h (or --help) flag enabled.
-Please note that the script for generating datasets may not be user-friendly and could require manual adjustments for specific parameters to generate datasets with diverse problem instances, as we did.
+
 
 
 
