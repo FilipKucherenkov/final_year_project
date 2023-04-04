@@ -2,10 +2,20 @@
 
 ### Generating A Problem Instance (Guide)
 To facilitate the generation of problem instances, we provide the following three separate scripts under `input_generation/scripts`:
-• generate_custom_instance.py: Generates custom problem instances suitable for test- ing small-scale problems.
-• generate_random_instance.py: Generates random problem instances suitable for ana- lyzing larger-scale problems.
-• generate_dataset: Generates datasets suitable for analyzing a larger number of problem instances of varying sizes.
-For detailed instructions on how to use these scripts, please refer to the README.md file located in the src directory. Please note that the script for generating datasets may not be user- friendly and could require manual adjustments for specific parameters to generate datasets with diverse problem instances, as we did.
+- generate_custom_instance.py: Generates custom problem instances suitable for test- ing small-scale problems.
+- generate_random_instance.py: Generates random problem instances suitable for ana- lyzing larger-scale problems.
+- generate_dataset: Generates datasets suitable for analyzing a larger number of problem instances of varying sizes.
+
+Example commands:
+- Generate a custom instance with 100 time slots, 2 jobs and a capacity limit 50. 
+```
+python3 -m input_generation.scripts.generate_custom_instance --name "user_guide_example_1" --T 100 --G 50 --jobs "0-7-5, 0-3-1"
+
+```
+
+The scripts additionally provide more information with the -h (or --help) flag enabled.
+Please note that the script for generating datasets may not be user-friendly and could require manual adjustments for specific parameters to generate datasets with diverse problem instances, as we did.
+
 
 
 ### Solving problem instances
