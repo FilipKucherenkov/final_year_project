@@ -54,14 +54,16 @@ Example command for solving a custom instance using the GLS method (Pyomo implem
 ```
 python3 -m solve_problem_instance --file "data/custom_instances/test.json" --algorithm "Greedy-local-search: Pyomo"
 ```
-#### 1. How to solve a problem instance using the Deterministic Methods:
-For solving a specific problem instance using the deterministic methods use the `solve_problem_instance.py` script. The script requires 3 arguments:
- - **file:** Specify path from top-level directory to a json file containing a problem instance.
- - **algorithm:** Optionally specify one of the implemented algorithms. If no argument is provided, the script will use the Integer Programming model by default
- - **solver_type:** Optionally specify a solver on your system. If no argument is provided, the script will use the CPLEX commercial optimization solver by default.
+<img width="1385" alt="Screen Shot 2023-04-01 at 17 29 24" src="https://user-images.githubusercontent.com/72323426/229880246-75cbf4c7-e6f7-4f98-bbce-b6604eab7ce0.png">
 
-#### 2. How to solve a perturbed instance using the Recovery Model:
-For solving a specific perturbed instance using the recovery model use the `<add_script>` script. 
+### Recovering Schedule From Disturbances
+For demonstration purposes, we provide the `recover_schedule.py` script, which utilizes both the `solver_handler.py` and `recovery_handler.py` modules. This script first solves the specified nominal scenario using the deterministic IP model, then uses the solution to solve the true scenario using the recovery IP model with provided weights for the two cost functions and an upper bound on the number of perturbed jobs. or further information enable the `--help` (or `-h`) flag. 
+
+Example command for recovering a schedule:
+```
+python3 -m recover_schedule --nominal_instance data/nominal_instances/runtime_test.json --perturbed_instance data/perturbed_instances/35fa8883-f4fa-4133-9d19-958bceed0b8f/e2b4af16-7c4c-4433-abaa-3a65659da3e1.json --v1 1 --v2 1 --gamma 25
+```
+<img width="1636" alt="Screen Shot 2023-04-01 at 19 38 43" src="https://user-images.githubusercontent.com/72323426/229880108-7abf54f4-a2e4-4286-acdc-c76058cc2e1c.png">
 
 
 ### Performance monitoring
