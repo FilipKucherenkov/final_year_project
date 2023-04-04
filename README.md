@@ -39,6 +39,13 @@ python3 -m input_generation.scripts.generate_dataset --T_range "25, 50, 100, 150
 ### 4. Perturbing A Problem Instance
 To introduce disturbances into problem instances, we offer a separate script, `perturb_instance.py`, which utilizes the `perturbator.py` class. Please note that in order to perturb a problem instance, its JSON file must be located in the `data/nominal_instances/` directory. The perturbed instance file will be generated in a separate directory with a name corresponding to the ID of the nominal instance, located in `data/perturbed_instances/<nominal_instance_id>/`. For further information enable the `--help` (or `-h`) flag. 
 
+Example command:
+```
+python3 -m input_generation.scripts.perturb_instance --instance_file user_guide_example_4 --gamma 20 --epsilon 20
+```
+
+<img width="1376" alt="Screen Shot 2023-04-04 at 18 58 20" src="https://user-images.githubusercontent.com/72323426/229878487-0f779c80-9593-45db-8e2c-f6b89daabc22.png">
+
 
 ### 4. Solving Instances Using Deterministic Methods
 To solve problem instances using the implemented deterministic methods, we provide the `solve_problem_instance.py` script, which utilizes the `solver_handler.py` module. The solution is stored in a 2-dimensional matrix where the rows represent jobs, and the columns represent time slots. For ease of use, we display this information in the terminal, along with the active time, the number of changed variables, and the batch violation. For further information enable the `--help` (or `-h`) flag. 
