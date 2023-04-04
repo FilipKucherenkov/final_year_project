@@ -36,21 +36,23 @@ python3 -m input_generation.scripts.generate_random_instance --name "user_guide_
 python3 -m input_generation.scripts.generate_dataset --T_range "25, 50, 100, 150, 250, 500" --P "T" --name "test"
 ```
 
-The scripts additionally provide more information with the -h (or --help) flag enabled.
+### 4. Perturbing A Problem Instance
+To introduce disturbances into problem instances, we offer a separate script, `perturb_instance.py`, which utilizes the `perturbator.py` class. Please note that in order to perturb a problem instance, its JSON file must be located in the `data/nominal_instances/` directory. The perturbed instance file will be generated in a separate directory with a name corresponding to the ID of the nominal instance, located in `data/perturbed_instances/<nominal_instance_id>/`. For further information enable the `--help` (or `-h`) flag. 
 
 
+### 4. Solving Instances Using Deterministic Methods
+To solve problem instances using the implemented deterministic methods, we provide the `solve_problem_instance.py` script, which utilizes the `solver_handler.py` module. The solution is stored in a 2-dimensional matrix where the rows represent jobs, and the columns represent time slots. For ease of use, we display this information in the terminal, along with the active time, the number of changed variables, and the batch violation. For further information enable the `--help` (or `-h`) flag. 
 
-
-### Solving problem instances
-
+Example command for solving a custom instance using the GLS method (Pyomo implementation):
+```
+python3 -m solve_problem_instance --file "data/custom_instances/test.json" --algorithm "Greedy-local-search: Pyomo"
+```
 #### 1. How to solve a problem instance using the Deterministic Methods:
 For solving a specific problem instance using the deterministic methods use the `solve_problem_instance.py` script. The script requires 3 arguments:
  - **file:** Specify path from top-level directory to a json file containing a problem instance.
  - **algorithm:** Optionally specify one of the implemented algorithms. If no argument is provided, the script will use the Integer Programming model by default
  - **solver_type:** Optionally specify a solver on your system. If no argument is provided, the script will use the CPLEX commercial optimization solver by default.
-```
-python3 -m solve_problem_instance --file "data/custom_instances/test.json" --algorithm "Greedy-local-search: Pyomo"
-```
+
 #### 2. How to solve a perturbed instance using the Recovery Model:
 For solving a specific perturbed instance using the recovery model use the `<add_script>` script. 
 
@@ -61,7 +63,7 @@ Scripts for monitoring performance are provided under `stats/scripts/` directory
 - `record_objective_deviation.py`: used for measuring deviation in the obtained objective value from deterministic methods before and after uncertainty realisation.
 - `record_recovery.py`: used for measuring performance (objective, runtime) of the recovery model on perturbed instances and comparing it with the deterministic IP Model.
 
-### Other:
+### Additional Information:
 The `utils/` folder contains helper functions we used throughout the project:
 - `utils/file_writers.py`: contains helper functions for writing results to files.
 - `utils/parsing.py`: contains helper functions used for parsing files to python objects.
