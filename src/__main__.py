@@ -5,6 +5,7 @@ from solvers.recovery.ip_recovery_3 import ip_recovery3
 from solvers.recovery_handler import recover_schedule
 
 from solvers.solver_handler import solve_instance
+from utils.parsing import parse_problem_instance
 from utils.plot_functions import print_objective_performance_under_uncertainty, \
     print_objective_performance_on_all_datasets, \
     generate_all_plots, print_runtime_comparison_stats_gls_impl
@@ -72,8 +73,16 @@ def main():
     # recovered_solution = recover_schedule(nominal_instance, perturbed_instance, 1, 1, 1)
     # recovered_solution.print_schedule_info()
 
+    # Parse a problem instance and print its details (Example)
+    parsed_instance = parse_problem_instance("data/custom_instances/nominal_instance.json")
+    parsed_instance.print_instance_info()
+
+    # Solve the parsed instanced.
+    s = solve_instance(parsed_instance, "Active-time-IP", "cplex_direct")
+    s.print_schedule_info()
+
     # Prints most of the stats we have calculated except those analyzed by sampling.
-    compute_stats_and_produce_plots()
+    # compute_stats_and_produce_plots()
 
 
 def compute_stats_and_produce_plots():
