@@ -5,7 +5,7 @@ from problem_classes.scheduling.recovery_schedule import Schedule
 from solvers.recovery.capacity_search import capacity_search
 
 
-def ip_recovery3(perturbed_instance, nominal_solution, v1, v2, gamma):
+def ip_recovery(perturbed_instance, nominal_solution, v1, v2, gamma):
     """
     IP Recovery Model using Weighted Sum Approach.
     :param perturbed_instance: ParsedInstance object representing the true scenario.

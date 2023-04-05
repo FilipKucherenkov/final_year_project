@@ -5,7 +5,7 @@ import os
 import timeit
 
 from problem_classes.problem_instances.parsed_instance import ParsedInstance
-from solvers.recovery.ip_recovery_3 import ip_recovery3
+from solvers.recovery.ip_recovery import ip_recovery
 from solvers.solver_handler import solve_instance
 from utils.file_writers import write_results_to_file
 from utils.parsing import parse_problem_instance
@@ -56,11 +56,11 @@ def record_recovery():
             if args.analysis_type == "objective":
                 optimal_perturbed_solution = solve_instance(perturbed_instance, "Active-time-IP", "cplex_direct")
 
-                recovered_solution = ip_recovery3(perturbed_instance,
-                                                  nominal_solution,
-                                                  float(args.l1),
-                                                  float(args.l2),
-                                                  gamma)
+                recovered_solution = ip_recovery(perturbed_instance,
+                                                 nominal_solution,
+                                                 float(args.l1),
+                                                 float(args.l2),
+                                                 gamma)
 
                 opt_perturbed = optimal_perturbed_solution.calculate_active_time() if optimal_perturbed_solution.calculate_active_time() != 0 else 1
                 batch_size = recovered_solution.calculate_batch_size()
@@ -87,11 +87,11 @@ def record_recovery():
                 continue
             else:
                 # Record runtime performance
-                t = timeit.Timer(lambda: ip_recovery3(perturbed_instance,
-                                                      nominal_solution,
-                                                      nominal_instance.number_of_parallel_jobs,
-                                                      nominal_instance.number_of_parallel_jobs,
-                                                      gamma))
+                t = timeit.Timer(lambda: ip_recovery(perturbed_instance,
+                                                     nominal_solution,
+                                                     nominal_instance.number_of_parallel_jobs,
+                                                     nominal_instance.number_of_parallel_jobs,
+                                                     gamma))
                 times = t.repeat(3, 3)
                 total_time_taken = min(times) / 3
                 t2 = timeit.Timer(lambda:  solve_instance(perturbed_instance, "Active-time-IP", "cplex_direct"))

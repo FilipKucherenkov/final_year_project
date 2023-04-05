@@ -1,6 +1,6 @@
 import logging
 
-from solvers.recovery.ip_recovery_3 import ip_recovery3
+from solvers.recovery.ip_recovery import ip_recovery
 from solvers.solver_handler import solve_instance
 
 
@@ -18,7 +18,7 @@ def recover_schedule(nominal_instance, perturbed_instance, v1, v2, gamma):
     logging.info(f"Expected Active Time: {nominal_solution.calculate_active_time()}")
     logging.info(f"Attempting to recover schedule...")
 
-    recovered_schedule = ip_recovery3(perturbed_instance, nominal_solution, v1, v2, gamma)
+    recovered_schedule = ip_recovery(perturbed_instance, nominal_solution, v1, v2, gamma)
 
     logging.info(f"Recovery completed")
     logging.info(f"Active time: {recovered_schedule.calculate_active_time()}")

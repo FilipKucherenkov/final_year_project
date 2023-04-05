@@ -2,7 +2,7 @@ import argparse
 import os
 import logging
 
-from solvers.recovery.ip_recovery_3 import ip_recovery3
+from solvers.recovery.ip_recovery import ip_recovery
 from solvers.solver_handler import solve_instance
 from utils.parsing import parse_problem_instance
 from utils.performance_monitors import record_execution_time_of_recovery_on_instance
@@ -56,11 +56,11 @@ def recover_schedule():
     logging.debug(f"Specified weights v1={args.v1} and v2={args.v2}")
     logging.debug(f"Specified Gamma: {args.gamma}")
     logging.debug("Recovering schedule...")
-    recovered_solution = ip_recovery3(perturbed_instance,
-                                      nominal_solution,
-                                      float(args.v1),
-                                      float(args.v2),
-                                      int(args.gamma))
+    recovered_solution = ip_recovery(perturbed_instance,
+                                     nominal_solution,
+                                     float(args.v1),
+                                     float(args.v2),
+                                     int(args.gamma))
 
     recovered_solution.print_schedule_info()
 

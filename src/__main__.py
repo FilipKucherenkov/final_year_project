@@ -1,7 +1,7 @@
 from input_generation.perturbator import Perturbator
 from problem_classes.graph.generate_network import generate_network
 from problem_classes.problem_instances.custom_instance import CustomInstance
-from solvers.recovery.ip_recovery_3 import ip_recovery3
+from solvers.recovery.ip_recovery import ip_recovery
 from solvers.recovery_handler import recover_schedule
 
 from solvers.solver_handler import solve_instance

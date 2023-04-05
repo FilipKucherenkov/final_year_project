@@ -2,7 +2,7 @@ import logging
 import timeit
 
 from problem_classes.problem_instances.parsed_instance import ParsedInstance
-from solvers.recovery.ip_recovery_3 import ip_recovery3
+from solvers.recovery.ip_recovery import ip_recovery
 from solvers.solver_handler import solve_instance
 
 
@@ -38,7 +38,7 @@ def record_execution_time_of_recovery_on_instance(nominal_instance: ParsedInstan
     :return:the total time taken to obtain a result.
     """
     nominal_solution = solve_instance(nominal_instance, deterministic_method, solver_type)
-    t2 = timeit.Timer(lambda: ip_recovery3(perturbed_instance, nominal_solution, v1, v2, gamma))
+    t2 = timeit.Timer(lambda: ip_recovery(perturbed_instance, nominal_solution, v1, v2, gamma))
     times2 = t2.repeat(3, 3)
     total_time_taken2 = min(times2) / 3
 
